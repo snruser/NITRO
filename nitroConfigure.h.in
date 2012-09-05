@@ -1,0 +1,40 @@
+/*=========================================================================
+
+  Program:   NITRO
+  Language:  C
+
+  Copyright (c) Brigham and Women's Hospital. All rights reserved.
+
+  This software is distributed WITHOUT ANY WARRANTY; without even
+  the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+  PURPOSE.  See the above copyright notices for more information.
+
+=========================================================================*/
+
+#ifndef __NITRO_CONFIGURE_H
+#define __NITRO_CONFIGURE_H
+
+#cmakedefine NITRO_PLATFORM_MACOSX
+#cmakedefine NITRO_PLATFORM_LINUX 
+#cmakedefine NITRO_PLATFORM_SUNOS 
+#cmakedefine NITRO_PLATFORM_WIN32
+#ifdef NITRO_PLATFORM_WIN32
+  #ifndef _WIN32
+    #define _WIN32
+  #endif
+  #ifndef WIN32
+    #define WIN32
+  #endif
+  #define NITROCommon_EXPORTS
+#endif
+
+#cmakedefine NITRO_USE_PTHREADS
+#cmakedefine NITRO_USE_WIN32_THREADS
+#cmakedefine NITRO_USE_SPROC
+#cmakedefine NITRO_HAVE_GETSOCKNAME_WITH_SOCKLEN_T
+#define NITRO_PROTOCOL_VERSION @NITRO_PROTOCOL_VERSION@
+
+#endif /*__NITRO_CONFIGURE_H*/
+
+
+

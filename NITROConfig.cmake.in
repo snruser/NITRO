@@ -1,0 +1,58 @@
+#-----------------------------------------------------------------------------
+#
+# NITROConfig.cmake - NITRO CMake configuration file for external projects.
+#
+# This file is configured by NITRO and used by the UseNITRO.cmake module
+# to load NITRO's settings for an external project.
+@NITRO_CONFIG_CODE@
+
+# The NITRO include file directories.
+SET(NITRO_INCLUDE_DIRS "@NITRO_INCLUDE_DIRS_CONFIG@")
+
+# The NITRO library directories.
+SET(NITRO_LIBRARY_DIRS "@NITRO_LIBRARY_DIRS_CONFIG@")
+
+# The C and C++ flags added by NITRO to the cmake-configured flags.
+SET(NITRO_REQUIRED_C_FLAGS "@NITRO_REQUIRED_C_FLAGS@")
+SET(NITRO_REQUIRED_CXX_FLAGS "@NITRO_REQUIRED_CXX_FLAGS@")
+SET(NITRO_REQUIRED_LINK_FLAGS "@NITRO_REQUIRED_LINK_FLAGS@")
+
+# The NITRO Library version number
+SET(NITRO_VERSION_MAJOR "@NITRO_VERSION_MAJOR@")
+SET(NITRO_VERSION_MINOR "@NITRO_VERSION_MINOR@")
+SET(NITRO_VERSION_PATCH "@NITRO_VERSION_PATCH@")
+
+# The NITRO Protocol version number
+SET(NITRO_PROTOCOL_VERSION "@NITRO_PROTOCOL_VERSION@")
+
+# The location of the UseNITRO.cmake file.
+SET(NITRO_USE_FILE "@NITRO_USE_FILE@")
+
+# The build settings file.
+SET(NITRO_BUILD_SETTINGS_FILE "@NITRO_BUILD_SETTINGS_FILE@")
+
+# The library dependencies file.
+SET(NITRO_LIBRARY_DEPENDS_FILE "@NITRO_LIBRARY_DEPENDS_FILE@")
+
+# Whether NITRO was built with shared libraries.
+SET(NITRO_BUILD_SHARED "@BUILD_SHARED_LIBS@")
+
+# Whether NITRO was built with Tcl wrapping support.
+SET(NITRO_CSWIG_TCL "@NITRO_CSWIG_TCL@")
+SET(NITRO_CSWIG_PYTHON "@NITRO_CSWIG_PYTHON@")
+SET(NITRO_CSWIG_JAVA "@NITRO_CSWIG_JAVA@")
+
+# Path to CableSwig configuration used by NITRO.
+SET(NITRO_CableSwig_DIR "@NITRO_CableSwig_DIR_CONFIG@")
+
+# A list of all libraries for NITRO.  Those listed here should
+# automatically pull in their dependencies.
+#SET(NITRO_LIBRARIES NITROAlgorithms NITROStatistics NITROFEM)
+SET(NITRO_LIBRARIES NITRO)
+
+# The NITRO library dependencies.
+IF(NOT NITRO_NO_LIBRARY_DEPENDS AND
+    EXISTS "${NITRO_LIBRARY_DEPENDS_FILE}")
+  INCLUDE("${NITRO_LIBRARY_DEPENDS_FILE}")
+ENDIF(NOT NITRO_NO_LIBRARY_DEPENDS AND
+  EXISTS "${NITRO_LIBRARY_DEPENDS_FILE}")
