@@ -9,6 +9,15 @@
 # The list of "uname -s" is available in CMake/Modules/CMakeDetermineSystem.cmake
 #
 
+# Thread parameters
+# Use pthread in default except Windows
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+  SET(NITRO_USE_WIN32_THREADS 1)
+else(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+  SET(NITRO_USE_PTHREADS 1)  
+endif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+
+
 # Windows
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
   SET(NITRO_PLATFORM_WIN32 1)
@@ -26,12 +35,22 @@ endif(CMAKE_SYSTEM_NAME MATCHES "Linux")
 
 # Sun OS
 if(CMAKE_SYSTEM_NAME MATCHES "SunOS")
-  SET(NITRO_PLATFORM_SUNOS 1)
+#  SET(OpenIGTLink_USE_SPROC 1)
+  SET(OpenIGTLink_PLATFORM_SUNOS 1)
+  # Set OpenIGTLink_STD_LINK_LIBRARIES 
+
+  SET(OpenIGTLink_STD_LINK_LIBRARIES
+    ${OpenIGTLink_STD_LINK_LIBRARIES}
+    rt
+    nsl
+  )
   IF(CMAKE_COMPILER_IS_GNUCXX)
-     SET(NITRO_STD_LINK_LIBRARIES
-       ${NITRO_STD_LINK_LIBRARIES}
+     SET(OpenIGTLink_STD_LINK_LIBRARIES
+       ${OpenIGTLink_STD_LINK_LIBRARIES}
        stdc++
      )
+  ELSE(CMAKE_COMPILER_IS_GNUCXX)
+  ENDIF(CMAKE_COMPILER_IS_GNUCXX)
 endif(CMAKE_SYSTEM_NAME MATCHES "SunOS")
 
 # QNX
