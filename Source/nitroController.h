@@ -17,62 +17,69 @@
 #include "nitroConfigure.h"
 #include "nitroObject.h"
 
-
 namespace nitro {
 
 class NITROCommon_EXPORT Controller : public Object
 {
-public:
-  /** Standard class typedefs. */
+ public:
   typedef Controller          Self;
   typedef Object              Superclass;
   typedef SmartPointer<Self>  Pointer;
   typedef SmartPointer<const Self>  ConstPointer;
-  
-  /** Method for creation through the object factory. */
+
   nitroNewMacro(Self);
+  nitroTypeMacro(Controller, Object);
+
+ public:
+  // Description:
+  // Set/get pointer to Kinematics class
+  void        SetKinematics(Kinematics* k) { this->m_Kinematics; }
+  Kinematics* GetKinematics(Kinematics* k) { return this->m_Kinematics; }
+
+  // Description:
+  // Set/get pointer to NetworkIF class
+  void        SetNetworkIF(NetworkIF* k)   { this->m_NetworkIF; }
+  NetworkIF*  GetNetworkIF(NetworkIF* k)   { return this->m_NetworkIF; }
+
+  // Description:
+  // Set/get pointer to HardwareIF class
+  void        SetHardwareIF(HardwareIF* k) { this->m_HardwareIF; }
+  HardwareIF* GetHardwareIF(HardwareIF* k) { return this->m_HardwareIF; }
+
+  // Description:
+  // Set/get pointer to UserIF class
+  void        SetUserIF(UserIF* k)         { this->m_UserIF; }
+  UserIF*     GetUserIF(UserIF* k)         { return this->m_UserIF; }
+
+  // Description:
+  // Specify main loop cylcle (microsecond)
+  void SetLoopCycle(int c)  { this->m_LoopCycle = c; }
+  int  GetLoopCycle()       { return this->m_LoopCycle; }
   
-  /** Run-time type information (and related methods). */
-  nitroTypeMacro(ConditionVariable, LightObject);
+  // Description:
+  // Run main loop. Note that this base class is implemented for
+  // non-real-time OS. If you consider using real-time OS API for
+  // hard real-time control of the loop, you may create a child
+  // class and override this function.
+  virtual void Execute();
 
-  /** Suspend execution of this thread until the condition is signaled. The
-   *  argument is a SimpleMutex object that must be locked prior to calling
-   *  this method.  */
-  void Wait(SimpleMutexLock * mutex);
+ protected:
 
-  /** Signal that the condition is true and release one waiting thread */
-  void Signal();
+  // Description:
+  // Constructor/Destructor
+  Controller();
+  ~Controller();
 
-  /** Signal that the condition is true and release all waiting threads */
-  void Broadcast();
+ protected:
+  
+  int m_LoopCycle;
+  
+  // Pointer to a kinmatics class
+  Kinematics* m_Kinematics;
+  NetworkIF*  m_NetworkIF;
+  HardwareIF* m_HardwareIF;
+  UserIF*     m_UserIF;
 
-protected:
-  ConditionVariable();
-  ~ConditionVariable();
-
-private:
-  ConditionVariable(const Self & other);
-  const Self & operator=( const Self & );
-#ifdef NITRO_USE_PTHREADS
-  pthread_cond_t m_ConditionVariable;
-  MutexType      m_Mutex;
-#else
-  int m_NumberOfWaiters;                   // number of waiting threads
-#ifdef WIN32
-  CRITICAL_SECTION m_NumberOfWaitersLock;  // Serialize access to 
-                                           // m_NumberOfWaiters
-
-  HANDLE m_Semaphore;                      // Semaphore to queue threads 
-  HANDLE m_WaitersAreDone;                 // Auto-reset event used by the
-                                           // broadcast/signal thread to
-                                           // wait for all the waiting
-                                           // threads to wake up and
-                                           // release the semaphore
-
-  size_t m_WasBroadcast;                   // Keeps track of whether we
-                                           // were broadcasting or signaling
-#endif
-#endif
 };
 
 } // end namespace nitro
