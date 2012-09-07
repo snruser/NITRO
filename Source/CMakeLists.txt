@@ -80,8 +80,18 @@ ADD_LIBRARY(NITRO
   ${NITRO_CLASSES}
   )
 
+ # add imported target
+ADD_LIBRARY(OpenIGTLinkLib STATIC IMPORTED)
+ 
+ # point the imported target at the real file
+SET_PROPERTY(TARGET OpenIGTLinkLib PROPERTY
+                IMPORTED_LOCATION "${OpenIGTLink_INSTALL_DIR}/lib/igtl/libOpenIGTLink.a")
+
+INCLUDE_DIRECTORIES(${OpenIGTLink_INSTALL_DIR}/include/igtl)
+
 TARGET_LINK_LIBRARIES(NITRO
   ${LINK_LIBS}
+  OpenIGTLinkLib
   )
 
 SET_TARGET_PROPERTIES(NITRO PROPERTIES

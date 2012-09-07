@@ -1,6 +1,6 @@
 PROJECT( NITRO )
 
-cmake_minimum_required(VERSION 2.4)
+cmake_minimum_required(VERSION 2.8)
 
 if(COMMAND cmake_policy)
      cmake_policy(SET CMP0003 NEW)
@@ -32,6 +32,25 @@ IF(NITRO_BUILD_TESTING)
   ENABLE_TESTING()
   INCLUDE (${CMAKE_ROOT}/Modules/Dart.cmake)
 ENDIF()
+
+#-----------------------------------------------------------------------------
+# OpenIGTLink
+
+include(ExternalProject)
+
+set(OpenIGTLink_PREFIX "${CMAKE_BINARY_DIR}/OpenIGTLink")
+set(OpenIGTLink_GIT_REPO_URL   https://github.com/openigtlink/OpenIGTLink)
+set(OpenIGTLink_INSTALL_DIR "${CMAKE_BINARY_DIR}/OpenIGTLink-build")
+set(OpenIGTLink_CMAKE_ARGS     "-DCMAKE_INSTALL_PREFIX=${OpenIGTLink_INSTALL_DIR}")
+
+ExternalProject_Add(OpenIGTLink
+   PREFIX ${OpenIGTLink_PREFIX}
+   GIT_REPOSITORY ${OpenIGTLink_GIT_REPO_URL}
+   GIT_TAG "origin/development"
+   CMAKE_ARGS ${OpenIGTLink_CMAKE_ARGS}
+   INSTALL_DIR ${OpenIGTLink_INSTALL_DIR}
+)
+
 
 #-----------------------------------------------------------------------------
 # Output directories.
