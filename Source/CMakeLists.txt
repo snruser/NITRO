@@ -26,7 +26,7 @@ ELSE(NITRO_PLATFORM_WIN32) # for POSIX-compatible OSs
   ENDIF(NITRO_PLATFORM_SUNOS)
 ENDIF(NITRO_PLATFORM_WIN32)
 
-SET(NITRO_TOOLS
+SET(NITRO_BASE_SOURCES
   nitroConditionVariable.cxx
   nitroFastMutexLock.cxx
   nitroLightObject.cxx
@@ -35,19 +35,19 @@ SET(NITRO_TOOLS
   nitroObject.cxx
   nitroObjectFactoryBase.cxx
   nitroSimpleFastMutexLock.cxx
+  nitroActuator.cxx
+  nitroXMLParser.cxx
   )
 
-SET(NITRO_CLASSES
+SET(NITRO_WORKFLOW_SOURCES
   nitroController.cxx
   nitroKinematics.cxx
   nitroHardwareIF.cxx
   nitroNetworkIF.cxx
   nitroUserIF.cxx
-  nitroActuator.cxx
-  nitroXMLParser.cxx
   )	
 
-SET(NITRO_INCLUDE_TOOLS
+SET(NITRO_BASE_INCLUDES
   nitroConditionVariable.h
   nitroCreateObjectFunction.h
   nitroFastMutexLock.h
@@ -63,21 +63,28 @@ SET(NITRO_INCLUDE_TOOLS
   nitroTypes.h
   nitroWin32Header.h
   nitroWindows.h
+  nitroActuator.h
+  nitroXMLParser.h
 )
 
-SET(NITRO_INCLUDE_CLASSES
+SET(NITRO_WORKFLOW_INCLUDES
   nitroController.h
   nitroKinematics.h
   nitroHardwareIF.h
   nitroNetworkIF.h
   nitroUserIF.h
-  nitroActuator.h
-  nitroXMLParser.h
+  )
+
+SET(RAPIDXML_INCLUDE_FILES
+  RapidXML/rapidxml_iterators.hpp
+  RapidXML/rapidxml_print.hpp
+  RapidXML/rapidxml_utils.hpp
+  RapidXML/rapidxml.hpp
   )
 
 ADD_LIBRARY(NITRO
-  ${NITRO_TOOLS}
-  ${NITRO_CLASSES}
+  ${NITRO_BASE_SOURCES}
+  ${NITRO_WORKFLOW_SOURCES}
   )
 
  # add imported target
@@ -99,7 +106,7 @@ SET_TARGET_PROPERTIES(NITRO PROPERTIES
   SOVERSION ${NITRO_VERSION_MAJOR}
 )
 
-INSTALL(FILES ${NITRO_INCLUDE_TOOLS} ${NITRO_INCLUDE_CLASSES}
+INSTALL(FILES ${NITRO_BASE_INCLUDES} ${NITRO_WORKFLOW_INCLUDES} ${RAPIDXML_INCLUDE_FILES}
   DESTINATION ${NITRO_INSTALL_INCLUDE_DIR}
   COMPONENT Development)
 

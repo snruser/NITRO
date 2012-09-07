@@ -36,21 +36,20 @@ ENDIF()
 #-----------------------------------------------------------------------------
 # OpenIGTLink
 
-include(ExternalProject)
+INCLUDE(ExternalProject)
 
-set(OpenIGTLink_PREFIX "${CMAKE_BINARY_DIR}/OpenIGTLink")
-set(OpenIGTLink_GIT_REPO_URL   https://github.com/openigtlink/OpenIGTLink)
-set(OpenIGTLink_INSTALL_DIR "${CMAKE_BINARY_DIR}/OpenIGTLink-build")
-set(OpenIGTLink_CMAKE_ARGS     "-DCMAKE_INSTALL_PREFIX=${OpenIGTLink_INSTALL_DIR}")
+SET(OpenIGTLink_PREFIX "${CMAKE_BINARY_DIR}/OpenIGTLink")
+SET(OpenIGTLink_GIT_REPO_URL   https://github.com/openigtlink/OpenIGTLink)
+SET(OpenIGTLink_INSTALL_DIR "${CMAKE_BINARY_DIR}/OpenIGTLink-build")
+SET(OpenIGTLink_CMAKE_ARGS     "-DCMAKE_INSTALL_PREFIX=${OpenIGTLink_INSTALL_DIR}")
 
-ExternalProject_Add(OpenIGTLink
+EXTERNALPROJECT_ADD(OpenIGTLink
    PREFIX ${OpenIGTLink_PREFIX}
    GIT_REPOSITORY ${OpenIGTLink_GIT_REPO_URL}
    GIT_TAG "origin/development"
    CMAKE_ARGS ${OpenIGTLink_CMAKE_ARGS}
    INSTALL_DIR ${OpenIGTLink_INSTALL_DIR}
 )
-
 
 #-----------------------------------------------------------------------------
 # Output directories.

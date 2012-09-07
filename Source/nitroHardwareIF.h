@@ -14,9 +14,15 @@
 #ifndef  __nitroHardwareIF_h
 #define  __nitroHardwareIF_h
 
+// STD include
+#include <vector>
+
 #include "nitroConfigure.h"
 #include "nitroObject.h"
 #include "nitroObjectFactory.h"
+
+// NITRO includes
+#include "nitroActuator.h"
 
 namespace nitro {
 
@@ -40,6 +46,14 @@ class NITROCommon_EXPORT HardwareIF : public Object
   // Constructor/Destructor
   HardwareIF();
   ~HardwareIF();
+
+  // Description:
+  // Variables
+  int DegreesOfFreedom;
+
+  // Description:
+  // Vector of actuators
+  std::vector<Actuator*> ActuatorsList;
 
  protected:
     

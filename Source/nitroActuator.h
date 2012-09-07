@@ -33,7 +33,6 @@ class NITROCommon_EXPORT Actuator : public Object
 
  public:
 
-
  protected:
 
   // Description:

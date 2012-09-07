@@ -18,6 +18,9 @@
 #include "nitroObject.h"
 #include "nitroObjectFactory.h"
 
+// Rapid XML
+#include "RapidXML/rapidxml.hpp"
+
 namespace nitro {
 
 class NITROCommon_EXPORT XMLParser : public Object
@@ -33,6 +36,7 @@ class NITROCommon_EXPORT XMLParser : public Object
 
  public:
 
+  void Parse(const char* xmlFile);
 
  protected:
 

@@ -19,10 +19,10 @@ Controller::Controller()
 {
   this->m_LoopCycle = 1000; // 1000 microsecond
 
-  this->m_Kinematics = NULL;
-  this->m_NetworkIF  = NULL;
-  this->m_HardwareIF = NULL;
-  this->m_UserIF     = NULL;
+  this->m_Kinematics = Kinematics::New();
+  this->m_NetworkIF  = NetworkIF::New();
+  this->m_HardwareIF = HardwareIF::New();
+  this->m_UserIF     = UserIF::New();
 }
 
 Controller::~Controller()
