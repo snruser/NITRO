@@ -11,11 +11,18 @@
 
 =========================================================================*/
 
-#ifndef  __nitroConditionVariable_h
-#define  __nitroConditionVariable_h
+#ifndef  __nitroController_h
+#define  __nitroController_h
 
 #include "nitroConfigure.h"
 #include "nitroObject.h"
+#include "nitroObjectFactory.h"
+
+// NITRO Classes
+#include "nitroKinematics.h"
+#include "nitroNetworkIF.h"
+#include "nitroHardwareIF.h"
+#include "nitroUserIF.h"
 
 namespace nitro {
 
@@ -33,23 +40,23 @@ class NITROCommon_EXPORT Controller : public Object
  public:
   // Description:
   // Set/get pointer to Kinematics class
-  void        SetKinematics(Kinematics* k) { this->m_Kinematics; }
+  void        SetKinematics(Kinematics* k) { this->m_Kinematics = k; }
   Kinematics* GetKinematics(Kinematics* k) { return this->m_Kinematics; }
 
   // Description:
   // Set/get pointer to NetworkIF class
-  void        SetNetworkIF(NetworkIF* k)   { this->m_NetworkIF; }
-  NetworkIF*  GetNetworkIF(NetworkIF* k)   { return this->m_NetworkIF; }
+  void        SetNetworkIF(NetworkIF* n)   { this->m_NetworkIF = n; }
+  NetworkIF*  GetNetworkIF(NetworkIF* n)   { return this->m_NetworkIF; }
 
   // Description:
   // Set/get pointer to HardwareIF class
-  void        SetHardwareIF(HardwareIF* k) { this->m_HardwareIF; }
-  HardwareIF* GetHardwareIF(HardwareIF* k) { return this->m_HardwareIF; }
+  void        SetHardwareIF(HardwareIF* h) { this->m_HardwareIF = h; }
+  HardwareIF* GetHardwareIF(HardwareIF* h) { return this->m_HardwareIF; }
 
   // Description:
   // Set/get pointer to UserIF class
-  void        SetUserIF(UserIF* k)         { this->m_UserIF; }
-  UserIF*     GetUserIF(UserIF* k)         { return this->m_UserIF; }
+  void        SetUserIF(UserIF* u)         { this->m_UserIF = u; }
+  UserIF*     GetUserIF(UserIF* u)         { return this->m_UserIF; }
 
   // Description:
   // Specify main loop cylcle (microsecond)
@@ -79,7 +86,6 @@ class NITROCommon_EXPORT Controller : public Object
   NetworkIF*  m_NetworkIF;
   HardwareIF* m_HardwareIF;
   UserIF*     m_UserIF;
-
 };
 
 } // end namespace nitro

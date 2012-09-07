@@ -26,7 +26,7 @@ ELSE(NITRO_PLATFORM_WIN32) # for POSIX-compatible OSs
   ENDIF(NITRO_PLATFORM_SUNOS)
 ENDIF(NITRO_PLATFORM_WIN32)
 
-SET(NITRO_SOURCES
+SET(NITRO_TOOLS
   nitroConditionVariable.cxx
   nitroFastMutexLock.cxx
   nitroLightObject.cxx
@@ -37,7 +37,17 @@ SET(NITRO_SOURCES
   nitroSimpleFastMutexLock.cxx
   )
 
-SET(NITRO_INCLUDE_FILES
+SET(NITRO_CLASSES
+  nitroController.cxx
+  nitroKinematics.cxx
+  nitroHardwareIF.cxx
+  nitroNetworkIF.cxx
+  nitroUserIF.cxx
+  nitroActuator.cxx
+  nitroXMLParser.cxx
+  )	
+
+SET(NITRO_INCLUDE_TOOLS
   nitroConditionVariable.h
   nitroCreateObjectFunction.h
   nitroFastMutexLock.h
@@ -55,8 +65,19 @@ SET(NITRO_INCLUDE_FILES
   nitroWindows.h
 )
 
+SET(NITRO_INCLUDE_CLASSES
+  nitroController.h
+  nitroKinematics.h
+  nitroHardwareIF.h
+  nitroNetworkIF.h
+  nitroUserIF.h
+  nitroActuator.h
+  nitroXMLParser.h
+  )
+
 ADD_LIBRARY(NITRO
-  ${NITRO_SOURCES}
+  ${NITRO_TOOLS}
+  ${NITRO_CLASSES}
   )
 
 TARGET_LINK_LIBRARIES(NITRO
@@ -68,7 +89,7 @@ SET_TARGET_PROPERTIES(NITRO PROPERTIES
   SOVERSION ${NITRO_VERSION_MAJOR}
 )
 
-INSTALL(FILES ${NITRO_INCLUDE_FILES}
+INSTALL(FILES ${NITRO_INCLUDE_TOOLS} ${NITRO_INCLUDE_CLASSES}
   DESTINATION ${NITRO_INSTALL_INCLUDE_DIR}
   COMPONENT Development)
 

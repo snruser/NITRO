@@ -11,25 +11,15 @@
 
 =========================================================================*/
 
-#include "nitroController.h"
+#include "nitroUserIF.h"
 
 namespace nitro {
 
-Controller::Controller()
-{
-  this->m_LoopCycle = 1000; // 1000 microsecond
-
-  this->m_Kinematics = NULL;
-  this->m_NetworkIF  = NULL;
-  this->m_HardwareIF = NULL;
-  this->m_UserIF     = NULL;
-}
-
-Controller::~Controller()
+UserIF::UserIF()
 {
 }
 
-void Controller::Execute()
+UserIF::~UserIF()
 {
 }
   
