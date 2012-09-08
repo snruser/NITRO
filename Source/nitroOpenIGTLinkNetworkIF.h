@@ -11,8 +11,8 @@
 
 =========================================================================*/
 
-#ifndef  __nitroUserIF_h
-#define  __nitroUserIF_h
+#ifndef  __nitroOpenIGTLinkNetworkIF_h
+#define  __nitroOpenIGTLinkNetworkIF_h
 
 #include "nitroConfigure.h"
 #include "nitroObject.h"
@@ -20,28 +20,26 @@
 
 namespace nitro {
 
-class NITROCommon_EXPORT UserIF : public Object
+class NITROCommon_EXPORT OpenIGTLinkNetworkIF : public Object
 {
  public:
-  typedef UserIF                    Self;
-  typedef Object                    Superclass;
-  typedef SmartPointer<Self>        Pointer;
+  typedef OpenIGTLinkNetworkIF           Self;
+  typedef Object              Superclass;
+  typedef SmartPointer<Self>  Pointer;
   typedef SmartPointer<const Self>  ConstPointer;
 
   nitroNewMacro(Self);
-  nitroTypeMacro(UserIF, Object);
+  nitroTypeMacro(OpenIGTLinkNetworkIF, Object);
 
  public:
 
-  virtual void Print(const char *format, ...);
-  virtual void PrintError(const char *format, ...);
 
  protected:
 
   // Description:
   // Constructor/Destructor
-  UserIF();
-  ~UserIF();
+  OpenIGTLinkNetworkIF();
+  ~OpenIGTLinkNetworkIF();
 
  protected:
     

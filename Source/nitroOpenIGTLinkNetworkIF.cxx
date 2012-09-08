@@ -11,27 +11,16 @@
 
 =========================================================================*/
 
-#include "nitroUserIF.h"
+#include "nitroOpenIGTLinkNetworkIF.h"
 
 namespace nitro {
 
-UserIF::UserIF()
+OpenIGTLinkNetworkIF::OpenIGTLinkNetworkIF()
 {
 }
 
-UserIF::~UserIF()
+OpenIGTLinkNetworkIF::~OpenIGTLinkNetworkIF()
 {
 }
-
-void UserIF::Print(const char *format, ...)
-{
-  std::cout << format;
-}
-
-void UserIF::PrintError(const char *format, ...)
-{
-  std::cout << "ERROR: " << format;
-}
-
   
 } // end namespace nitro

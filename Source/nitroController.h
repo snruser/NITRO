@@ -68,7 +68,7 @@ class NITROCommon_EXPORT Controller : public Object
   // non-real-time OS. If you consider using real-time OS API for
   // hard real-time control of the loop, you may create a child
   // class and override this function.
-  virtual void Execute();
+  virtual int Execute();
 
  protected:
 

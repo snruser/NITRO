@@ -13,24 +13,74 @@
 
 #include "nitroController.h"
 
+#include "nitroMath.h"
+#include "nitroOSUtil.h"
+
 namespace nitro {
 
 Controller::Controller()
 {
   this->m_LoopCycle = 1000; // 1000 microsecond
 
-  this->m_Kinematics = Kinematics::New();
-  this->m_NetworkIF  = NetworkIF::New();
-  this->m_HardwareIF = HardwareIF::New();
-  this->m_UserIF     = UserIF::New();
+  this->m_Kinematics = NULL;
+  this->m_NetworkIF  = NULL;
+  this->m_HardwareIF = NULL;
+  this->m_UserIF     = NULL;
 }
 
 Controller::~Controller()
 {
 }
 
-void Controller::Execute()
+int Controller::Execute()
 {
+
+  // Before start using this->m_UserIF->Print() and this->m_UserIF->PrintError(),
+  // make sure that UserIF is set.
+  if (this->m_UserIF)
+    {
+    std::cerr << "ERROR: NO user interface has found." << std::endl;
+    return 0;
+    }
+
+  if (this->m_Kinematics)
+    {
+    this->m_UserIF->PrintError("No Kinematic class has been set.\n");
+    return 0;
+    }
+
+  if (this->m_NetworkIF)
+    {
+    this->m_UserIF->PrintError("No NetworkIF class has been set.\n");
+    return 0;
+    }
+
+  if (this->m_HardwareIF)
+    {
+    this->m_UserIF->PrintError("No HardwareIF class has been set.\n");
+    return 0;
+    }
+
+  // ------------------------------
+  // Check number of end effectors
+  //int nEffectors = this->m_HardwareIF->GetNumberOfEndEffectors();
+  int nEffectors = 1;
+  //this->NetworkIF->SetNEffectors(nEffectors);
+
+  std::list< Matrix > targets;
+  targets.resize(nEffectors);
+
+  // ------------------------------  
+  // Initialize
+  this->m_UserIF->Print("Initializing.\n");  
+
+  while (1)
+    {
+    //this->NetworkIF->GetTarget(targets);
+
+    // The following code is tentative. 
+    Sleep(10);
+    }
 }
   
 } // end namespace nitro

@@ -37,6 +37,7 @@ SET(NITRO_BASE_SOURCES
   nitroSimpleFastMutexLock.cxx
   nitroActuator.cxx
   nitroXMLParser.cxx
+  nitroOSUtil.cxx
   )
 
 SET(NITRO_WORKFLOW_SOURCES
@@ -65,6 +66,8 @@ SET(NITRO_BASE_INCLUDES
   nitroWindows.h
   nitroActuator.h
   nitroXMLParser.h
+  nitroOSUtil.h
+
 )
 
 SET(NITRO_WORKFLOW_INCLUDES
