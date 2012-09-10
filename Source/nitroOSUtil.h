@@ -11,27 +11,20 @@
 
 =========================================================================*/
 
-#include "nitroUserIF.h"
+#ifndef __igltOSUtil_h
+#define __igltOSUtil_h
 
-namespace nitro {
-
-UserIF::UserIF()
+#include "nitroWin32Header.h"
+namespace nitro
 {
+
+  /** Stop the program for the duration specified in millisecond
+   *  The maximum dulation is 
+   * */
+  void NITROCommon_EXPORT Sleep(int millisecond);
+
 }
 
-UserIF::~UserIF()
-{
-}
+#endif // __igltOSUtil_h
 
-void UserIF::Print(const char *format, ...)
-{
-  std::cout << format;
-}
 
-void UserIF::PrintError(const char *format, ...)
-{
-  std::cout << "ERROR: " << format;
-}
-
-  
-} // end namespace nitro

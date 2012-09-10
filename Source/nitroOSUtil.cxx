@@ -11,27 +11,34 @@
 
 =========================================================================*/
 
-#include "nitroUserIF.h"
+#include "nitroOSUtil.h"
 
-namespace nitro {
+#if defined(_WIN32) && !defined(__CYGWIN__)
+  #include <windows.h>
+#else
+  #include <time.h>
+#endif
 
-UserIF::UserIF()
+namespace nitro
 {
-}
 
-UserIF::~UserIF()
+void Sleep(int milliseconds)
 {
-}
+#if defined(_WIN32) && !defined(__CYGWIN__)
 
-void UserIF::Print(const char *format, ...)
-{
-  std::cout << format;
-}
-
-void UserIF::PrintError(const char *format, ...)
-{
-  std::cout << "ERROR: " << format;
-}
-
+  // Call Windows Native Sleep() function
+  ::Sleep(milliseconds);
   
-} // end namespace nitro
+#else
+  
+  struct timespec req;
+  req.tv_sec  = (int) milliseconds / 1000;
+  req.tv_nsec = (milliseconds % 1000) * 1000000;
+  
+  nanosleep(&req, NULL);
+  
+#endif
+  
+}
+
+}

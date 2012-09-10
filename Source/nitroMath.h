@@ -11,27 +11,16 @@
 
 =========================================================================*/
 
-#include "nitroUserIF.h"
+#ifndef __igltMath_h
+#define __igltMath_h
 
-namespace nitro {
-
-UserIF::UserIF()
+#include "nitroWin32Header.h"
+namespace nitro
 {
+  typedef std::list<float>   Vector;
+  typedef std::list<Vector>  Matrix;
 }
 
-UserIF::~UserIF()
-{
-}
+#endif // __igltMath_h
 
-void UserIF::Print(const char *format, ...)
-{
-  std::cout << format;
-}
 
-void UserIF::PrintError(const char *format, ...)
-{
-  std::cout << "ERROR: " << format;
-}
-
-  
-} // end namespace nitro
