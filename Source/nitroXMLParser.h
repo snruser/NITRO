@@ -37,6 +37,20 @@ class NITROCommon_EXPORT XMLParser : public Object
  public:
 
   void Parse(const char* xmlFile);
+  void* GoToNextActuator();
+  std::string GetTagValue(const char* tag);
+  int GetNumberOfActuators();
+
+  // Templated method to help conversion from string to different type (int, double, float, ...)
+  template <class T> T ConvertFromString(const std::string& s)
+  {
+    std::istringstream ss(s);
+    T t;
+    ss >> t;
+    return t;
+  }
+
+
 
  protected:
 
@@ -46,6 +60,9 @@ class NITROCommon_EXPORT XMLParser : public Object
   ~XMLParser();
 
  protected:
+
+  rapidxml::xml_document<> xmlDoc;
+  rapidxml::xml_node<>* ActuatorNode;
     
 };
 

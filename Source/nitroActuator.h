@@ -9,7 +9,7 @@
   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
   PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 
 #ifndef  __nitroActuator_h
 #define  __nitroActuator_h
@@ -20,32 +20,53 @@
 
 namespace nitro {
 
-class NITROCommon_EXPORT Actuator : public Object
-{
- public:
-  typedef Actuator            Self;
-  typedef Object              Superclass;
-  typedef SmartPointer<Self>  Pointer;
-  typedef SmartPointer<const Self>  ConstPointer;
+  class NITROCommon_EXPORT Actuator : public Object
+  {
+  public:
+    typedef Actuator            Self;
+    typedef Object              Superclass;
+    typedef SmartPointer<Self>  Pointer;
+    typedef SmartPointer<const Self>  ConstPointer;
 
-  nitroNewMacro(Self);
-  nitroTypeMacro(Actuator, Object);
+    nitroNewMacro(Self);
+    nitroTypeMacro(Actuator, Object);
 
- public:
+  public:
 
- protected:
+    enum Motor{
+      ROTARY,
+      LINEAR
+    };
 
-  // Description:
-  // Constructor/Destructor
-  Actuator();
-  ~Actuator();
+    enum Feedback{
+      NONE,
+      ENCODER
+    };
 
- protected:
-    
-};
+    // Motor Type (Linear, Rotary, ...)
+    int GetMotorType();
+    std::string GetMotorTypeAsString();
+    void SetMotorType(Motor type);
+
+    // Feedback Device (Encoder, None, ...)
+    int GetFeedbackDevice();
+    std::string GetFeedbackDeviceAsString();
+    void SetFeedbackDevice(Feedback device);
+
+  protected:
+
+    // Description:
+    // Constructor/Destructor
+    Actuator();
+    ~Actuator();
+
+  protected:
+
+    Motor MotorType;
+    Feedback FeedbackDevice;
+
+  };
 
 } // end namespace nitro
 
 #endif
-
-
