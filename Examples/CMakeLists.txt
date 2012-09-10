@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 2.4)
+cmake_minimum_required(VERSION 2.8)
 
-SUBDIRS(
+add_subdirectory(
   NeedlePusher
 )
 
