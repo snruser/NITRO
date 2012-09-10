@@ -30,7 +30,7 @@ void UserIF::Print(const char *format, ...)
 
 void UserIF::PrintError(const char *format, ...)
 {
-  std::cout << "ERROR: " << format;
+  std::cerr << "ERROR: " << format;
 }
 
   
