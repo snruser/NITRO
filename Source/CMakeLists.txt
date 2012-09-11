@@ -46,6 +46,7 @@ SET(NITRO_WORKFLOW_SOURCES
   nitroHardwareIF.cxx
   nitroNetworkIF.cxx
   nitroUserIF.cxx
+  nitroOpenIGTLinkNetworkIF.cxx
   )	
 
 SET(NITRO_BASE_INCLUDES
@@ -67,7 +68,7 @@ SET(NITRO_BASE_INCLUDES
   nitroActuator.h
   nitroXMLParser.h
   nitroOSUtil.h
-
+  nitroMath.h
 )
 
 SET(NITRO_WORKFLOW_INCLUDES
@@ -76,6 +77,7 @@ SET(NITRO_WORKFLOW_INCLUDES
   nitroHardwareIF.h
   nitroNetworkIF.h
   nitroUserIF.h
+  nitroOpenIGTLinkNetworkIF.cxx
   )
 
 SET(RAPIDXML_INCLUDE_FILES

@@ -17,6 +17,7 @@
 #include "nitroConfigure.h"
 #include "nitroObject.h"
 #include "nitroObjectFactory.h"
+#include "nitroMath.h"
 
 namespace nitro {
 
@@ -33,6 +34,26 @@ class NITROCommon_EXPORT NetworkIF : public Object
 
  public:
 
+  // Description:
+  // Connect to the remote host.
+  virtual int Conennct() {};
+
+  // Description:
+  // Disconnect from the remote host.
+  virtual int Disconnect() {};
+
+  // Description:
+  // Check if the connection is alive.
+  virtual int IsConnected() {};
+
+  // Description:
+  // Get target coordinates receviced from the remote host. GetTargets()
+  // creates a list of coordinates in image coordinate system and
+  // set them in 'vectors'.
+  // Because GetTargets() checkes the connection status before fetching
+  // target data, thus the caller does not need to call IsConnected() before
+  // calling GetTargets().
+  virtual int GetTargets(std::list< Vector >& vectors) {};
 
  protected:
 
