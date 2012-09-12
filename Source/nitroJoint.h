@@ -44,17 +44,18 @@ namespace nitro {
 
   protected:
 
-    Text j_Name;
-    Text j_Description;
-    MotionType j_MotionType;
-    Drive j_Drive;
-    MinMax j_MotionRange;
-    MinMaxFixed j_Speed;
-    MinMaxFixed j_Acceleration;
-    MinMaxFixed j_Torque;
-    Actuator j_Actuator;
-    Sensor j_Sensor;
-    Landmark j_Landmark;
+/* (REQUIRED) */   Text		j_Name;	        // Name of the joint                         
+                   Text		j_Description;	// Description of the joint                  
+/* (REQUIRED) */   int		j_Group;	// Group belonging for priority motion       
+/* (REQUIRED) */   MotionType	j_MotionType;	// Rotational or linear motion               
+/* (REQUIRED) */   Drive	j_Drive;	// Active or passive joint                   
+                   MinMax	j_MotionRange;	// Range of motion                           
+                   MinMaxFixed	j_Speed;	// Range of speed, or fixed                  
+                   MinMaxFixed	j_Acceleration;	// Range of acceleration, or fixed           
+                   MinMaxFixed	j_Torque;	// Range of torque, or fixed                 
+/* (REQUIRED) */   Actuator	j_Actuator;	// Actuator informations                     
+                   Sensor	j_Sensor;	// Sensor informations                       
+                   Landmark	j_Landmark;	// Landmark informations                     
   };
 
 } // end namespace nitro

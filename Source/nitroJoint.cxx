@@ -21,6 +21,7 @@ namespace nitro {
   {
     this->j_Name = "Default";
     this->j_Description = "(None)";
+    this->j_Group = 0;
     this->j_MotionType = ROTATIONAL;
     this->j_Drive = ACTIVE;
     this->j_MotionRange;
