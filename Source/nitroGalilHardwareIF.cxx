@@ -11,24 +11,24 @@
 
   =========================================================================*/
 
-#include "nitroHardwareNeedlePusher.h"
+#include "nitroGalilHardwareIF.h"
 
 
 
-HardwareNeedlePusher::HardwareNeedlePusher()
+GalilHardwareIF::GalilHardwareIF()
 {
 }
 
-HardwareNeedlePusher::~HardwareNeedlePusher()
+GalilHardwareIF::~GalilHardwareIF()
 {
 }
 
-void HardwareNeedlePusher::Connect()
+void GalilHardwareIF::Connect()
 {
   this->DiscoverGalilBoards();
 }
 
-void HardwareNeedlePusher::DiscoverGalilBoards()
+void GalilHardwareIF::DiscoverGalilBoards()
 {
   int sock;                     /* socket descriptor */
   int flag_on = 1;              /* socket option flag */
@@ -155,7 +155,7 @@ void HardwareNeedlePusher::DiscoverGalilBoards()
 }
 
 
-void HardwareNeedlePusher::DisplayBoardsAvailable()
+void GalilHardwareIF::DisplayBoardsAvailable()
 {
   std::cerr << "Galil boards detected" << std::endl;
   std::cerr << "---------------------------" << std::endl;
@@ -167,7 +167,7 @@ void HardwareNeedlePusher::DisplayBoardsAvailable()
     }
 }
 
-void HardwareNeedlePusher::RequestGalilBoardToConnect()
+void GalilHardwareIF::RequestGalilBoardToConnect()
 {
   int selectedBoard = 0;
 
@@ -186,7 +186,7 @@ void HardwareNeedlePusher::RequestGalilBoardToConnect()
     }
 }
 
-void HardwareNeedlePusher::InitiateCommunication(int board)
+void GalilHardwareIF::InitiateCommunication(int board)
 {
   int flag_on = 1;               /* socket option flag */
   struct sockaddr_in com_addr;   /* socket address structure */
@@ -216,7 +216,7 @@ void HardwareNeedlePusher::InitiateCommunication(int board)
   std::cerr << "Connected" << std::endl;
 }
 
-void HardwareNeedlePusher::Command(const char *command)
+void GalilHardwareIF::Command(const char *command)
 {
   if(this->CommunicationSocket < 0)
     {
@@ -248,7 +248,7 @@ void HardwareNeedlePusher::Command(const char *command)
   std::cerr << "Reply: " << reply << std::endl;
 }
 
-void HardwareNeedlePusher::Disconnect()
+void GalilHardwareIF::Disconnect()
 {
   if(this->CommunicationSocket > 0)
     {
@@ -256,12 +256,12 @@ void HardwareNeedlePusher::Disconnect()
     }
 }
 
-int HardwareNeedlePusher::GetNumberOfDevices()
+int GalilHardwareIF::GetNumberOfDevices()
 {
   return GalilList.size();
 }
 
-std::string HardwareNeedlePusher::GetNthIPAsString(int i)
+std::string GalilHardwareIF::GetNthIPAsString(int i)
 {
   if(i < GalilList.size())
     {

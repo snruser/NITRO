@@ -49,7 +49,7 @@ namespace nitro {
     fin.close();
 
     // Parse XML File with RapidXML
-    this->xmlDoc.parse<0>(buffer);
+    this->XMLDoc.parse<0>(buffer);
 
     delete[] buffer;
   }
@@ -60,9 +60,9 @@ namespace nitro {
   {
     if(!this->ActuatorNode)
       {
-      if(this->xmlDoc.first_node("Actuator"))
+      if(this->XMLDoc.first_node("Actuator"))
         {
-        this->ActuatorNode = this->xmlDoc.first_node("Actuator");
+        this->ActuatorNode = this->XMLDoc.first_node("Actuator");
         }
       else
         {
@@ -89,7 +89,7 @@ namespace nitro {
   {
     int numberOfNodes = 0;
 
-    for(rapidxml::xml_node<>* i = this->xmlDoc.first_node("Actuator"); i; i = i->next_sibling("Actuator"))
+    for(rapidxml::xml_node<>* i = this->XMLDoc.first_node("Actuator"); i; i = i->next_sibling("Actuator"))
       {
       numberOfNodes++;
       }

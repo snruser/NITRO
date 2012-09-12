@@ -22,7 +22,7 @@
 #include "nitroObjectFactory.h"
 
 // NITRO includes
-#include "nitroActuator.h"
+#include "nitroJoint.h"
 
 namespace nitro {
 
@@ -53,7 +53,7 @@ class NITROCommon_EXPORT HardwareIF : public Object
 
   // Description:
   // Vector of actuators
-  std::vector<Actuator*> ActuatorsList;
+  std::vector<Joint*> JointsList;
 
  protected:
     

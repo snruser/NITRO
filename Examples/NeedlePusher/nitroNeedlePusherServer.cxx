@@ -1,4 +1,4 @@
-#include "nitroHardwareNeedlePusher.h"
+#include "nitroGalilHardwareIF.h"
 #include "nitroXMLParser.h"
 
 int main()
@@ -9,8 +9,8 @@ int main()
   // logic, and user interface
 
   // Device I/O (Galil)
-  HardwareNeedlePusher::Pointer hwnp;
-  hwnp = HardwareNeedlePusher::New();
+  GalilHardwareIF::Pointer hwnp;
+  hwnp = GalilHardwareIF::New();
 
   // Test XML Parser
   nitro::XMLParser::Pointer xmlp;

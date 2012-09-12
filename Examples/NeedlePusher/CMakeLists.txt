@@ -10,11 +10,10 @@ find_package(NITRO REQUIRED)
 include(${NITRO_USE_FILE})
 
 SET(HEADERS
-   nitroHardwareNeedlePusher.h)
-
+	)
 SET(SOURCES
     nitroNeedlePusherServer.cxx
-    nitroHardwareNeedlePusher.cxx)
+    )
 
 ADD_EXECUTABLE(NeedlePusherServer ${SOURCES})
 TARGET_LINK_LIBRARIES(NeedlePusherServer NITRO)

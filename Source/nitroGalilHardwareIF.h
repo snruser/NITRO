@@ -11,8 +11,8 @@
 
   =========================================================================*/
 
-#ifndef  __nitroHardwareNeedlePusher_h
-#define  __nitroHardwareNeedlePusher_h
+#ifndef  __nitroGalilHardwareIF_h
+#define  __nitroGalilHardwareIF_h
 
 // STD include
 #include <sys/types.h>   /* for type definitions */
@@ -38,16 +38,16 @@
 #define COMMUNICATION_PORT 18889
 #define MULTICAST_IP "239.255.19.56"
 
-class  HardwareNeedlePusher : public nitro::HardwareIF
+class  GalilHardwareIF : public nitro::HardwareIF
 {
 public:
-typedef HardwareNeedlePusher          Self;
+typedef GalilHardwareIF          Self;
 typedef HardwareIF              Superclass;
 typedef nitro::SmartPointer<Self>  Pointer;
 typedef nitro::SmartPointer<const Self>  ConstPointer;
 
 nitroNewMacro(Self);
-nitroTypeMacro(HardwareNeedlePusher, HardwareIF);
+nitroTypeMacro(GalilHardwareIF, HardwareIF);
 
 
 //--------------------------------------------------
@@ -64,8 +64,8 @@ protected:
 
 // Description:
 // Constructor/Destructor
-HardwareNeedlePusher();
-~HardwareNeedlePusher();
+GalilHardwareIF();
+~GalilHardwareIF();
 
 private:
 void DiscoverGalilBoards();
