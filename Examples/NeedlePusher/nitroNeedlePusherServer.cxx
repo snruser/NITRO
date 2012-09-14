@@ -16,12 +16,13 @@ int main()
   nitro::XMLParser::Pointer xmlp;
   xmlp = nitro::XMLParser::New();
 
-  xmlp->Parse("/Users/SNR/Desktop/test2.xml");
-  for(int i = 0; i < xmlp->GetNumberOfActuators(); i++)
+  if(xmlp->SetXMLPath("/Users/SNR/Desktop/NITRO/Examples/NeedlePusher/NeedlePusher.xml"))
     {
-    xmlp->GoToNextActuator();
-    int testvalue = xmlp->ConvertFromString<int>(xmlp->GetTagValue("test"));
-    std::cerr << "Test: " << testvalue << std::endl;
+    xmlp->Parse();    
+    }
+  else
+    {
+    std::cerr << "Couldn't open file" << std::endl;
     }
   return 0;
 }

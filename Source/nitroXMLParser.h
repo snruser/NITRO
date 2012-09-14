@@ -17,6 +17,7 @@
 #include "nitroConfigure.h"
 #include "nitroObject.h"
 #include "nitroObjectFactory.h"
+#include "nitroJoint.h"
 
 // Rapid XML
 #include "RapidXML/rapidxml.hpp"
@@ -36,18 +37,21 @@ namespace nitro {
 
   public:
 
-    void Parse(const char* xmlFile);
-    void* GoToNextActuator();
-    std::string GetTagValue(const char* tag);
-    int GetNumberOfActuators();
+    int SetXMLPath(const char *path);
+    const char* GetXMLPath();
+    void Parse();
 
     // Templated method to help conversion from string to different type (int, double, float, ...)
     template <class T> T ConvertFromString(const std::string& s)
       {
-      std::istringstream ss(s);
-      T t;
-      ss >> t;
-      return t;
+	if(!s.empty())
+	  {
+	    std::istringstream ss(s);
+	    T t;
+	    ss >> t;
+	    return t;
+	  }
+	return NULL;
       }
 
 
@@ -58,11 +62,22 @@ namespace nitro {
     XMLParser();
     ~XMLParser();
 
+    void GetHardwareName();
+    void GetDegreesOfFreedom();
+    void GetJointList();
+
   protected:
 
     rapidxml::xml_document<> XMLDoc;
-    rapidxml::xml_node<>* ActuatorNode;
+    rapidxml::xml_node<>* TagNode;
+    std::string XMLPath;
 
+
+    std::string HardwareName;
+    int DegreesOfFreedom;
+    //std::vector<Link*> LinkList;
+    std::vector<Joint::Pointer> JointList;
+    int NumberOfJoints;
   };
 
 } // end namespace nitro

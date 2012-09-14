@@ -19,18 +19,18 @@ namespace nitro {
 
   Joint::Joint()
   {
-    this->j_Name = "Default";
-    this->j_Description = "(None)";
-    this->j_Group = 0;
-    this->j_MotionType = ROTATIONAL;
-    this->j_Drive = ACTIVE;
-    this->j_MotionRange;
-    this->j_Speed;
-    this->j_Acceleration;
-    this->j_Torque;
-    this->j_Actuator;
-    this->j_Sensor;
-    this->j_Landmark;
+    this->m_Name = "Default";
+    this->m_Description = "(None)";
+    this->m_Group = 0;
+    this->m_MotionType = ROTATIONAL;
+    this->m_Drive = ACTIVE;
+    this->m_MotionRange;
+    this->m_Speed;
+    this->m_Acceleration;
+    this->m_Torque;
+    this->m_Actuator;
+    this->m_Sensor;
+    this->m_Landmark;
   }
 
 //---------------------------------------------------------------------------

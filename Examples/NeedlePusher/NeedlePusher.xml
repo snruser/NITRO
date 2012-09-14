@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<RobotName>NeedlePusher</RobotName>
+<DegreesOfFreedom>1</DegreesOfFreedom>
+<Link>
+  <Name>Upper arm</Name>
+  <Length>20</Length>
+</Link>
+<Joint>
+  <Name>Shoulder</Name>
+  <Description>Command lead screw</Description>
+  <Group>0</Group>
+  <MotionType>Rotational</MotionType>
+  <Drive>Active</Drive>
+  <MotionRange>
+    <Min>0.0</Min>
+    <Max>3.14</Max>
+  </MotionRange>
+  <Speed>
+    <Min>0.0</Min>
+    <Max>3.14</Max>
+    <Fixed>3.14</Fixed>
+  </Speed>
+  <Acceleration>
+    <Min>0.0</Min>
+    <Max>1.0</Max>
+    <Fixed>1.0</Fixed>
+  </Acceleration>
+  <Torque>
+    <Min>0.0</Min>
+    <Max>1.0</Max>
+    <Fixed>1.0</Fixed>    
+  </Torque>
+  <Actuator>
+    <Type>DC</Type>
+    <MotionType>Rotational</MotionType>
+    <Input>Position</Input>
+    <PPU>100</PPU>
+    <GearRatio>1.0</GearRatio>
+  </Actuator>
+  <Sensor>
+    <Type>Encoder</Type>
+    <MotionType>Rotational</MotionType>
+    <CountsPerUnit>8192</CountsPerUnit>
+  </Sensor>
+  <Landmark>
+    <Home></Home>
+    <Min></Min>
+    <Max></Max>
+  </Landmark>
+</Joint>
