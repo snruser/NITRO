@@ -378,7 +378,6 @@ namespace nitro {
         this->JointList.push_back(newJoint);
         this->NumberOfJoints++;
         }
-      std::cerr << "Information: [" << this->JointList[0]->GetLandmark().Limits.Max  << "]" << std::endl;
       }
   }
 
