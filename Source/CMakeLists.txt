@@ -36,6 +36,7 @@ SET(NITRO_BASE_SOURCES
   nitroObjectFactoryBase.cxx
   nitroSimpleFastMutexLock.cxx
   nitroJoint.cxx
+  nitroLink.cxx
   nitroXMLParser.cxx
   nitroOSUtil.cxx
   )
@@ -67,6 +68,7 @@ SET(NITRO_BASE_INCLUDES
   nitroWin32Header.h
   nitroWindows.h
   nitroJoint.h
+  nitroLink.h
   nitroXMLParser.h
   nitroOSUtil.h
   nitroMath.h

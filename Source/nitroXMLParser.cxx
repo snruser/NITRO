@@ -28,6 +28,7 @@ namespace nitro {
     this->HardwareName = "";
     this->DegreesOfFreedom = 0;
     this->NumberOfJoints = 0;
+    this->NumberOfLinks = 0;
   }
 
 //---------------------------------------------------------------------------
@@ -93,14 +94,15 @@ namespace nitro {
       delete[] buffer;
       }
 
-    this->GetHardwareName();
-    this->GetDegreesOfFreedom();
-    this->GetJointList();
+    this->ParseHardwareName();
+    this->ParseDegreesOfFreedom();
+    this->ParseLinks();
+    this->ParseJoints();
   }
 
 //---------------------------------------------------------------------------
 
-  void XMLParser::GetHardwareName()
+  void XMLParser::ParseHardwareName()
   {
     if(this->XMLDoc.first_node("RobotName"))
       {
@@ -114,14 +116,14 @@ namespace nitro {
 
 //---------------------------------------------------------------------------
 
-  void XMLParser::GetDegreesOfFreedom()
+  void XMLParser::ParseDegreesOfFreedom()
   {
     if(this->XMLDoc.first_node("DegreesOfFreedom"))
       {
       rapidxml::xml_node<>* dof = this->XMLDoc.first_node("DegreesOfFreedom");
       if(dof)
         {
-        this->DegreesOfFreedom = this->ConvertFromString<int>(dof->value());
+        this->DegreesOfFreedom = this->ConvertFromStringTo<int>(dof->value());
         }
       }
   }
@@ -129,14 +131,50 @@ namespace nitro {
 //---------------------------------------------------------------------------
 
   // TODO: Check required fields and optional
-  void XMLParser::GetJointList()
+  void XMLParser::ParseLinks()
+  {
+    if(this->XMLDoc.first_node("Link"))
+      {
+      for(rapidxml::xml_node<>* n = this->XMLDoc.first_node("Joint"); n; n = n->next_sibling("Joint"))
+        {
+        Link::Pointer newLink = Link::New();
+
+        // Link Name
+        if(rapidxml::xml_node<>* tmpNode = n->first_node("Name"))
+          {
+          if(strcmp(tmpNode->value(), ""))
+            {
+            newLink->SetName(tmpNode->value());
+            }
+          }
+
+        // Link length
+        if(rapidxml::xml_node<>* tmpNode = n->first_node("Length"))
+          {
+          if(strcmp(tmpNode->value(), ""))
+            {
+            newLink->SetLength(this->ConvertFromStringTo<double>(tmpNode->value()));
+            }
+          }
+
+        // Add new links to the list
+        this->LinkList.push_back(newLink);
+        this->NumberOfLinks++;
+        }
+      }
+  }
+
+//---------------------------------------------------------------------------
+
+  // TODO: Check required fields and optional
+  void XMLParser::ParseJoints()
   {
     if(this->XMLDoc.first_node("Joint"))
       {
       for(rapidxml::xml_node<>* n = this->XMLDoc.first_node("Joint"); n; n = n->next_sibling("Joint"))
         {
         Joint::Pointer newJoint = Joint::New();
-        
+
         // Joint Name
         if(rapidxml::xml_node<>* tmpNode = n->first_node("Name"))
           {
@@ -145,7 +183,7 @@ namespace nitro {
             newJoint->SetName(tmpNode->value());
             }
           }
-        
+
         // Joint Description
         if(rapidxml::xml_node<>* tmpNode = n->first_node("Description"))
           {
@@ -160,10 +198,10 @@ namespace nitro {
           {
           if(strcmp(tmpNode->value(), ""))
             {
-            newJoint->SetGroup(this->ConvertFromString<int>(tmpNode->value()));
+            newJoint->SetGroup(this->ConvertFromStringTo<int>(tmpNode->value()));
             }
           }
-        
+
         // Joint MotionType
         if(rapidxml::xml_node<>* tmpNode = n->first_node("MotionType"))
           {
@@ -195,7 +233,7 @@ namespace nitro {
               }
             }
           }
-        
+
         // TODO: Check variables not empty
         // Joint MotionRange
         if(rapidxml::xml_node<>* tmpNode = n->first_node("MotionRange"))
@@ -203,71 +241,71 @@ namespace nitro {
           struct MinMax temp;
           if(rapidxml::xml_node<>* tmpNode2 = tmpNode->first_node("Min"))
             {
-            temp.Min = this->ConvertFromString<double>(tmpNode2->value());
+            temp.Min = this->ConvertFromStringTo<double>(tmpNode2->value());
             }
-         if(rapidxml::xml_node<>* tmpNode3 = tmpNode->first_node("Max"))
+          if(rapidxml::xml_node<>* tmpNode3 = tmpNode->first_node("Max"))
             {
-            temp.Max = this->ConvertFromString<double>(tmpNode3->value());
-            } 
-         newJoint->SetMotionRange(temp);
-         }
-        
+            temp.Max = this->ConvertFromStringTo<double>(tmpNode3->value());
+            }
+          newJoint->SetMotionRange(temp);
+          }
+
         // Joint Speed
         if(rapidxml::xml_node<>* tmpNode = n->first_node("Speed"))
           {
           struct MinMaxFixed temp;
           if(rapidxml::xml_node<>* tmpNode2 = tmpNode->first_node("Min"))
             {
-            temp.Min = this->ConvertFromString<double>(tmpNode2->value());
+            temp.Min = this->ConvertFromStringTo<double>(tmpNode2->value());
             }
-         if(rapidxml::xml_node<>* tmpNode3 = tmpNode->first_node("Max"))
+          if(rapidxml::xml_node<>* tmpNode3 = tmpNode->first_node("Max"))
             {
-            temp.Max = this->ConvertFromString<double>(tmpNode3->value());
-            } 
-         if(rapidxml::xml_node<>* tmpNode4 = tmpNode->first_node("Fixed"))
+            temp.Max = this->ConvertFromStringTo<double>(tmpNode3->value());
+            }
+          if(rapidxml::xml_node<>* tmpNode4 = tmpNode->first_node("Fixed"))
             {
-            temp.Fixed = this->ConvertFromString<double>(tmpNode4->value());
-            } 
-         newJoint->SetSpeed(temp);
-         }
-        
+            temp.Fixed = this->ConvertFromStringTo<double>(tmpNode4->value());
+            }
+          newJoint->SetSpeed(temp);
+          }
+
         // Joint Acceleration
         if(rapidxml::xml_node<>* tmpNode = n->first_node("Acceleration"))
           {
           struct MinMaxFixed temp;
           if(rapidxml::xml_node<>* tmpNode2 = tmpNode->first_node("Min"))
             {
-            temp.Min = this->ConvertFromString<double>(tmpNode2->value());
+            temp.Min = this->ConvertFromStringTo<double>(tmpNode2->value());
             }
-         if(rapidxml::xml_node<>* tmpNode3 = tmpNode->first_node("Max"))
+          if(rapidxml::xml_node<>* tmpNode3 = tmpNode->first_node("Max"))
             {
-            temp.Max = this->ConvertFromString<double>(tmpNode3->value());
-            } 
-         if(rapidxml::xml_node<>* tmpNode4 = tmpNode->first_node("Fixed"))
+            temp.Max = this->ConvertFromStringTo<double>(tmpNode3->value());
+            }
+          if(rapidxml::xml_node<>* tmpNode4 = tmpNode->first_node("Fixed"))
             {
-            temp.Fixed = this->ConvertFromString<double>(tmpNode4->value());
-            } 
-         newJoint->SetAcceleration(temp);
-         }
-        
+            temp.Fixed = this->ConvertFromStringTo<double>(tmpNode4->value());
+            }
+          newJoint->SetAcceleration(temp);
+          }
+
         // Joint Torque
         if(rapidxml::xml_node<>* tmpNode = n->first_node("Torque"))
           {
           struct MinMaxFixed temp;
           if(rapidxml::xml_node<>* tmpNode2 = tmpNode->first_node("Min"))
             {
-            temp.Min = this->ConvertFromString<double>(tmpNode2->value());
+            temp.Min = this->ConvertFromStringTo<double>(tmpNode2->value());
             }
-         if(rapidxml::xml_node<>* tmpNode3 = tmpNode->first_node("Max"))
+          if(rapidxml::xml_node<>* tmpNode3 = tmpNode->first_node("Max"))
             {
-            temp.Max = this->ConvertFromString<double>(tmpNode3->value());
-            } 
-         if(rapidxml::xml_node<>* tmpNode4 = tmpNode->first_node("Fixed"))
+            temp.Max = this->ConvertFromStringTo<double>(tmpNode3->value());
+            }
+          if(rapidxml::xml_node<>* tmpNode4 = tmpNode->first_node("Fixed"))
             {
-            temp.Fixed = this->ConvertFromString<double>(tmpNode4->value());
-            } 
-         newJoint->SetTorque(temp);
-         } 
+            temp.Fixed = this->ConvertFromStringTo<double>(tmpNode4->value());
+            }
+          newJoint->SetTorque(temp);
+          }
 
         // Joint Actuator
         if(rapidxml::xml_node<>* tmpNode = n->first_node("Actuator"))
@@ -284,7 +322,7 @@ namespace nitro {
               temp.Type = STEPPING;
               }
             }
-         if(rapidxml::xml_node<>* tmpNode3 = tmpNode->first_node("MotionType"))
+          if(rapidxml::xml_node<>* tmpNode3 = tmpNode->first_node("MotionType"))
             {
             if(!strcasecmp(tmpNode3->value(), "rotational"))
               {
@@ -294,8 +332,8 @@ namespace nitro {
               {
               temp.MotionType = LINEAR;
               }
-            } 
-         if(rapidxml::xml_node<>* tmpNode4 = tmpNode->first_node("Input"))
+            }
+          if(rapidxml::xml_node<>* tmpNode4 = tmpNode->first_node("Input"))
             {
             if(!strcasecmp(tmpNode4->value(), "position"))
               {
@@ -310,17 +348,17 @@ namespace nitro {
               temp.Input = TORQUE;
               }
             }
-         if(rapidxml::xml_node<>* tmpNode5 = tmpNode->first_node("PPU"))
+          if(rapidxml::xml_node<>* tmpNode5 = tmpNode->first_node("PPU"))
             {
-            temp.PulsePerUnit = this->ConvertFromString<int>(tmpNode5->value());
+            temp.PulsePerUnit = this->ConvertFromStringTo<int>(tmpNode5->value());
             }
-         if(rapidxml::xml_node<>* tmpNode6 = tmpNode->first_node("GearRatio"))
+          if(rapidxml::xml_node<>* tmpNode6 = tmpNode->first_node("GearRatio"))
             {
-            temp.GearRatio = this->ConvertFromString<double>(tmpNode6->value());
-            }         
-         newJoint->SetActuator(temp);
-         }
-        
+            temp.GearRatio = this->ConvertFromStringTo<double>(tmpNode6->value());
+            }
+          newJoint->SetActuator(temp);
+          }
+
         // Joint Sensor
         if(rapidxml::xml_node<>* tmpNode = n->first_node("Sensor"))
           {
@@ -349,7 +387,7 @@ namespace nitro {
             }
           if(rapidxml::xml_node<>* tmpNode4 = tmpNode->first_node("CountsPerUnit"))
             {
-            temp.CountsPerUnit = this->ConvertFromString<double>(tmpNode4->value());
+            temp.CountsPerUnit = this->ConvertFromStringTo<double>(tmpNode4->value());
             }
           newJoint->SetSensor(temp);
           }
@@ -360,15 +398,15 @@ namespace nitro {
           struct Landmark temp;
           if(rapidxml::xml_node<>* tmpNode2 = tmpNode->first_node("Home"))
             {
-            temp.Home = this->ConvertFromString<double>(tmpNode2->value());
+            temp.Home = this->ConvertFromStringTo<double>(tmpNode2->value());
             }
           if(rapidxml::xml_node<>* tmpNode3 = tmpNode->first_node("Min"))
             {
-            temp.Limits.Min = this->ConvertFromString<double>(tmpNode3->value());
+            temp.Limits.Min = this->ConvertFromStringTo<double>(tmpNode3->value());
             }
           if(rapidxml::xml_node<>* tmpNode4 = tmpNode->first_node("Max"))
             {
-            temp.Limits.Max = this->ConvertFromString<double>(tmpNode4->value());
+            temp.Limits.Max = this->ConvertFromStringTo<double>(tmpNode4->value());
             }
           newJoint->SetLandmark(temp);
           }

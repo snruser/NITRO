@@ -18,6 +18,7 @@
 #include "nitroObject.h"
 #include "nitroObjectFactory.h"
 #include "nitroJoint.h"
+#include "nitroLink.h"
 
 // Rapid XML
 #include "RapidXML/rapidxml.hpp"
@@ -42,7 +43,7 @@ namespace nitro {
     void Parse();
 
     // Templated method to help conversion from string to different type (int, double, float, ...)
-    template <class T> T ConvertFromString(const std::string& s)
+    template <class T> T ConvertFromStringTo(const std::string& s)
       {
 	if(!s.empty())
 	  {
@@ -54,7 +55,13 @@ namespace nitro {
 	return NULL;
       }
 
+    const char* GetHardwareName() { return this->HardwareName.c_str(); };
+    int GetDegreesOfFreedom() { return this->DegreesOfFreedom; };
+    std::vector<Joint::Pointer> GetJointList() { return this->JointList; };
 
+    int GetNumberOfJoints() { return this->NumberOfJoints; };
+    int GetNumberOfLinks() { return this->NumberOfLinks; };
+    
   protected:
 
     // Description:
@@ -62,22 +69,24 @@ namespace nitro {
     XMLParser();
     ~XMLParser();
 
-    void GetHardwareName();
-    void GetDegreesOfFreedom();
-    void GetJointList();
-
+    void ParseHardwareName();
+    void ParseDegreesOfFreedom();
+    void ParseLinks();
+    void ParseJoints();
+    
+    
   protected:
 
     rapidxml::xml_document<> XMLDoc;
     rapidxml::xml_node<>* TagNode;
     std::string XMLPath;
 
-
     std::string HardwareName;
     int DegreesOfFreedom;
-    //std::vector<Link*> LinkList;
+    std::vector<Link::Pointer> LinkList;
     std::vector<Joint::Pointer> JointList;
     int NumberOfJoints;
+    int NumberOfLinks;
   };
 
 } // end namespace nitro
