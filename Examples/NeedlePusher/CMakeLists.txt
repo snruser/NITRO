@@ -11,10 +11,12 @@ include(${NITRO_USE_FILE})
 
 SET(HEADERS
     nitroNeedlePusherKinematics.h
+    nitroNeedlePusherController.h
     )
 
 SET(SOURCES
     nitroNeedlePusherKinematics.cxx
+    nitroNeedlePusherController.cxx
     nitroNeedlePusherServer.cxx
     )
 

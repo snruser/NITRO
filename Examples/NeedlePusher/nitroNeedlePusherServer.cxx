@@ -2,7 +2,7 @@
 #include "nitroOpenIGTLinkNetworkIF.h"
 #include "nitroNeedlePusherKinematics.h"
 #include "nitroUserIF.h"
-#include "nitroController.h"
+#include "nitroNeedlePusherController.h"
 
 #include "nitroXMLParser.h"
 
@@ -43,8 +43,8 @@ int main()
   // ------------------------------------------------------------
   // Step 2: Create controller and set the instances
 
-  Controller::Pointer ctl;
-  ctl = Controller::New();
+  NeedlePusherController::Pointer ctl;
+  ctl = NeedlePusherController::New();
   ctl->SetHardwareIF(hwnp);
   ctl->SetNetworkIF(nwio);
   ctl->SetKinematics(km);

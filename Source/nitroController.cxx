@@ -84,34 +84,4 @@ namespace nitro {
       }
   }
 
-  void Controller::Initialize()
-  {
-    // Parse XML File and create Joints list and Links list
-    if(this->m_XMLParser)
-      {
-      std::cerr << "Parse XML" << std::endl;
-      this->m_XMLParser->Parse();
-      }
-
-    if(this->m_NetworkIF)
-      {
-      std::cerr << "Connect OpenIGTLink" << std::endl;
-      if(this->m_NetworkIF->Connect())
-        {
-        std::cerr << "Client connected" << std::endl;
-        }
-      }
-  }
-
-  void Controller::Exit()
-  {
-    if(this->m_NetworkIF)
-      {
-      std::cerr << "Disconnect" << std::endl;
-      // TODO: Check if connected
-      this->m_NetworkIF->Disconnect();
-      }
-  }
-
-
 } // end namespace nitro
