@@ -31,9 +31,9 @@ int main()
   NeedlePusherKinematics::Pointer km;
   km = NeedlePusherKinematics::New();
 
-  // User Interface
-  UserIF::Pointer ui;
-  ui = UserIF::New();
+  // User Interface (Required ?)
+  //UserIF::Pointer ui;
+  //ui = UserIF::New();
 
   // XML Parser
   XMLParser::Pointer xmlp;
@@ -45,11 +45,11 @@ int main()
 
   Controller::Pointer ctl;
   ctl = Controller::New();
-  ctl->SetHardwareIF(hwnp.GetPointer());
-  ctl->SetNetworkIF(nwio.GetPointer());
-  ctl->SetKinematics(km.GetPointer());
-  ctl->SetUserIF(ui.GetPointer());
-  ctl->SetXMLParser(xmlp.GetPointer());
+  ctl->SetHardwareIF(hwnp);
+  ctl->SetNetworkIF(nwio);
+  ctl->SetKinematics(km);
+  //ctl->SetUserIF(ui);
+  ctl->SetXMLParser(xmlp);
 
   // ------------------------------------------------------------
   // Step 3: Initialize the controller

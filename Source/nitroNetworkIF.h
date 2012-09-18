@@ -36,15 +36,15 @@ class NITROCommon_EXPORT NetworkIF : public Object
 
   // Description:
   // Connect to the remote host.
-  virtual int Connect() {};
+  virtual int Connect() { return 0; };
 
   // Description:
   // Disconnect from the remote host.
-  virtual int Disconnect() {};
+  virtual int Disconnect() { return 0; };
 
   // Description:
   // Check if the connection is alive.
-  virtual int IsConnected() {};
+  virtual int IsConnected() { return 0; };
 
   // Description:
   // Get target coordinates receviced from the remote host. GetTargets()
@@ -53,7 +53,7 @@ class NITROCommon_EXPORT NetworkIF : public Object
   // Because GetTargets() checkes the connection status before fetching
   // target data, thus the caller does not need to call IsConnected() before
   // calling GetTargets().
-  virtual int GetTargets(std::list< Vector >& vectors) {};
+  virtual int GetTargets(std::list< Vector >& vectors) { return 0; };
 
  protected:
 
