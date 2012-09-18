@@ -9,7 +9,7 @@
   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
   PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 /*=========================================================================
 
   Program:   Insight Segmentation & Registration Toolkit
@@ -24,11 +24,11 @@
   Portions of this code are covered under the VTK copyright.
   See VTKCopyright.txt or http://www.kitware.com/VTKCopyright.htm for details.
 
-     This software is distributed WITHOUT ANY WARRANTY; without even 
-     the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
-     PURPOSE.  See the above copyright notices for more information.
+  This software is distributed WITHOUT ANY WARRANTY; without even
+  the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+  PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 #ifndef __nitroWin32Header_h
 #define __nitroWin32Header_h
 
@@ -46,22 +46,22 @@
 #endif
 
 #if defined(_WIN32)
-  // Include the windows header here only if requested by user code.
+// Include the windows header here only if requested by user code.
 # if defined(NITRO_INCLUDE_WINDOWS_H)
 #  include <windows.h>
-   // Define types from the windows header file.
-   typedef DWORD nitroWindowsDWORD;
-   typedef PVOID nitroWindowsPVOID;
-   typedef LPVOID nitroWindowsLPVOID;
-   typedef HANDLE nitroWindowsHANDLE;
-   typedef LPTHREAD_START_ROUTINE nitroWindowsLPTHREAD_START_ROUTINE;
+// Define types from the windows header file.
+typedef DWORD nitroWindowsDWORD;
+typedef PVOID nitroWindowsPVOID;
+typedef LPVOID nitroWindowsLPVOID;
+typedef HANDLE nitroWindowsHANDLE;
+typedef LPTHREAD_START_ROUTINE nitroWindowsLPTHREAD_START_ROUTINE;
 # else
-   // Define types from the windows header file.
-   typedef unsigned long nitroWindowsDWORD;
-   typedef void* nitroWindowsPVOID;
-   typedef nitroWindowsPVOID nitroWindowsLPVOID;
-   typedef nitroWindowsPVOID nitroWindowsHANDLE;
-   typedef nitroWindowsDWORD (__stdcall *nitroWindowsLPTHREAD_START_ROUTINE)(nitroWindowsLPVOID);
+// Define types from the windows header file.
+typedef unsigned long nitroWindowsDWORD;
+typedef void* nitroWindowsPVOID;
+typedef nitroWindowsPVOID nitroWindowsLPVOID;
+typedef nitroWindowsPVOID nitroWindowsHANDLE;
+typedef nitroWindowsDWORD (__stdcall *nitroWindowsLPTHREAD_START_ROUTINE)(nitroWindowsLPVOID);
 # endif
 
 #if ( _MSC_VER >= 1300 ) // Visual studio .NET
@@ -85,9 +85,9 @@
 
 
 #if defined(_MSC_VER)
-  // Enable MSVC compiler warning messages that are useful but off by default.
+// Enable MSVC compiler warning messages that are useful but off by default.
 # pragma warning ( default : 4263 ) /* no override, call convention differs */
-  // Disable MSVC compiler warning messages that often occur in valid code.
+// Disable MSVC compiler warning messages that often occur in valid code.
 # if !defined(NITRO_DISPLAY_WIN32_WARNINGS)
 #  pragma warning ( disable : 4003 ) /* not enough actual parameters for macro */
 #  pragma warning ( disable : 4097 ) /* typedef is synonym for class */
@@ -124,7 +124,7 @@
 #endif
 
 #if defined(__BORLANDC__)
-  // Disable Borland compiler warning messages that often occur in valid code.
+// Disable Borland compiler warning messages that often occur in valid code.
 # if !defined(NITRO_DISPLAY_WIN32_WARNINGS)
 #  pragma warn -8004 /* assigned a value that is never used */
 #  pragma warn -8008 /* condition is always false */
@@ -139,7 +139,7 @@
 // NITRO_EXPORT can not be used
 #define NITRO_EXPORT
 
-#if (defined(_WIN32) || defined(WIN32)) && !defined(NITROSTATIC) 
+#if (defined(_WIN32) || defined(WIN32)) && !defined(NITROSTATIC)
 # ifdef NITROCommon_EXPORTS
 #  define NITROCommon_EXPORT __declspec(dllexport)
 # else
@@ -147,7 +147,7 @@
 # endif  /* NITROCommon_EXPORT */
 #else
 /* unix needs nothing */
-#define NITROCommon_EXPORT 
+#define NITROCommon_EXPORT
 #endif
 
 

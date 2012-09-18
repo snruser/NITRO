@@ -9,7 +9,7 @@
   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
   PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 /*=========================================================================
 
   Program:   Insight Segmentation & Registration Toolkit
@@ -24,83 +24,83 @@
   Portions of this code are covered under the VTK copyright.
   See VTKCopyright.txt or http://www.kitware.com/VTKCopyright.htm for details.
 
-     This software is distributed WITHOUT ANY WARRANTY; without even 
-     the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
-     PURPOSE.  See the above copyright notices for more information.
+  This software is distributed WITHOUT ANY WARRANTY; without even
+  the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+  PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 #include "nitroSimpleFastMutexLock.h"
 
 namespace nitro
 {
 
 // Construct a new SimpleMutexLock
-SimpleFastMutexLock::SimpleFastMutexLock()
-{
+  SimpleFastMutexLock::SimpleFastMutexLock()
+  {
 #ifdef NITRO_USE_SPROC
-  init_lock( &m_FastMutexLock );
+    init_lock( &m_FastMutexLock );
 #endif
 
 #if defined(_WIN32) && !defined(NITRO_USE_PTHREADS)
-  //this->MutexLock = CreateMutex( NULL, FALSE, NULL );
-  InitializeCriticalSection(&m_FastMutexLock);
+    //this->MutexLock = CreateMutex( NULL, FALSE, NULL );
+    InitializeCriticalSection(&m_FastMutexLock);
 #endif
 
 #ifdef NITRO_USE_PTHREADS
 #ifdef NITRO_HP_PTHREADS
-  pthread_mutex_init(&(m_FastMutexLock), pthread_mutexattr_default);
+    pthread_mutex_init(&(m_FastMutexLock), pthread_mutexattr_default);
 #else
-  pthread_mutex_init(&(m_FastMutexLock), NULL);
+    pthread_mutex_init(&(m_FastMutexLock), NULL);
 #endif
 #endif
 
-}
+  }
 
 // Destruct the SimpleMutexVariable
-SimpleFastMutexLock::~SimpleFastMutexLock()
-{
+  SimpleFastMutexLock::~SimpleFastMutexLock()
+  {
 #if defined(_WIN32) && !defined(NITRO_USE_PTHREADS)
-  //CloseHandle(this->MutexLock);
-  DeleteCriticalSection(&m_FastMutexLock);
+    //CloseHandle(this->MutexLock);
+    DeleteCriticalSection(&m_FastMutexLock);
 #endif
 
 #ifdef NITRO_USE_PTHREADS
-  pthread_mutex_destroy( &m_FastMutexLock);
+    pthread_mutex_destroy( &m_FastMutexLock);
 #endif
-}
+  }
 
 // Lock the FastMutexLock
-void SimpleFastMutexLock::Lock() const
-{
+  void SimpleFastMutexLock::Lock() const
+  {
 #ifdef NITRO_USE_SPROC
-  spin_lock( &m_FastMutexLock );
+    spin_lock( &m_FastMutexLock );
 #endif
 
 #if defined(_WIN32) && !defined(NITRO_USE_PTHREADS)
-  //WaitForSingleObject( this->MutexLock, INFINITE );
-  EnterCriticalSection(&m_FastMutexLock);
+    //WaitForSingleObject( this->MutexLock, INFINITE );
+    EnterCriticalSection(&m_FastMutexLock);
 #endif
 
 #ifdef NITRO_USE_PTHREADS
-  pthread_mutex_lock( &m_FastMutexLock);
+    pthread_mutex_lock( &m_FastMutexLock);
 #endif
-}
+  }
 
 // Unlock the FastMutexLock
-void SimpleFastMutexLock::Unlock() const
-{
+  void SimpleFastMutexLock::Unlock() const
+  {
 #ifdef NITRO_USE_SPROC
-  release_lock( &m_FastMutexLock );
+    release_lock( &m_FastMutexLock );
 #endif
 
 #if defined(_WIN32) && !defined(NITRO_USE_PTHREADS)
-  //ReleaseMutex( this->MutexLock );
-  LeaveCriticalSection(&m_FastMutexLock);
+    //ReleaseMutex( this->MutexLock );
+    LeaveCriticalSection(&m_FastMutexLock);
 #endif
 
 #ifdef NITRO_USE_PTHREADS
-  pthread_mutex_unlock( &m_FastMutexLock);
+    pthread_mutex_unlock( &m_FastMutexLock);
 #endif
-}
+  }
 
-}//end namespace nitro  
+}//end namespace nitro

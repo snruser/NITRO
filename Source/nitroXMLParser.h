@@ -28,10 +28,10 @@ namespace nitro {
   class NITROCommon_EXPORT XMLParser : public Object
   {
   public:
-    typedef XMLParser           Self;
-    typedef Object              Superclass;
-    typedef SmartPointer<Self>  Pointer;
-    typedef SmartPointer<const Self>  ConstPointer;
+    typedef XMLParser                   Self;
+    typedef Object                      Superclass;
+    typedef SmartPointer<Self>          Pointer;
+    typedef SmartPointer<const Self>    ConstPointer;
 
     nitroNewMacro(Self);
     nitroTypeMacro(XMLParser, Object);
@@ -45,14 +45,14 @@ namespace nitro {
     // Templated method to help conversion from string to different type (int, double, float, ...)
     template <class T> T ConvertFromStringTo(const std::string& s)
       {
-	if(!s.empty())
-	  {
-	    std::istringstream ss(s);
-	    T t;
-	    ss >> t;
-	    return t;
-	  }
-	return NULL;
+      if(!s.empty())
+        {
+        std::istringstream ss(s);
+        T t;
+        ss >> t;
+        return t;
+        }
+      return NULL;
       }
 
     const char* GetHardwareName() { return this->HardwareName.c_str(); };
@@ -61,7 +61,7 @@ namespace nitro {
 
     int GetNumberOfJoints() { return this->NumberOfJoints; };
     int GetNumberOfLinks() { return this->NumberOfLinks; };
-    
+
   protected:
 
     // Description:
@@ -73,8 +73,8 @@ namespace nitro {
     void ParseDegreesOfFreedom();
     void ParseLinks();
     void ParseJoints();
-    
-    
+
+
   protected:
 
     rapidxml::xml_document<> XMLDoc;

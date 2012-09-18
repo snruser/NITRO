@@ -26,7 +26,7 @@ int main()
   OpenIGTLinkNetworkIF::Pointer nwio;
   nwio = OpenIGTLinkNetworkIF::New();
   nwio->ConfigureAsServer(18944);
-  
+
   // Controller (Kinematics)
   NeedlePusherKinematics::Pointer km;
   km = NeedlePusherKinematics::New();
@@ -39,7 +39,12 @@ int main()
   XMLParser::Pointer xmlp;
   xmlp = XMLParser::New();
   xmlp->SetXMLPath("/Users/SNR/Desktop/NITRO/Examples/NeedlePusher/NeedlePusher.xml");
-    
+
+  // Log Recorder
+  LogRecorder::Pointer log;
+  log = LogRecorder::New();
+  log->SetLogFile("/Users/SNR/Desktop/NITRO/Examples/NeedlePusher/test1.txt");
+
   // ------------------------------------------------------------
   // Step 2: Create controller and set the instances
 
@@ -50,6 +55,7 @@ int main()
   ctl->SetKinematics(km);
   //ctl->SetUserIF(ui);
   ctl->SetXMLParser(xmlp);
+  ctl->SetLogRecorder(log);
 
   // ------------------------------------------------------------
   // Step 3: Initialize the controller

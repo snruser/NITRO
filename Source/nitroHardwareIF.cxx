@@ -9,18 +9,18 @@
   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
   PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 
 #include "nitroHardwareIF.h"
 
 namespace nitro {
 
-HardwareIF::HardwareIF()
-{
-}
+  HardwareIF::HardwareIF()
+  {
+  }
 
-HardwareIF::~HardwareIF()
-{
-}
-  
+  HardwareIF::~HardwareIF()
+  {
+  }
+
 } // end namespace nitro

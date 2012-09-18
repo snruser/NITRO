@@ -9,7 +9,7 @@
   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
   PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 /*=========================================================================
 
   Program:   Insight Segmentation & Registration Toolkit
@@ -24,19 +24,19 @@
   Portions of this code are covered under the VTK copyright.
   See VTKCopyright.txt or http://www.kitware.com/VTKCopyright.htm for details.
 
-     This software is distributed WITHOUT ANY WARRANTY; without even 
-     the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
-     PURPOSE.  See the above copyright notices for more information.
+  This software is distributed WITHOUT ANY WARRANTY; without even
+  the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+  PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 #include "nitroFastMutexLock.h"
 
 namespace nitro
 {
 
-void FastMutexLock::PrintSelf(std::ostream& os) const
-{
-  Superclass::PrintSelf(os);
-}
+  void FastMutexLock::PrintSelf(std::ostream& os) const
+  {
+    Superclass::PrintSelf(os);
+  }
 
 }//end namespace nitro

@@ -9,7 +9,7 @@
   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
   PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 
 #ifndef  __nitroLink_h
 #define  __nitroLink_h
@@ -20,40 +20,38 @@
 
 namespace nitro {
 
-class NITROCommon_EXPORT Link : public Object
-{
- public:
-  typedef Link          Self;
-  typedef Object              Superclass;
-  typedef SmartPointer<Self>  Pointer;
-  typedef SmartPointer<const Self>  ConstPointer;
+  class NITROCommon_EXPORT Link : public Object
+  {
+  public:
+    typedef Link                                Self;
+    typedef Object                      Superclass;
+    typedef SmartPointer<Self>          Pointer;
+    typedef SmartPointer<const Self>    ConstPointer;
 
-  nitroNewMacro(Self);
-  nitroTypeMacro(Link, Object);
+    nitroNewMacro(Self);
+    nitroTypeMacro(Link, Object);
 
- public:
+  public:
 
-  void SetName(const char* name) { this->Name.assign(name); };
-  const char* GetName() { return this->Name.c_str(); };
-  void SetLength(double l) { this->Length = l; };
-  double GetLength() { return this->Length; };
+    void SetName(const char* name) { this->Name.assign(name); };
+    const char* GetName() { return this->Name.c_str(); };
+    void SetLength(double l) { this->Length = l; };
+    double GetLength() { return this->Length; };
 
- protected:
+  protected:
 
-  // Description:
-  // Constructor/Destructor
-  Link();
-  ~Link();
+    // Description:
+    // Constructor/Destructor
+    Link();
+    ~Link();
 
- protected:
-    
-  std::string Name;
-  double Length;
+  protected:
 
-};
+    std::string Name;
+    double Length;
+
+  };
 
 } // end namespace nitro
 
 #endif
-
-

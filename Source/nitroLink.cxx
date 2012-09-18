@@ -9,20 +9,20 @@
   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
   PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 
 #include "nitroLink.h"
 
 namespace nitro {
 
-Link::Link()
-{
-  this->Name="Default link";
-  this->Length = 0.0;
-}
+  Link::Link()
+  {
+    this->Name="Default link";
+    this->Length = 0.0;
+  }
 
-Link::~Link()
-{
-}
-  
+  Link::~Link()
+  {
+  }
+
 } // end namespace nitro

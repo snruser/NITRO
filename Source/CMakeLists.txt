@@ -38,6 +38,7 @@ SET(NITRO_BASE_SOURCES
   nitroJoint.cxx
   nitroLink.cxx
   nitroXMLParser.cxx
+  nitroLogRecorder.cxx
   nitroOSUtil.cxx
   )
 
@@ -70,6 +71,7 @@ SET(NITRO_BASE_INCLUDES
   nitroJoint.h
   nitroLink.h
   nitroXMLParser.h
+  nitroLogRecorder.h
   nitroOSUtil.h
   nitroMath.h
 )

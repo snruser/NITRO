@@ -9,7 +9,7 @@
   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
   PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 
 #ifndef __igltMath_h
 #define __igltMath_h
@@ -22,5 +22,3 @@ namespace nitro
 }
 
 #endif // __igltMath_h
-
-

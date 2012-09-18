@@ -40,42 +40,42 @@
 
 class  GalilHardwareIF : public nitro::HardwareIF
 {
-public:
-typedef GalilHardwareIF          Self;
-typedef HardwareIF              Superclass;
-typedef nitro::SmartPointer<Self>  Pointer;
-typedef nitro::SmartPointer<const Self>  ConstPointer;
+ public:
+  typedef GalilHardwareIF          Self;
+  typedef HardwareIF              Superclass;
+  typedef nitro::SmartPointer<Self>  Pointer;
+  typedef nitro::SmartPointer<const Self>  ConstPointer;
 
-nitroNewMacro(Self);
-nitroTypeMacro(GalilHardwareIF, HardwareIF);
+  nitroNewMacro(Self);
+  nitroTypeMacro(GalilHardwareIF, HardwareIF);
 
 
 //--------------------------------------------------
 // Galil methods
 
-void Connect();
-void Command(const char* command);
-void Disconnect();
+  void Connect();
+  void Command(const char* command);
+  void Disconnect();
 
-int GetNumberOfDevices();
-std::string GetNthIPAsString(int i);
+  int GetNumberOfDevices();
+  std::string GetNthIPAsString(int i);
 
-protected:
+ protected:
 
 // Description:
 // Constructor/Destructor
-GalilHardwareIF();
-~GalilHardwareIF();
+  GalilHardwareIF();
+  ~GalilHardwareIF();
 
-private:
-void DiscoverGalilBoards();
-void DisplayBoardsAvailable();
-void InitiateCommunication(int board);
-void RequestGalilBoardToConnect();
+ private:
+  void DiscoverGalilBoards();
+  void DisplayBoardsAvailable();
+  void InitiateCommunication(int board);
+  void RequestGalilBoardToConnect();
 
-private:
-std::vector<std::string> GalilList;
-int CommunicationSocket;
+ private:
+  std::vector<std::string> GalilList;
+  int CommunicationSocket;
 
 };
 

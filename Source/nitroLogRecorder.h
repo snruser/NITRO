@@ -11,38 +11,46 @@
 
   =========================================================================*/
 
-#ifndef  __nitroKinematics_h
-#define  __nitroKinematics_h
+#ifndef  __nitroLogRecorder_h
+#define  __nitroLogRecorder_h
 
+#include <fstream>
 #include "nitroConfigure.h"
 #include "nitroObject.h"
 #include "nitroObjectFactory.h"
 
 namespace nitro {
 
-  class NITROCommon_EXPORT Kinematics : public Object
+  class NITROCommon_EXPORT LogRecorder : public Object
   {
   public:
-    typedef Kinematics                  Self;
-    typedef Object                      Superclass;
-    typedef SmartPointer<Self>          Pointer;
-    typedef SmartPointer<const Self>    ConstPointer;
+    typedef LogRecorder              Self;
+    typedef Object                   Superclass;
+    typedef SmartPointer<Self>       Pointer;
+    typedef SmartPointer<const Self> ConstPointer;
 
     nitroNewMacro(Self);
-    nitroTypeMacro(Kinematics, Object);
+    nitroTypeMacro(LogRecorder, Object);
 
   public:
 
+    void SetLogFile(const char* fpath);
+    void Log(const char* logData);
+
+    // Create continous recording ?
+    //void StartRecording();
+    //void StopRecording();
 
   protected:
 
     // Description:
     // Constructor/Destructor
-    Kinematics();
-    ~Kinematics();
+    LogRecorder();
+    ~LogRecorder();
 
   protected:
 
+    std::ofstream LogFile;
   };
 
 } // end namespace nitro

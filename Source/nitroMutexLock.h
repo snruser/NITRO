@@ -9,7 +9,7 @@
   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
   PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 /*=========================================================================
 
   Program:   Insight Segmentation & Registration Toolkit
@@ -24,11 +24,11 @@
   Portions of this code are covered under the VTK copyright.
   See VTKCopyright.txt or http://www.kitware.com/VTKCopyright.htm for details.
 
-     This software is distributed WITHOUT ANY WARRANTY; without even 
-     the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
-     PURPOSE.  See the above copyright notices for more information.
+  This software is distributed WITHOUT ANY WARRANTY; without even
+  the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+  PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 #ifndef __nitroMutexLock_h
 #define __nitroMutexLock_h
 
@@ -42,7 +42,7 @@
 #ifdef NITRO_USE_PTHREADS
 #include <pthread.h>
 #endif
- 
+
 #ifdef NITRO_USE_WIN32_THREADS
 #include "nitroWindows.h"
 #endif
@@ -51,123 +51,123 @@ namespace nitro
 {
 
 #ifdef NITRO_USE_SPROC
-typedef abilock_t MutexType;
+  typedef abilock_t MutexType;
 #endif
 
 #ifdef NITRO_USE_PTHREADS
-typedef pthread_mutex_t MutexType;
+  typedef pthread_mutex_t MutexType;
 #endif
- 
+
 #ifdef NITRO_USE_WIN32_THREADS
-typedef HANDLE MutexType;
+  typedef HANDLE MutexType;
 #endif
 
 #ifndef NITRO_USE_SPROC
 #ifndef NITRO_USE_PTHREADS
 #ifndef NITRO_USE_WIN32_THREADS
-typedef int MutexType;
+  typedef int MutexType;
 #endif
 #endif
 #endif
 
-/** \class SimpleMutexLock 
+/** \class SimpleMutexLock
  * \brief Simple mutual exclusion locking class.
- 
- * SimpleMutexLock allows the locking of variables which are accessed 
- * through different threads.  This header file also defines 
+
+ * SimpleMutexLock allows the locking of variables which are accessed
+ * through different threads.  This header file also defines
  * SimpleMutexLock which is not a subclass of Object.
- * 
+ *
  * \ingroup OSSystemObjects
  */
-class NITROCommon_EXPORT SimpleMutexLock
-{
-public:
-  /** Standard class typedefs.  */
-  typedef SimpleMutexLock       Self;
-  
-  /** Constructor and destructor left public purposely. */
-  SimpleMutexLock();
-  virtual ~SimpleMutexLock();
-  
-  /** Methods for creation and destruction through the object factory. */
-  static SimpleMutexLock *New();
-  //void Delete() {delete this;}
-  
-  /** Used for debugging and other run-time purposes. */
-  virtual const char *GetNameOfClass() {return "nitroSimpleMutexLock";};
-  
-  /** Lock the MutexLock. */
-  void Lock( void );
-
-  /** Unlock the MutexLock. */
-  void Unlock( void );
-
-  /** Access the MutexType member variable from outside this class */
-  MutexType& GetMutexLock()
+  class NITROCommon_EXPORT SimpleMutexLock
   {
-    return m_MutexLock;
-  }
-  const MutexType GetMutexLock() const
-  {
-    return m_MutexLock;
-  }
-  
-protected:
-  MutexType   m_MutexLock;
-};
+  public:
+    /** Standard class typedefs.  */
+    typedef SimpleMutexLock       Self;
 
-/** \class MutexLock 
+    /** Constructor and destructor left public purposely. */
+    SimpleMutexLock();
+    virtual ~SimpleMutexLock();
+
+    /** Methods for creation and destruction through the object factory. */
+    static SimpleMutexLock *New();
+    //void Delete() {delete this;}
+
+    /** Used for debugging and other run-time purposes. */
+    virtual const char *GetNameOfClass() {return "nitroSimpleMutexLock";};
+
+    /** Lock the MutexLock. */
+    void Lock( void );
+
+    /** Unlock the MutexLock. */
+    void Unlock( void );
+
+    /** Access the MutexType member variable from outside this class */
+    MutexType& GetMutexLock()
+      {
+      return m_MutexLock;
+      }
+    const MutexType GetMutexLock() const
+    {
+      return m_MutexLock;
+    }
+
+  protected:
+    MutexType   m_MutexLock;
+  };
+
+/** \class MutexLock
  * \brief Mutual exclusion locking class.
  *
- * MutexLock allows the locking of variables which are accessed 
- * through different threads.  This header file also defines 
+ * MutexLock allows the locking of variables which are accessed
+ * through different threads.  This header file also defines
  * SimpleMutexLock which is not a subclass of nitroObject.
- * 
+ *
  * \ingroup OSSystemObjects
  */
-class NITROCommon_EXPORT MutexLock : public Object
-{
-public:
-  /** Standard class typedefs. */
-  typedef MutexLock       Self;
-  typedef Object  Superclass;
-  typedef SmartPointer<Self>  Pointer;
-  typedef SmartPointer<const Self>  ConstPointer;
-  
-  /** Method for creation. */
-  nitroNewMacro(Self);
-  
-  /** Run-time information. */
-  nitroTypeMacro(MutexLock,Object);
+  class NITROCommon_EXPORT MutexLock : public Object
+  {
+  public:
+    /** Standard class typedefs. */
+    typedef MutexLock       Self;
+    typedef Object  Superclass;
+    typedef SmartPointer<Self>  Pointer;
+    typedef SmartPointer<const Self>  ConstPointer;
 
-  /** Lock the nitroMutexLock. */
-  void Lock( void );
+    /** Method for creation. */
+    nitroNewMacro(Self);
 
-  /** Unlock the MutexLock. */
-  void Unlock( void );
+    /** Run-time information. */
+    nitroTypeMacro(MutexLock,Object);
 
-protected:
-  MutexLock() {}
-  ~MutexLock() {}
-  
-  SimpleMutexLock   m_SimpleMutexLock;
-  void PrintSelf(std::ostream& os) const;
-  
-private:
-  MutexLock(const Self&); //purposely not implemented
-  void operator=(const Self&); //purposely not implemented
-};
+    /** Lock the nitroMutexLock. */
+    void Lock( void );
+
+    /** Unlock the MutexLock. */
+    void Unlock( void );
+
+  protected:
+    MutexLock() {}
+    ~MutexLock() {}
+
+    SimpleMutexLock   m_SimpleMutexLock;
+    void PrintSelf(std::ostream& os) const;
+
+  private:
+    MutexLock(const Self&); //purposely not implemented
+    void operator=(const Self&); //purposely not implemented
+  };
 
 
-inline void MutexLock::Lock( void )
-{
-  m_SimpleMutexLock.Lock();
-}
+  inline void MutexLock::Lock( void )
+  {
+    m_SimpleMutexLock.Lock();
+  }
 
-inline void MutexLock::Unlock( void )
-{
-  m_SimpleMutexLock.Unlock();
-}
+  inline void MutexLock::Unlock( void )
+  {
+    m_SimpleMutexLock.Unlock();
+  }
 
 
 }//end nitro namespace

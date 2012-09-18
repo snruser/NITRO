@@ -9,7 +9,7 @@
   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
   PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 /*=========================================================================
 
   Program:   Insight Segmentation & Registration Toolkit
@@ -24,11 +24,11 @@
   Portions of this code are covered under the VTK copyright.
   See VTKCopyright.txt or http://www.kitware.com/VTKCopyright.htm for details.
 
-     This software is distributed WITHOUT ANY WARRANTY; without even 
-     the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
-     PURPOSE.  See the above copyright notices for more information.
+  This software is distributed WITHOUT ANY WARRANTY; without even
+  the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+  PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 #ifndef __nitroObjectFactory_h
 #define __nitroObjectFactory_h
 
@@ -55,20 +55,17 @@ namespace nitro
  * \ingroup NITROSystemObjects
  */
 
-template <class T>
-class ObjectFactory : public ObjectFactoryBase
-{
-public:
-  static typename T::Pointer Create()
-  {
-    LightObject::Pointer ret = ObjectFactory::CreateInstance(typeid(T).name());
-    return dynamic_cast<T*>(ret.GetPointer());
-  }
-};
+  template <class T>
+    class ObjectFactory : public ObjectFactoryBase
+    {
+    public:
+    static typename T::Pointer Create()
+    {
+      LightObject::Pointer ret = ObjectFactory::CreateInstance(typeid(T).name());
+      return dynamic_cast<T*>(ret.GetPointer());
+    }
+    };
 
 } // end namespace nitro
 
 #endif
-
-        
-

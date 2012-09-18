@@ -9,29 +9,29 @@
   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
   PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 
 #include "nitroUserIF.h"
 
 namespace nitro {
 
-UserIF::UserIF()
-{
-}
+  UserIF::UserIF()
+  {
+  }
 
-UserIF::~UserIF()
-{
-}
+  UserIF::~UserIF()
+  {
+  }
 
-void UserIF::Print(const char *format, ...)
-{
-  std::cout << format;
-}
+  void UserIF::Print(const char *format, ...)
+  {
+    std::cout << format;
+  }
 
-void UserIF::PrintError(const char *format, ...)
-{
-  std::cerr << "ERROR: " << format;
-}
+  void UserIF::PrintError(const char *format, ...)
+  {
+    std::cerr << "ERROR: " << format;
+  }
 
-  
+
 } // end namespace nitro

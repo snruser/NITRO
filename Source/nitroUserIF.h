@@ -9,7 +9,7 @@
   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
   PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 
 #ifndef  __nitroUserIF_h
 #define  __nitroUserIF_h
@@ -20,35 +20,33 @@
 
 namespace nitro {
 
-class NITROCommon_EXPORT UserIF : public Object
-{
- public:
-  typedef UserIF                    Self;
-  typedef Object                    Superclass;
-  typedef SmartPointer<Self>        Pointer;
-  typedef SmartPointer<const Self>  ConstPointer;
+  class NITROCommon_EXPORT UserIF : public Object
+  {
+  public:
+    typedef UserIF                      Self;
+    typedef Object                      Superclass;
+    typedef SmartPointer<Self>          Pointer;
+    typedef SmartPointer<const Self>    ConstPointer;
 
-  nitroNewMacro(Self);
-  nitroTypeMacro(UserIF, Object);
+    nitroNewMacro(Self);
+    nitroTypeMacro(UserIF, Object);
 
- public:
+  public:
 
-  virtual void Print(const char *format, ...);
-  virtual void PrintError(const char *format, ...);
+    virtual void Print(const char *format, ...);
+    virtual void PrintError(const char *format, ...);
 
- protected:
+  protected:
 
-  // Description:
-  // Constructor/Destructor
-  UserIF();
-  ~UserIF();
+    // Description:
+    // Constructor/Destructor
+    UserIF();
+    ~UserIF();
 
- protected:
-    
-};
+  protected:
+
+  };
 
 } // end namespace nitro
 
 #endif
-
-

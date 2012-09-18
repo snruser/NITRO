@@ -9,7 +9,7 @@
   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
   PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 /*=========================================================================
 
   Program:   Insight Segmentation & Registration Toolkit
@@ -24,11 +24,11 @@
   Portions of this code are covered under the VTK copyright.
   See VTKCopyright.txt or http://www.kitware.com/VTKCopyright.htm for details.
 
-     This software is distributed WITHOUT ANY WARRANTY; without even 
-     the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
-     PURPOSE.  See the above copyright notices for more information.
+  This software is distributed WITHOUT ANY WARRANTY; without even
+  the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+  PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 #if defined(_MSC_VER)
 #pragma warning ( disable : 4786 )
 #endif
@@ -44,19 +44,19 @@
 
 namespace
 {
-  
-class CleanUpObjectFactory
-{
-public:
-  inline void Use() 
+
+  class CleanUpObjectFactory
+  {
+  public:
+    inline void Use()
     {
     }
-  ~CleanUpObjectFactory()
+    ~CleanUpObjectFactory()
     {
-    nitro::ObjectFactoryBase::UnRegisterAllFactories();
-    }  
-};
-static CleanUpObjectFactory CleanUpObjectFactoryGlobal;
+      nitro::ObjectFactoryBase::UnRegisterAllFactories();
+    }
+  };
+  static CleanUpObjectFactory CleanUpObjectFactoryGlobal;
 }
 
 namespace nitro
@@ -66,23 +66,23 @@ namespace nitro
  * Add this for the SGI compiler which does not seem
  * to provide a default implementation as it should.
  */
-bool operator==(const ObjectFactoryBase::OverrideInformation& rhs, 
-                const ObjectFactoryBase::OverrideInformation& lhs)
-{
-  return (rhs.m_Description == lhs.m_Description
-       && rhs.m_OverrideWithName == lhs.m_OverrideWithName);
-}
+  bool operator==(const ObjectFactoryBase::OverrideInformation& rhs,
+                  const ObjectFactoryBase::OverrideInformation& lhs)
+  {
+    return (rhs.m_Description == lhs.m_Description
+            && rhs.m_OverrideWithName == lhs.m_OverrideWithName);
+  }
 
 /**
  * Add this for the SGI compiler which does not seem
  * to provide a default implementation as it should.
  */
-bool operator<(const ObjectFactoryBase::OverrideInformation& rhs, 
-               const ObjectFactoryBase::OverrideInformation& lhs)
-{
-  return (rhs.m_Description < lhs.m_Description
-          && rhs.m_OverrideWithName < lhs.m_OverrideWithName);
-}
+  bool operator<(const ObjectFactoryBase::OverrideInformation& rhs,
+                 const ObjectFactoryBase::OverrideInformation& lhs)
+  {
+    return (rhs.m_Description < lhs.m_Description
+            && rhs.m_OverrideWithName < lhs.m_OverrideWithName);
+  }
 
 
 /** \class StringOverMap
@@ -93,112 +93,112 @@ bool operator<(const ObjectFactoryBase::OverrideInformation& rhs,
  * and a pointer member can be used.  This avoids other
  * classes including <map> and getting long symbol warnings.
  */
-typedef std::multimap<std::string, ObjectFactoryBase::OverrideInformation> 
-StringOverMapType;
+  typedef std::multimap<std::string, ObjectFactoryBase::OverrideInformation>
+  StringOverMapType;
 
 /** \class OverRideMap
  * \brief Internal implementation class for ObjectFactorBase.
  */
-class OverRideMap : public StringOverMapType
-{
-public:
-};
+  class OverRideMap : public StringOverMapType
+  {
+  public:
+  };
 
 /**
  * Initialize static list of factories.
  */
-std::list<ObjectFactoryBase*>* 
-ObjectFactoryBase::m_RegisteredFactories = 0;
+  std::list<ObjectFactoryBase*>*
+  ObjectFactoryBase::m_RegisteredFactories = 0;
 
 
 /**
  * Create an instance of a named nitro object using the loaded
  * factories
  */
-LightObject::Pointer 
-ObjectFactoryBase
-::CreateInstance(const char* nitroclassname)
-{
-  if ( !ObjectFactoryBase::m_RegisteredFactories )
-    {
-    ObjectFactoryBase::Initialize();
-    }
-  
-  for ( std::list<ObjectFactoryBase*>::iterator 
-          i = m_RegisteredFactories->begin();
-        i != m_RegisteredFactories->end(); ++i )
-    {
-    LightObject::Pointer newobject = (*i)->CreateObject(nitroclassname);
-    if(newobject)
+  LightObject::Pointer
+  ObjectFactoryBase
+  ::CreateInstance(const char* nitroclassname)
+  {
+    if ( !ObjectFactoryBase::m_RegisteredFactories )
       {
-      newobject->Register();
-      return newobject;
+      ObjectFactoryBase::Initialize();
       }
-    }
-  return 0;
-}
+
+    for ( std::list<ObjectFactoryBase*>::iterator
+            i = m_RegisteredFactories->begin();
+          i != m_RegisteredFactories->end(); ++i )
+      {
+      LightObject::Pointer newobject = (*i)->CreateObject(nitroclassname);
+      if(newobject)
+        {
+        newobject->Register();
+        return newobject;
+        }
+      }
+    return 0;
+  }
 
 
-std::list<LightObject::Pointer>
-ObjectFactoryBase
-::CreateAllInstance(const char* nitroclassname)
-{
-  if ( !ObjectFactoryBase::m_RegisteredFactories )
-    {
-    ObjectFactoryBase::Initialize();
-    }
-  std::list<LightObject::Pointer> created;
-  for ( std::list<ObjectFactoryBase*>::iterator 
-          i = m_RegisteredFactories->begin();
-        i != m_RegisteredFactories->end(); ++i )
-    {
-    LightObject::Pointer newobject = (*i)->CreateObject(nitroclassname);
-    if(newobject)
+  std::list<LightObject::Pointer>
+  ObjectFactoryBase
+  ::CreateAllInstance(const char* nitroclassname)
+  {
+    if ( !ObjectFactoryBase::m_RegisteredFactories )
       {
-      created.push_back(newobject);
+      ObjectFactoryBase::Initialize();
       }
-    }
-  return created;
-}
+    std::list<LightObject::Pointer> created;
+    for ( std::list<ObjectFactoryBase*>::iterator
+            i = m_RegisteredFactories->begin();
+          i != m_RegisteredFactories->end(); ++i )
+      {
+      LightObject::Pointer newobject = (*i)->CreateObject(nitroclassname);
+      if(newobject)
+        {
+        created.push_back(newobject);
+        }
+      }
+    return created;
+  }
 
 
 /**
  * A one time initialization method.
  */
-void 
-ObjectFactoryBase
-::Initialize()
-{
-  CleanUpObjectFactoryGlobal.Use();
-  /**
-   * Don't do anything if we are already initialized
-   */
-  if ( ObjectFactoryBase::m_RegisteredFactories )
-    {
-    return;
-    }
-  
-  ObjectFactoryBase::m_RegisteredFactories =
-    new std::list<ObjectFactoryBase*>;
-  ObjectFactoryBase::RegisterDefaults();
-  //  ObjectFactoryBase::LoadDynamicFactories();
-}
+  void
+  ObjectFactoryBase
+  ::Initialize()
+  {
+    CleanUpObjectFactoryGlobal.Use();
+    /**
+     * Don't do anything if we are already initialized
+     */
+    if ( ObjectFactoryBase::m_RegisteredFactories )
+      {
+      return;
+      }
+
+    ObjectFactoryBase::m_RegisteredFactories =
+      new std::list<ObjectFactoryBase*>;
+    ObjectFactoryBase::RegisterDefaults();
+    //  ObjectFactoryBase::LoadDynamicFactories();
+  }
 
 
 /**
  * Register any factories that are always present in NITRO like
  * the OpenGL factory, currently this is not done.
  */
-void 
-ObjectFactoryBase
-::RegisterDefaults()
-{
-}
+  void
+  ObjectFactoryBase
+  ::RegisterDefaults()
+  {
+  }
 
 ///**
 // * Load all libraries in NITRO_AUTOLOAD_PATH
 // */
-//void 
+//void
 //ObjectFactoryBase
 //::LoadDynamicFactories()
 //{
@@ -210,7 +210,7 @@ ObjectFactoryBase
 //#else
 //  char PathSeparator = ':';
 //#endif
-//  
+//
 //  std::string LoadPath;
 //  if (getenv("NITRO_AUTOLOAD_PATH"))
 //    {
@@ -235,14 +235,14 @@ ObjectFactoryBase
 //    /**
 //     * find PathSeparator in LoadPath
 //     */
-//    EndSeparatorPosition = LoadPath.find(PathSeparator, 
+//    EndSeparatorPosition = LoadPath.find(PathSeparator,
 //                                         StartSeparatorPosition);
 //    if(EndSeparatorPosition == std::string::npos)
 //      {
 //      EndSeparatorPosition = LoadPath.size() + 1; // Add 1 to simulate
 //                                                  // having a separator
 //      }
-//    std::string CurrentPath = 
+//    std::string CurrentPath =
 //      LoadPath.substr(StartSeparatorPosition,
 //                      EndSeparatorPosition - StartSeparatorPosition);
 //
@@ -268,7 +268,7 @@ ObjectFactoryBase
  * a full path
  */
 
-//static std::string 
+//static std::string
 //CreateFullPath(const char* path, const char* file)
 //{
 //  std::string ret;
@@ -294,7 +294,7 @@ ObjectFactoryBase
  * A file scope typedef to make the cast code to the load
  * function cleaner to read.
  */
-typedef ObjectFactoryBase* (* NITRO_LOAD_FUNCTION)();
+  typedef ObjectFactoryBase* (* NITRO_LOAD_FUNCTION)();
 
 
 ///**
@@ -303,7 +303,7 @@ typedef ObjectFactoryBase* (* NITRO_LOAD_FUNCTION)();
 // * case before the compare, DynamicLoader always uses
 // * lower case for LibExtension values.
 // */
-//inline bool 
+//inline bool
 //NameIsSharedLibrary(const char* name)
 //{
 //  std::string extension = nitrosys::DynamicLoader::LibExtension();
@@ -314,7 +314,7 @@ typedef ObjectFactoryBase* (* NITRO_LOAD_FUNCTION)();
 //  // should be ".so"
 //  extension = ".dylib";
 //#endif
-//  
+//
 //  std::string sname = name;
 //  if ( sname.rfind(extension) == sname.size() - extension.size() )
 //    {
@@ -326,7 +326,7 @@ typedef ObjectFactoryBase* (* NITRO_LOAD_FUNCTION)();
 ///**
 // *
 // */
-//void 
+//void
 //ObjectFactoryBase
 //::LoadLibrariesInPath(const char* path)
 //{
@@ -335,7 +335,7 @@ typedef ObjectFactoryBase* (* NITRO_LOAD_FUNCTION)();
 //    {
 //    return;
 //    }
-//  
+//
 //  /**
 //   * Attempt to load each file in the directory as a shared library
 //   */
@@ -390,144 +390,144 @@ typedef ObjectFactoryBase* (* NITRO_LOAD_FUNCTION)();
 /**
  * Recheck the NITRO_AUTOLOAD_PATH for new libraries
  */
-void 
-ObjectFactoryBase
-::ReHash()
-{
-  ObjectFactoryBase::UnRegisterAllFactories();
-  ObjectFactoryBase::Initialize();
-}
+  void
+  ObjectFactoryBase
+  ::ReHash()
+  {
+    ObjectFactoryBase::UnRegisterAllFactories();
+    ObjectFactoryBase::Initialize();
+  }
 
 
 /**
  * initialize class members
  */
-ObjectFactoryBase::ObjectFactoryBase()
-{
-  m_LibraryHandle = 0;
-  m_LibraryDate = 0;
-  m_OverrideMap = new OverRideMap;
-}
+  ObjectFactoryBase::ObjectFactoryBase()
+  {
+    m_LibraryHandle = 0;
+    m_LibraryDate = 0;
+    m_OverrideMap = new OverRideMap;
+  }
 
 
 /**
  * Unload the library and free the path string
  */
-ObjectFactoryBase
-::~ObjectFactoryBase()
-{
-  m_OverrideMap->erase(m_OverrideMap->begin(), m_OverrideMap->end());
-  delete m_OverrideMap;
-}
+  ObjectFactoryBase
+  ::~ObjectFactoryBase()
+  {
+    m_OverrideMap->erase(m_OverrideMap->begin(), m_OverrideMap->end());
+    delete m_OverrideMap;
+  }
 
 
 /**
  * Add a factory to the registered list
  */
-void 
-ObjectFactoryBase
-::RegisterFactory(ObjectFactoryBase* factory)
-{
-  if ( factory->m_LibraryHandle == 0 )
-    {
-    const char nonDynamicName[] = "Non-Dynamicaly loaded factory";
-    factory->m_LibraryPath = nonDynamicName;
-    }
-//  if ( strcmp(factory->GetNITROSourceVersion(), 
+  void
+  ObjectFactoryBase
+  ::RegisterFactory(ObjectFactoryBase* factory)
+  {
+    if ( factory->m_LibraryHandle == 0 )
+      {
+      const char nonDynamicName[] = "Non-Dynamicaly loaded factory";
+      factory->m_LibraryPath = nonDynamicName;
+      }
+//  if ( strcmp(factory->GetNITROSourceVersion(),
 //              Version::GetNITROSourceVersion()) != 0 )
 //    {
-//    nitroGenericOutputMacro(<< "Possible incompatible factory load:" 
-//                          << "\nRunning nitro version :\n" << Version::GetNITROSourceVersion() 
+//    nitroGenericOutputMacro(<< "Possible incompatible factory load:"
+//                          << "\nRunning nitro version :\n" << Version::GetNITROSourceVersion()
 //                          << "\nLoaded factory version:\n" << factory->GetNITROSourceVersion()
 //                          << "\nLoading factory:\n" << factory->m_LibraryPath << "\n");
 //    }
 
-  ObjectFactoryBase::Initialize();
-  ObjectFactoryBase::m_RegisteredFactories->push_back(factory);
-  factory->Register();
-}
+    ObjectFactoryBase::Initialize();
+    ObjectFactoryBase::m_RegisteredFactories->push_back(factory);
+    factory->Register();
+  }
 
 
 /**
  *
  */
-void 
-ObjectFactoryBase
-::PrintSelf(std::ostream& os) const
-{
-  Superclass::PrintSelf(os);
+  void
+  ObjectFactoryBase
+  ::PrintSelf(std::ostream& os) const
+  {
+    Superclass::PrintSelf(os);
 
-  const char* indent = "    ";
+    const char* indent = "    ";
 
-  os << indent << "Factory DLL path: " << m_LibraryPath.c_str() << "\n";
-  os << indent << "Factory description: " << this->GetDescription() << std::endl;
+    os << indent << "Factory DLL path: " << m_LibraryPath.c_str() << "\n";
+    os << indent << "Factory description: " << this->GetDescription() << std::endl;
 
-  int num = static_cast<int>( m_OverrideMap->size() );
-  os << indent << "Factory overides " << num << " classes:" << std::endl;
+    int num = static_cast<int>( m_OverrideMap->size() );
+    os << indent << "Factory overides " << num << " classes:" << std::endl;
 
-  //indent = indent.GetNextIndent();
-  for(OverRideMap::iterator i = m_OverrideMap->begin();
-      i != m_OverrideMap->end(); ++i)
-    {
-    os << indent << "Class : " <<  (*i).first.c_str() << "\n";
-    os << indent << "Overridden with: " <<  (*i).second.m_OverrideWithName.c_str()
-       << std::endl;
-    os << indent << "Enable flag: " << (*i).second.m_EnabledFlag
-       << std::endl;
-    os << indent << "Create object: " << (*i).second.m_CreateObject
-       << std::endl;
-    os << std::endl;
-    }
-}
-
-
-/**
- *
- */
-void 
-ObjectFactoryBase
-::UnRegisterFactory(ObjectFactoryBase* factory)
-{ 
-  for ( std::list<ObjectFactoryBase*>::iterator i = 
-          m_RegisteredFactories->begin();
-        i != m_RegisteredFactories->end(); ++i )
-    {
-    if ( factory == *i )
+    //indent = indent.GetNextIndent();
+    for(OverRideMap::iterator i = m_OverrideMap->begin();
+        i != m_OverrideMap->end(); ++i)
       {
-      factory->UnRegister();
-      m_RegisteredFactories->remove(factory);
-      return;
+      os << indent << "Class : " <<  (*i).first.c_str() << "\n";
+      os << indent << "Overridden with: " <<  (*i).second.m_OverrideWithName.c_str()
+         << std::endl;
+      os << indent << "Enable flag: " << (*i).second.m_EnabledFlag
+         << std::endl;
+      os << indent << "Create object: " << (*i).second.m_CreateObject
+         << std::endl;
+      os << std::endl;
       }
-    }
-}
-  
+  }
+
+
+/**
+ *
+ */
+  void
+  ObjectFactoryBase
+  ::UnRegisterFactory(ObjectFactoryBase* factory)
+  {
+    for ( std::list<ObjectFactoryBase*>::iterator i =
+            m_RegisteredFactories->begin();
+          i != m_RegisteredFactories->end(); ++i )
+      {
+      if ( factory == *i )
+        {
+        factory->UnRegister();
+        m_RegisteredFactories->remove(factory);
+        return;
+        }
+      }
+  }
+
 
 /**
  * unregister all factories and delete the RegisteredFactories list
  */
-void 
-ObjectFactoryBase
-::UnRegisterAllFactories()
-{
-  
-  if ( ObjectFactoryBase::m_RegisteredFactories )
-    {
-    // Collect up all the library handles so they can be closed
-    // AFTER the factory has been deleted.
-    std::list<void *> libs;
-    for ( std::list<ObjectFactoryBase*>::iterator i 
-            = m_RegisteredFactories->begin();
-          i != m_RegisteredFactories->end(); ++i )
+  void
+  ObjectFactoryBase
+  ::UnRegisterAllFactories()
+  {
+
+    if ( ObjectFactoryBase::m_RegisteredFactories )
       {
-      libs.push_back(static_cast<void *>((*i)->m_LibraryHandle));
-      }
-    // Unregister each factory
-    for ( std::list<ObjectFactoryBase*>::iterator f 
-            = m_RegisteredFactories->begin();
-          f != m_RegisteredFactories->end(); ++f )
-      {
-      (*f)->UnRegister();
-      }
+      // Collect up all the library handles so they can be closed
+      // AFTER the factory has been deleted.
+      std::list<void *> libs;
+      for ( std::list<ObjectFactoryBase*>::iterator i
+              = m_RegisteredFactories->begin();
+            i != m_RegisteredFactories->end(); ++i )
+        {
+        libs.push_back(static_cast<void *>((*i)->m_LibraryHandle));
+        }
+      // Unregister each factory
+      for ( std::list<ObjectFactoryBase*>::iterator f
+              = m_RegisteredFactories->begin();
+            f != m_RegisteredFactories->end(); ++f )
+        {
+        (*f)->UnRegister();
+        }
 //    // And delete the library handles all at once
 //    for ( std::list<void *>::iterator lib = libs.begin();
 //          lib != libs.end();
@@ -538,194 +538,194 @@ ObjectFactoryBase
 //        DynamicLoader::CloseLibrary(static_cast<LibHandle>(*lib));
 //        }
 //      }
-    delete ObjectFactoryBase::m_RegisteredFactories;
-    ObjectFactoryBase::m_RegisteredFactories = 0;
-    }
-}
-
-
-/**
- *
- */
-void 
-ObjectFactoryBase
-::RegisterOverride(const char* classOverride,
-                   const char* subclass,
-                   const char* description,
-                   bool enableFlag,
-                   CreateObjectFunctionBase*
-                   createFunction)
-{
-  ObjectFactoryBase::OverrideInformation info;
-  info.m_Description = description;
-  info.m_OverrideWithName = subclass;
-  info.m_EnabledFlag = enableFlag;
-  info.m_CreateObject = createFunction;
-
-  m_OverrideMap->insert(OverRideMap::value_type(classOverride, info));
-}
-
-
-LightObject::Pointer 
-ObjectFactoryBase
-::CreateObject(const char* nitroclassname)
-{
-  OverRideMap::iterator start = m_OverrideMap->lower_bound(nitroclassname);
-  OverRideMap::iterator end = m_OverrideMap->upper_bound(nitroclassname);
-
-  for ( OverRideMap::iterator i = start; i != end; ++i )
-    {
-    if ( i != m_OverrideMap->end() && (*i).second.m_EnabledFlag)
-      {
-      return (*i).second.m_CreateObject->CreateObject();
+      delete ObjectFactoryBase::m_RegisteredFactories;
+      ObjectFactoryBase::m_RegisteredFactories = 0;
       }
-    }
-  return 0;
-}
+  }
 
 
 /**
  *
  */
-void 
-ObjectFactoryBase
-::SetEnableFlag(bool flag,
-                const char* className,
-                const char* subclassName)
-{
-  OverRideMap::iterator start = m_OverrideMap->lower_bound(className);
-  OverRideMap::iterator end = m_OverrideMap->upper_bound(className);
-  for ( OverRideMap::iterator i = start; i != end; ++i )
-    {
-    if ( (*i).second.m_OverrideWithName == subclassName )
+  void
+  ObjectFactoryBase
+  ::RegisterOverride(const char* classOverride,
+                     const char* subclass,
+                     const char* description,
+                     bool enableFlag,
+                     CreateObjectFunctionBase*
+                     createFunction)
+  {
+    ObjectFactoryBase::OverrideInformation info;
+    info.m_Description = description;
+    info.m_OverrideWithName = subclass;
+    info.m_EnabledFlag = enableFlag;
+    info.m_CreateObject = createFunction;
+
+    m_OverrideMap->insert(OverRideMap::value_type(classOverride, info));
+  }
+
+
+  LightObject::Pointer
+  ObjectFactoryBase
+  ::CreateObject(const char* nitroclassname)
+  {
+    OverRideMap::iterator start = m_OverrideMap->lower_bound(nitroclassname);
+    OverRideMap::iterator end = m_OverrideMap->upper_bound(nitroclassname);
+
+    for ( OverRideMap::iterator i = start; i != end; ++i )
       {
-      (*i).second.m_EnabledFlag = flag;
+      if ( i != m_OverrideMap->end() && (*i).second.m_EnabledFlag)
+        {
+        return (*i).second.m_CreateObject->CreateObject();
+        }
       }
-    }
-}
+    return 0;
+  }
 
 
 /**
  *
  */
-bool 
-ObjectFactoryBase
-::GetEnableFlag(const char* className, const char* subclassName)
-{
-  OverRideMap::iterator start = m_OverrideMap->lower_bound(className);
-  OverRideMap::iterator end = m_OverrideMap->upper_bound(className);
-  for ( OverRideMap::iterator i = start; i != end; ++i )
-    {
-    if ( (*i).second.m_OverrideWithName == subclassName )
+  void
+  ObjectFactoryBase
+  ::SetEnableFlag(bool flag,
+                  const char* className,
+                  const char* subclassName)
+  {
+    OverRideMap::iterator start = m_OverrideMap->lower_bound(className);
+    OverRideMap::iterator end = m_OverrideMap->upper_bound(className);
+    for ( OverRideMap::iterator i = start; i != end; ++i )
       {
-      return (*i).second.m_EnabledFlag;
+      if ( (*i).second.m_OverrideWithName == subclassName )
+        {
+        (*i).second.m_EnabledFlag = flag;
+        }
       }
-    }
-  return 0;
-}
+  }
 
 
 /**
  *
  */
-void 
-ObjectFactoryBase
-::Disable(const char* className)
-{
-  OverRideMap::iterator start = m_OverrideMap->lower_bound(className);
-  OverRideMap::iterator end = m_OverrideMap->upper_bound(className);
-  for ( OverRideMap::iterator i = start; i != end; ++i )
-    {
-    (*i).second.m_EnabledFlag = 0;
-    }
-}
+  bool
+  ObjectFactoryBase
+  ::GetEnableFlag(const char* className, const char* subclassName)
+  {
+    OverRideMap::iterator start = m_OverrideMap->lower_bound(className);
+    OverRideMap::iterator end = m_OverrideMap->upper_bound(className);
+    for ( OverRideMap::iterator i = start; i != end; ++i )
+      {
+      if ( (*i).second.m_OverrideWithName == subclassName )
+        {
+        return (*i).second.m_EnabledFlag;
+        }
+      }
+    return 0;
+  }
 
 
 /**
  *
  */
-std::list<ObjectFactoryBase*> 
-ObjectFactoryBase
-::GetRegisteredFactories()
-{
-  return *ObjectFactoryBase::m_RegisteredFactories;
-}
+  void
+  ObjectFactoryBase
+  ::Disable(const char* className)
+  {
+    OverRideMap::iterator start = m_OverrideMap->lower_bound(className);
+    OverRideMap::iterator end = m_OverrideMap->upper_bound(className);
+    for ( OverRideMap::iterator i = start; i != end; ++i )
+      {
+      (*i).second.m_EnabledFlag = 0;
+      }
+  }
+
+
+/**
+ *
+ */
+  std::list<ObjectFactoryBase*>
+  ObjectFactoryBase
+  ::GetRegisteredFactories()
+  {
+    return *ObjectFactoryBase::m_RegisteredFactories;
+  }
 
 
 /**
  * Return a list of classes that this factory overrides.
  */
-std::list<std::string> 
-ObjectFactoryBase
-::GetClassOverrideNames()
-{
-  std::list<std::string> ret;
-  for ( OverRideMap::iterator i = m_OverrideMap->begin();
-        i != m_OverrideMap->end(); ++i )
-    {
-    ret.push_back((*i).first);
-    }
-  return ret;
-}
+  std::list<std::string>
+  ObjectFactoryBase
+  ::GetClassOverrideNames()
+  {
+    std::list<std::string> ret;
+    for ( OverRideMap::iterator i = m_OverrideMap->begin();
+          i != m_OverrideMap->end(); ++i )
+      {
+      ret.push_back((*i).first);
+      }
+    return ret;
+  }
 
 
 /**
  * Return a list of the names of classes that override classes.
  */
-std::list<std::string> 
-ObjectFactoryBase
-::GetClassOverrideWithNames()
-{
-  std::list<std::string> ret;
-  for ( OverRideMap::iterator i = m_OverrideMap->begin();
-        i != m_OverrideMap->end(); ++i )
-    {
-    ret.push_back((*i).second.m_OverrideWithName);
-    }
-  return ret;
-}
+  std::list<std::string>
+  ObjectFactoryBase
+  ::GetClassOverrideWithNames()
+  {
+    std::list<std::string> ret;
+    for ( OverRideMap::iterator i = m_OverrideMap->begin();
+          i != m_OverrideMap->end(); ++i )
+      {
+      ret.push_back((*i).second.m_OverrideWithName);
+      }
+    return ret;
+  }
 
 
 /**
  * Retrun a list of descriptions for class overrides
  */
-std::list<std::string> 
-ObjectFactoryBase
-::GetClassOverrideDescriptions()
-{ 
-  std::list<std::string> ret;
-  for ( OverRideMap::iterator i = m_OverrideMap->begin();
-        i != m_OverrideMap->end(); ++i )
-    {
-    ret.push_back((*i).second.m_Description);
-    }
-  return ret;
-}
+  std::list<std::string>
+  ObjectFactoryBase
+  ::GetClassOverrideDescriptions()
+  {
+    std::list<std::string> ret;
+    for ( OverRideMap::iterator i = m_OverrideMap->begin();
+          i != m_OverrideMap->end(); ++i )
+      {
+      ret.push_back((*i).second.m_Description);
+      }
+    return ret;
+  }
 
 
 /**
  * Return a list of enable flags
  */
-std::list<bool> 
-ObjectFactoryBase
-::GetEnableFlags()
-{
-  std::list<bool> ret;
-  for( OverRideMap::iterator i = m_OverrideMap->begin();
-       i != m_OverrideMap->end(); ++i)
-    {
-    ret.push_back((*i).second.m_EnabledFlag);
-    }
-  return ret;
-}
+  std::list<bool>
+  ObjectFactoryBase
+  ::GetEnableFlags()
+  {
+    std::list<bool> ret;
+    for( OverRideMap::iterator i = m_OverrideMap->begin();
+         i != m_OverrideMap->end(); ++i)
+      {
+      ret.push_back((*i).second.m_EnabledFlag);
+      }
+    return ret;
+  }
 
 /**
  * Return the path to a dynamically loaded factory. */
-const char *
-ObjectFactoryBase
-::GetLibraryPath()
-{
-  return m_LibraryPath.c_str();
-}
+  const char *
+  ObjectFactoryBase
+  ::GetLibraryPath()
+  {
+    return m_LibraryPath.c_str();
+  }
 
 } // end namespace nitro

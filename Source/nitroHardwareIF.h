@@ -9,7 +9,7 @@
   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
   PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 
 #ifndef  __nitroHardwareIF_h
 #define  __nitroHardwareIF_h
@@ -26,41 +26,39 @@
 
 namespace nitro {
 
-class NITROCommon_EXPORT HardwareIF : public Object
-{
- public:
-  typedef HardwareIF          Self;
-  typedef Object              Superclass;
-  typedef SmartPointer<Self>  Pointer;
-  typedef SmartPointer<const Self>  ConstPointer;
+  class NITROCommon_EXPORT HardwareIF : public Object
+  {
+  public:
+    typedef HardwareIF                  Self;
+    typedef Object                      Superclass;
+    typedef SmartPointer<Self>          Pointer;
+    typedef SmartPointer<const Self>    ConstPointer;
 
-  nitroNewMacro(Self);
-  nitroTypeMacro(HardwareIF, Object);
+    nitroNewMacro(Self);
+    nitroTypeMacro(HardwareIF, Object);
 
- public:
+  public:
 
 
- protected:
+  protected:
 
-  // Description:
-  // Constructor/Destructor
-  HardwareIF();
-  ~HardwareIF();
+    // Description:
+    // Constructor/Destructor
+    HardwareIF();
+    ~HardwareIF();
 
-  // Description:
-  // Variables
-  int DegreesOfFreedom;
+    // Description:
+    // Variables
+    int DegreesOfFreedom;
 
-  // Description:
-  // Vector of actuators
-  std::vector<Joint*> JointsList;
+    // Description:
+    // Vector of actuators
+    std::vector<Joint*> JointsList;
 
- protected:
-    
-};
+  protected:
+
+  };
 
 } // end namespace nitro
 
 #endif
-
-

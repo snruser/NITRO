@@ -24,16 +24,17 @@
 #include "nitroHardwareIF.h"
 #include "nitroUserIF.h"
 #include "nitroXMLParser.h"
+#include "nitroLogRecorder.h"
 
 namespace nitro {
 
   class NITROCommon_EXPORT Controller : public Object
   {
   public:
-    typedef Controller          Self;
-    typedef Object              Superclass;
-    typedef SmartPointer<Self>  Pointer;
-    typedef SmartPointer<const Self>  ConstPointer;
+    typedef Controller               Self;
+    typedef Object                   Superclass;
+    typedef SmartPointer<Self>       Pointer;
+    typedef SmartPointer<const Self> ConstPointer;
 
     nitroNewMacro(Self);
     nitroTypeMacro(Controller, Object);
@@ -43,7 +44,7 @@ namespace nitro {
     // Set/get pointer to Kinematics class
     void        SetKinematics(Kinematics* k) { this->m_Kinematics = k; }
     Kinematics::Pointer GetKinematics() { return this->m_Kinematics; }
-    
+
     // Description:
     // Set/get pointer to NetworkIF class
     void        SetNetworkIF(NetworkIF* n)   { this->m_NetworkIF = n; }
@@ -65,6 +66,11 @@ namespace nitro {
     XMLParser::Pointer     GetXMLParser()         { return this->m_XMLParser; }
 
     // Description:
+    // Set/get pointer to XMLParser class
+    void        SetLogRecorder(LogRecorder* l)         { this->m_LogRecorder = l; }
+    LogRecorder::Pointer     GetLogRecorder()         { return this->m_LogRecorder; }
+
+    // Description:
     // Specify main loop cylcle (microsecond)
     void SetLoopCycle(int c)  { this->m_LoopCycle = c; }
     int  GetLoopCycle()       { return this->m_LoopCycle; }
@@ -74,14 +80,14 @@ namespace nitro {
     virtual void Initialize() {};
 
     // Description:
-    // Main loop 
+    // Main loop
     // TODO: Rename it
     virtual void Loop() {};
-    
+
     // Description:
-    // Close connections, delete classes 
+    // Close connections, delete classes
     virtual void Exit() {};
-    
+
     // Description:
     // Run main loop. Note that this base class is implemented for
     // non-real-time OS. If you consider using real-time OS API for
@@ -101,11 +107,12 @@ namespace nitro {
     int m_LoopCycle;
 
     // Pointer to a classes
-    Kinematics::Pointer m_Kinematics;
-    NetworkIF::Pointer  m_NetworkIF;
-    HardwareIF::Pointer m_HardwareIF;
-    UserIF::Pointer     m_UserIF;
-    XMLParser::Pointer  m_XMLParser;
+    Kinematics::Pointer  m_Kinematics;
+    NetworkIF::Pointer   m_NetworkIF;
+    HardwareIF::Pointer  m_HardwareIF;
+    UserIF::Pointer      m_UserIF;
+    XMLParser::Pointer   m_XMLParser;
+    LogRecorder::Pointer m_LogRecorder;
   };
 
 } // end namespace nitro

@@ -9,18 +9,18 @@
   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
   PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 
 #include "nitroKinematics.h"
 
 namespace nitro {
 
-Kinematics::Kinematics()
-{
-}
+  Kinematics::Kinematics()
+  {
+  }
 
-Kinematics::~Kinematics()
-{
-}
-  
+  Kinematics::~Kinematics()
+  {
+  }
+
 } // end namespace nitro

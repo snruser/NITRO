@@ -9,7 +9,7 @@
   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
   PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 /*=========================================================================
 
   Program:   Insight Segmentation & Registration Toolkit
@@ -24,11 +24,11 @@
   Portions of this code are covered under the VTK copyright.
   See VTKCopyright.txt or http://www.kitware.com/VTKCopyright.htm for details.
 
-     This software is distributed WITHOUT ANY WARRANTY; without even 
-     the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
-     PURPOSE.  See the above copyright notices for more information.
+  This software is distributed WITHOUT ANY WARRANTY; without even
+  the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+  PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 #include "nitroObject.h"
 #include "nitroObjectFactory.h"
 #include "nitroMacro.h"
@@ -38,7 +38,7 @@ namespace nitro
 /**
  * Initialize static member that controls warning display.
  */
-bool Object::m_GlobalWarningDisplay = true;
+  bool Object::m_GlobalWarningDisplay = true;
 
 //class Observer
 //{
@@ -225,69 +225,69 @@ bool Object::m_GlobalWarningDisplay = true;
 //  return true;
 //}
 
-Object::Pointer
-Object::New()
-{
-  Pointer smartPtr;
-  Object *rawPtr = ::nitro::ObjectFactory<Object>::Create();
-  if(rawPtr == NULL)
-    {
-    rawPtr = new Object;
-    }
-  smartPtr = rawPtr;
-  rawPtr->UnRegister();
-  return smartPtr;
-}
+  Object::Pointer
+  Object::New()
+  {
+    Pointer smartPtr;
+    Object *rawPtr = ::nitro::ObjectFactory<Object>::Create();
+    if(rawPtr == NULL)
+      {
+      rawPtr = new Object;
+      }
+    smartPtr = rawPtr;
+    rawPtr->UnRegister();
+    return smartPtr;
+  }
 
-LightObject::Pointer
-Object::CreateAnother() const
-{
-  return Object::New().GetPointer();
-}
+  LightObject::Pointer
+  Object::CreateAnother() const
+  {
+    return Object::New().GetPointer();
+  }
 
 
 /**
  * Turn debugging output on.
  */
-void
-Object
-::DebugOn() const
-{
-  m_Debug = true;
-}
+  void
+  Object
+  ::DebugOn() const
+  {
+    m_Debug = true;
+  }
 
 
 /**
  * Turn debugging output off.
  */
-void
-Object
-::DebugOff() const
-{
-  m_Debug = false;
-}
+  void
+  Object
+  ::DebugOff() const
+  {
+    m_Debug = false;
+  }
 
 
 /**
  * Get the value of the debug flag.
  */
-bool
-Object
-::GetDebug() const
-{
-  return m_Debug;
-}
+  bool
+  Object
+  ::GetDebug() const
+  {
+    return m_Debug;
+  }
 
 
 /**
  * Set the value of the debug flag. A non-zero value turns debugging on.
  */
-void
-Object
-::SetDebug(bool debugFlag) const
-{
-  m_Debug = debugFlag;
-}
+  void
+  Object
+  ::SetDebug(bool debugFlag) const
+  {
+    m_Debug = debugFlag;
+  }
 
 
 ///**
@@ -316,84 +316,84 @@ Object
 /**
  * Increase the reference count (mark as used by another object).
  */
-void
-Object
-::Register() const
-{
-  nitroDebugMacro(<< "Registered, "
-                << "ReferenceCount = " << (m_ReferenceCount+1));
+  void
+  Object
+  ::Register() const
+  {
+    nitroDebugMacro(<< "Registered, "
+                    << "ReferenceCount = " << (m_ReferenceCount+1));
 
-  // call the parent
-  Superclass::Register();
-}
+    // call the parent
+    Superclass::Register();
+  }
 
 
 /**
  * Decrease the reference count (release by another object).
  */
-void
-Object
-::UnRegister() const
-{
-  // call the parent
-  nitroDebugMacro(<< "UnRegistered, "
-                << "ReferenceCount = " << (m_ReferenceCount-1));
+  void
+  Object
+  ::UnRegister() const
+  {
+    // call the parent
+    nitroDebugMacro(<< "UnRegistered, "
+                    << "ReferenceCount = " << (m_ReferenceCount-1));
 
-  if ( (m_ReferenceCount-1) <= 0)
-    {
-    /**
-     * If there is a delete method, invoke it.
-     */
-    //this->InvokeEvent(DeleteEvent());
-    }
+    if ( (m_ReferenceCount-1) <= 0)
+      {
+      /**
+       * If there is a delete method, invoke it.
+       */
+      //this->InvokeEvent(DeleteEvent());
+      }
 
-  Superclass::UnRegister();
-}
+    Superclass::UnRegister();
+  }
 
 
 /**
  * Sets the reference count (use with care)
  */
-void
-Object
-::SetReferenceCount(int ref)
-{
-  nitroDebugMacro(<< "Reference Count set to " << ref);
+  void
+  Object
+  ::SetReferenceCount(int ref)
+  {
+    nitroDebugMacro(<< "Reference Count set to " << ref);
 
-  // ReferenceCount in now unlocked.  We may have a race condition to
-  // to delete the object.
-  if( ref <= 0 )
-    {
-    /**
-     * If there is a delete method, invoke it.
-     */
+    // ReferenceCount in now unlocked.  We may have a race condition to
+    // to delete the object.
+    if( ref <= 0 )
+      {
+      /**
+       * If there is a delete method, invoke it.
+       */
       //this->InvokeEvent(DeleteEvent());
-    }
+      }
 
-  Superclass::SetReferenceCount(ref);
-}
+    Superclass::SetReferenceCount(ref);
+  }
 
 
 /**
  * Set the value of the global debug output control flag.
  */
-void
-Object
-::SetGlobalWarningDisplay(bool val)
-{
-  m_GlobalWarningDisplay = val;
-}
+  void
+  Object
+  ::SetGlobalWarningDisplay(bool val)
+  {
+    m_GlobalWarningDisplay = val;
+  }
 
 
 /**
  * Get the value of the global debug output control flag.
  */
-bool
-Object
-::GetGlobalWarningDisplay()
-{
-  return m_GlobalWarningDisplay;
-}
+  bool
+  Object
+  ::GetGlobalWarningDisplay()
+  {
+    return m_GlobalWarningDisplay;
+  }
 
 
 //unsigned long
@@ -504,52 +504,52 @@ Object
 
 
 /**
- * Create an object with Debug turned off and modified time initialized 
+ * Create an object with Debug turned off and modified time initialized
  * to the most recently modified object.
  */
-Object
-::Object():
-  LightObject(),
-  m_Debug(false)/*,
-  m_SubjectImplementation(NULL),
-  m_MetaDataDictionary(NULL)
-                */
-{
-  //  this->Modified();
-}
+  Object
+  ::Object():
+    LightObject(),
+    m_Debug(false)/*,
+                    m_SubjectImplementation(NULL),
+                    m_MetaDataDictionary(NULL)
+                  */
+  {
+    //  this->Modified();
+  }
 
 
-Object
-::~Object() 
-{
-  nitroDebugMacro(<< "Destructing!");
-  //delete m_SubjectImplementation;
-  //delete m_MetaDataDictionary;//Deleting a NULL pointer does nothing.
-}
+  Object
+  ::~Object()
+  {
+    nitroDebugMacro(<< "Destructing!");
+    //delete m_SubjectImplementation;
+    //delete m_MetaDataDictionary;//Deleting a NULL pointer does nothing.
+  }
 
 
 /**
  * Chaining method to print an object's instance variables, as well as
  * its superclasses.
  */
-void
-Object
-::PrintSelf(std::ostream& os) const
-{
-  Superclass::PrintSelf(os);
+  void
+  Object
+  ::PrintSelf(std::ostream& os) const
+  {
+    Superclass::PrintSelf(os);
 
-  const char* indent = "    ";
+    const char* indent = "    ";
 
-  //  os << indent << "Modified Time: " << this->GetMTime() << std::endl;
-  os << indent << "Debug: " << (m_Debug ? "On\n" : "Off\n");
-  os << indent << "Observers: \n";
-  /*
-  if(!this->PrintObservers(os))
-    {
-    os << "        " << "none\n";
-    }
-  */
-}
+    //  os << indent << "Modified Time: " << this->GetMTime() << std::endl;
+    os << indent << "Debug: " << (m_Debug ? "On\n" : "Off\n");
+    os << indent << "Observers: \n";
+    /*
+      if(!this->PrintObservers(os))
+      {
+      os << "        " << "none\n";
+      }
+    */
+  }
 
 //MetaDataDictionary &
 //Object

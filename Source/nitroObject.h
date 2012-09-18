@@ -9,7 +9,7 @@
   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
   PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 /*=========================================================================
 
   Program:   Insight Segmentation & Registration Toolkit
@@ -24,11 +24,11 @@
   Portions of this code are covered under the VTK copyright.
   See VTKCopyright.txt or http://www.kitware.com/VTKCopyright.htm for details.
 
-     This software is distributed WITHOUT ANY WARRANTY; without even 
-     the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
-     PURPOSE.  See the above copyright notices for more information.
+  This software is distributed WITHOUT ANY WARRANTY; without even
+  the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+  PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 #ifndef __nitroObject_h
 #define __nitroObject_h
 
@@ -56,155 +56,154 @@ namespace nitro
  * \ingroup NITROSystemObjects
  * \ingroup DataRepresentation
  */
-class NITROCommon_EXPORT Object: public LightObject
-{
-public:
-  /** Smart pointer typedef support. */
-  typedef Object              Self;
-  typedef LightObject         Superclass;
-  typedef SmartPointer<Self>  Pointer;
-  typedef SmartPointer<const Self>  ConstPointer;
+  class NITROCommon_EXPORT Object: public LightObject
+  {
+  public:
+    /** Smart pointer typedef support. */
+    typedef Object                      Self;
+    typedef LightObject                 Superclass;
+    typedef SmartPointer<Self>          Pointer;
+    typedef SmartPointer<const Self>    ConstPointer;
 
-  /** Method for creation through the object factory. */
-  static Pointer New();
+    /** Method for creation through the object factory. */
+    static Pointer New();
 
-  /** Create an object from an instance, potentially deferring to a
-   * factory.  This method allows you to create an instance of an
-   * object that is exactly the same type as the referring object.
-   * This is useful in cases where an object has been cast back to a
-   * base class. */
-  virtual LightObject::Pointer CreateAnother() const;
+    /** Create an object from an instance, potentially deferring to a
+     * factory.  This method allows you to create an instance of an
+     * object that is exactly the same type as the referring object.
+     * This is useful in cases where an object has been cast back to a
+     * base class. */
+    virtual LightObject::Pointer CreateAnother() const;
 
-  /** Standard part of all nitro objects. */
-  nitroTypeMacro(Object, LightObject);
+    /** Standard part of all nitro objects. */
+    nitroTypeMacro(Object, LightObject);
 
-  /** Turn debugging output on.  */
-  virtual void DebugOn() const;
+    /** Turn debugging output on.  */
+    virtual void DebugOn() const;
 
-  /** Turn debugging output off.  */
-  virtual void DebugOff() const;
-  
-  /** Get the value of the debug flag.  */
-  bool GetDebug() const;
-  
-  /** Set the value of the debug flag. A non-zero value turns debugging on. */
-  void SetDebug(bool debugFlag) const;
-  
-  /** Return this objects modified time.  */
-  //  virtual unsigned long GetMTime() const;
+    /** Turn debugging output off.  */
+    virtual void DebugOff() const;
 
-  /** Update the modification time for this object. Many filters rely on the
-   * modification time to determine if they need to recompute their data.  */
-  //  virtual void Modified() const;
-  
-  /** Increase the reference count (mark as used by another object).  */
-  virtual void Register() const;
+    /** Get the value of the debug flag.  */
+    bool GetDebug() const;
 
-  /** Decrease the reference count (release by another object).  */
-  virtual void UnRegister() const;
+    /** Set the value of the debug flag. A non-zero value turns debugging on. */
+    void SetDebug(bool debugFlag) const;
 
-  /** Sets the reference count (use with care)  */
-  virtual void SetReferenceCount(int);
+    /** Return this objects modified time.  */
+    //  virtual unsigned long GetMTime() const;
 
-  /** This is a global flag that controls whether any debug, warning
-   *  or error messages are displayed.  */
-  static void SetGlobalWarningDisplay(bool flag);
-  static bool GetGlobalWarningDisplay();
-  static void GlobalWarningDisplayOn()
+    /** Update the modification time for this object. Many filters rely on the
+     * modification time to determine if they need to recompute their data.  */
+    //  virtual void Modified() const;
+
+    /** Increase the reference count (mark as used by another object).  */
+    virtual void Register() const;
+
+    /** Decrease the reference count (release by another object).  */
+    virtual void UnRegister() const;
+
+    /** Sets the reference count (use with care)  */
+    virtual void SetReferenceCount(int);
+
+    /** This is a global flag that controls whether any debug, warning
+     *  or error messages are displayed.  */
+    static void SetGlobalWarningDisplay(bool flag);
+    static bool GetGlobalWarningDisplay();
+    static void GlobalWarningDisplayOn()
     { Object::SetGlobalWarningDisplay(true); }
-  static void GlobalWarningDisplayOff()
+    static void GlobalWarningDisplayOff()
     { Object::SetGlobalWarningDisplay(false); }
-    
-  /** Allow people to add/remove/invoke observers (callbacks) to any NITRO
-   * object. This is an implementation of the subject/observer design
-   * pattern. An observer is added by specifying an event to respond to
-   * and an nitro::Command to execute. It returns an unsigned long tag
-   * which can be used later to remove the event or retrieve the
-   * command.  The memory for the Command becomes the responsibility of
-   * this object, so don't pass the same instance of a command to two
-   * different objects  */
+
+    /** Allow people to add/remove/invoke observers (callbacks) to any NITRO
+     * object. This is an implementation of the subject/observer design
+     * pattern. An observer is added by specifying an event to respond to
+     * and an nitro::Command to execute. It returns an unsigned long tag
+     * which can be used later to remove the event or retrieve the
+     * command.  The memory for the Command becomes the responsibility of
+     * this object, so don't pass the same instance of a command to two
+     * different objects  */
 //  unsigned long AddObserver(const EventObject & event, Command *);
 //  unsigned long AddObserver(const EventObject & event, Command *) const;
- 
-  /** Get the command associated with the given tag.  NOTE: This returns
-   * a pointer to a Command, but it is safe to asign this to a
-   * Command::Pointer.  Since Command inherits from LightObject, at this
-   * point in the code, only a pointer or a reference to the Command can
-   * be used.   */
-  //Command* GetCommand(unsigned long tag);
-  
-  /** Call Execute on all the Commands observing this event id. */
-  //void InvokeEvent( const EventObject & );
 
-  /** Call Execute on all the Commands observing this event id.
-   * The actions triggered by this call doesn't modify this object. */
-  //void InvokeEvent( const EventObject & ) const;
+    /** Get the command associated with the given tag.  NOTE: This returns
+     * a pointer to a Command, but it is safe to asign this to a
+     * Command::Pointer.  Since Command inherits from LightObject, at this
+     * point in the code, only a pointer or a reference to the Command can
+     * be used.   */
+    //Command* GetCommand(unsigned long tag);
 
-  /** Remove the observer with this tag value. */
-  //void RemoveObserver(unsigned long tag);
+    /** Call Execute on all the Commands observing this event id. */
+    //void InvokeEvent( const EventObject & );
 
-  /** Remove all observers . */
-  //void RemoveAllObservers();
+    /** Call Execute on all the Commands observing this event id.
+     * The actions triggered by this call doesn't modify this object. */
+    //void InvokeEvent( const EventObject & ) const;
 
-  /** Return true if an observer is registered for this event. */
-  //bool HasObserver( const EventObject & event ) const;
+    /** Remove the observer with this tag value. */
+    //void RemoveObserver(unsigned long tag);
 
-  /**
-   * \return A reference to this objects MetaDataDictionary.
-   * \warning This reference may be changed.
-   */
-  //MetaDataDictionary & GetMetaDataDictionary(void);
+    /** Remove all observers . */
+    //void RemoveAllObservers();
 
-  /**
-   * \return A constant reference to this objects MetaDataDictionary.
-   */
-  //const MetaDataDictionary & GetMetaDataDictionary(void) const;
+    /** Return true if an observer is registered for this event. */
+    //bool HasObserver( const EventObject & event ) const;
 
-  /**
-   * \return Set the MetaDataDictionary
-   */
-  //void SetMetaDataDictionary(const MetaDataDictionary & rhs);
+    /**
+     * \return A reference to this objects MetaDataDictionary.
+     * \warning This reference may be changed.
+     */
+    //MetaDataDictionary & GetMetaDataDictionary(void);
+
+    /**
+     * \return A constant reference to this objects MetaDataDictionary.
+     */
+    //const MetaDataDictionary & GetMetaDataDictionary(void) const;
+
+    /**
+     * \return Set the MetaDataDictionary
+     */
+    //void SetMetaDataDictionary(const MetaDataDictionary & rhs);
 
 
-protected:
-  Object(); 
-  virtual ~Object(); 
+  protected:
+    Object();
+    virtual ~Object();
 
-  /** Methods invoked by Print() to print information about the object
-   * including superclasses. Typically not called by the user (use Print()
-   * instead) but used in the hierarchical print process to combine the
-   * output of several classes.  */
-  virtual void PrintSelf(std::ostream& os) const;
+    /** Methods invoked by Print() to print information about the object
+     * including superclasses. Typically not called by the user (use Print()
+     * instead) but used in the hierarchical print process to combine the
+     * output of several classes.  */
+    virtual void PrintSelf(std::ostream& os) const;
 
-  //bool PrintObservers(std::ostream& os) const;
+    //bool PrintObservers(std::ostream& os) const;
 
-private:
-  Object(const Self&); //purposely not implemented
-  void operator=(const Self&); //purposely not implemented
+  private:
+    Object(const Self&); //purposely not implemented
+    void operator=(const Self&); //purposely not implemented
 
-  /** Enable/Disable debug messages. */
-  mutable bool m_Debug;
-  
-  /** Keep track of modification time. */
-  //  mutable TimeStamp m_MTime;
-  
-  /** Global object debug flag. */
-  static bool m_GlobalWarningDisplay;
+    /** Enable/Disable debug messages. */
+    mutable bool m_Debug;
 
-  /** Implementation class for Subject/Observer Pattern.
-   * This is only allocated if used. */
-  //SubjectImplementation* m_SubjectImplementation;
- /**
-  * Implementation for holding Object MetaData
-  * @see nitro::MetaDataDictionary
-  * @see nitro::MetaDataObjectBase
-  * @see nitro::MetaDataObject
-  * This is only allocated if used.
-  */
-  //mutable MetaDataDictionary * m_MetaDataDictionary;
-};
+    /** Keep track of modification time. */
+    //  mutable TimeStamp m_MTime;
+
+    /** Global object debug flag. */
+    static bool m_GlobalWarningDisplay;
+
+    /** Implementation class for Subject/Observer Pattern.
+     * This is only allocated if used. */
+    //SubjectImplementation* m_SubjectImplementation;
+    /**
+     * Implementation for holding Object MetaData
+     * @see nitro::MetaDataDictionary
+     * @see nitro::MetaDataObjectBase
+     * @see nitro::MetaDataObject
+     * This is only allocated if used.
+     */
+    //mutable MetaDataDictionary * m_MetaDataDictionary;
+  };
 
 } // end namespace nitro
 
 #endif
-

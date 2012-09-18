@@ -9,18 +9,18 @@
   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
   PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 
 #include "nitroNetworkIF.h"
 
 namespace nitro {
 
-NetworkIF::NetworkIF()
-{
-}
+  NetworkIF::NetworkIF()
+  {
+  }
 
-NetworkIF::~NetworkIF()
-{
-}
-  
+  NetworkIF::~NetworkIF()
+  {
+  }
+
 } // end namespace nitro

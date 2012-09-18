@@ -9,7 +9,7 @@
   the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
   PURPOSE.  See the above copyright notices for more information.
 
-=========================================================================*/
+  =========================================================================*/
 
 #ifndef  __nitroOpenIGTLinkNetworkIF_h
 #define  __nitroOpenIGTLinkNetworkIF_h
@@ -23,64 +23,62 @@
 
 namespace nitro {
 
-class NITROCommon_EXPORT OpenIGTLinkNetworkIF : public NetworkIF
-{
- public:
-  typedef OpenIGTLinkNetworkIF           Self;
-  typedef Object              Superclass;
-  typedef SmartPointer<Self>  Pointer;
-  typedef SmartPointer<const Self>  ConstPointer;
+  class NITROCommon_EXPORT OpenIGTLinkNetworkIF : public NetworkIF
+  {
+  public:
+    typedef OpenIGTLinkNetworkIF          Self;
+    typedef Object                      Superclass;
+    typedef SmartPointer<Self>          Pointer;
+    typedef SmartPointer<const Self>    ConstPointer;
 
-  nitroNewMacro(Self);
-  nitroTypeMacro(OpenIGTLinkNetworkIF, NetworkIF);
+    nitroNewMacro(Self);
+    nitroTypeMacro(OpenIGTLinkNetworkIF, NetworkIF);
 
- public:
+  public:
 
-  // Description:
-  // Configure the connector as a server and
-  // set remote host information
-  void ConfigureAsServer(int port);
+    // Description:
+    // Configure the connector as a server and
+    // set remote host information
+    void ConfigureAsServer(int port);
 
-  // Description:
-  // Configure the connector as a client and
-  // set remote host information
-  void ConfigureAsClient(const char* hostname, int port);
-  
-  // Description:
-  // Connect to the OpenIGTLink remote host.
-  virtual int Connect();
+    // Description:
+    // Configure the connector as a client and
+    // set remote host information
+    void ConfigureAsClient(const char* hostname, int port);
 
-  // Description:
-  // Disconnect from the remote host.
-  virtual int Disconnect();
+    // Description:
+    // Connect to the OpenIGTLink remote host.
+    virtual int Connect();
 
-  // Description:
-  // Check if the connection is alive.
-  virtual int IsConnected();
+    // Description:
+    // Disconnect from the remote host.
+    virtual int Disconnect();
 
-  // Description:
-  // Get target coordinates receviced from the remote host. GetTargets()
-  // creates a list of coordinates in image coordinate system and
-  // set them in 'vectors'.
-  // Because GetTargets() checkes the connection status before fetching
-  // target data, thus the caller does not need to call IsConnected() before
-  // calling GetTargets().
-  virtual int GetTargets(std::list< Vector >& vectors);
+    // Description:
+    // Check if the connection is alive.
+    virtual int IsConnected();
 
- protected:
+    // Description:
+    // Get target coordinates receviced from the remote host. GetTargets()
+    // creates a list of coordinates in image coordinate system and
+    // set them in 'vectors'.
+    // Because GetTargets() checkes the connection status before fetching
+    // target data, thus the caller does not need to call IsConnected() before
+    // calling GetTargets().
+    virtual int GetTargets(std::list< Vector >& vectors);
 
-  // Description:
-  // Constructor/Destructor
-  OpenIGTLinkNetworkIF();
-  ~OpenIGTLinkNetworkIF();
+  protected:
 
- protected:
-  igtl::SessionManager::Pointer m_Session;
-    
-};
+    // Description:
+    // Constructor/Destructor
+    OpenIGTLinkNetworkIF();
+    ~OpenIGTLinkNetworkIF();
+
+  protected:
+    igtl::SessionManager::Pointer m_Session;
+
+  };
 
 } // end namespace nitro
 
 #endif
-
-
