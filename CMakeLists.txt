@@ -68,6 +68,8 @@ EXTERNALPROJECT_ADD(OpenIGTLink
 	   -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
 )
 
+INCLUDE_DIRECTORIES("${OpenIGTLink_INSTALL_DIR}/include/igtl")
+
 #-----------------------------------------------------------------------------
 # Output directories.
 

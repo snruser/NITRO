@@ -36,7 +36,7 @@ class NITROCommon_EXPORT NetworkIF : public Object
 
   // Description:
   // Connect to the remote host.
-  virtual int Conennct() {};
+  virtual int Connect() {};
 
   // Description:
   // Disconnect from the remote host.

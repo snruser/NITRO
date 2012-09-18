@@ -10,8 +10,11 @@ find_package(NITRO REQUIRED)
 include(${NITRO_USE_FILE})
 
 SET(HEADERS
-	)
+    nitroNeedlePusherKinematics.h
+    )
+
 SET(SOURCES
+    nitroNeedlePusherKinematics.cxx
     nitroNeedlePusherServer.cxx
     )
 

@@ -54,7 +54,7 @@ void OpenIGTLinkNetworkIF::ConfigureAsClient(const char* hostname, int port)
     }
 }
 
-int OpenIGTLinkNetworkIF::Conennct()
+int OpenIGTLinkNetworkIF::Connect()
 {
   // Check if the session manager is available
   if (!this->m_Session.IsNotNull())
@@ -62,12 +62,12 @@ int OpenIGTLinkNetworkIF::Conennct()
     return 0;
     }
 
-  this->m_Session->Connect();
+  return this->m_Session->Connect();
 }
 
 int OpenIGTLinkNetworkIF::Disconnect()
 {
-  this->m_Session->Disconnect();
+  return this->m_Session->Disconnect();
 }
 
 int OpenIGTLinkNetworkIF::IsConnected()

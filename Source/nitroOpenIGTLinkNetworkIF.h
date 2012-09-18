@@ -48,7 +48,7 @@ class NITROCommon_EXPORT OpenIGTLinkNetworkIF : public NetworkIF
   
   // Description:
   // Connect to the OpenIGTLink remote host.
-  virtual int Conennct();
+  virtual int Connect();
 
   // Description:
   // Disconnect from the remote host.
