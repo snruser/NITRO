@@ -34,7 +34,9 @@ class NITROCommon_EXPORT NeedlePusherKinematics : public Kinematics
 
  public:
 
-  double Convert(double distance_mm);
+  // Description:
+  // Convert target position to motor motion
+  virtual double Convert(double target);
 
  protected:
 

@@ -37,6 +37,13 @@ namespace nitro {
     // Initialization function. Could be overloaded.
     virtual void Initialize() {};
 
+    // Description:
+    // Convert target position to motor motion
+    virtual double Convert(double target) { return 0.0; };
+
+    // Description:
+    // Close connections, delete classes
+    virtual void Exit() {};
 
   protected:
 

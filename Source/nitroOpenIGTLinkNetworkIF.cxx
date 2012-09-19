@@ -62,7 +62,7 @@ namespace nitro {
       return 0;
       }
     std::cerr << "Connecting..." << std::endl;
-    
+
     if(!this->m_Session->Connect())
       {
       std::cerr << "Connection timeout" << std::endl;
@@ -102,6 +102,7 @@ namespace nitro {
 
   void OpenIGTLinkNetworkIF::Initialize()
   {
+    std::cerr << "OpenIGTLinkNetworkIF initialization" << std::endl;
     switch(this->m_Session->GetMode())
       {
       // Server
@@ -137,6 +138,14 @@ namespace nitro {
         {
         break;
         }
+      }
+  }
+
+  void OpenIGTLinkNetworkIF::Exit()
+  {
+    if(this->m_Session)
+      {
+      this->Disconnect();
       }
   }
 

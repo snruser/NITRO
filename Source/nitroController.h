@@ -82,11 +82,11 @@ namespace nitro {
     // Description:
     // Main loop
     // TODO: Rename it
-    virtual void Loop() {};
+    virtual void Loop();
 
     // Description:
     // Close connections, delete classes
-    virtual void Exit() {};
+    virtual void Exit();
 
     // Description:
     // Run main loop. Note that this base class is implemented for

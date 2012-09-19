@@ -125,4 +125,59 @@ namespace nitro {
       }
   }
 
+  void Controller::Loop()
+  {
+    // TODO: Get targets
+    // Get targets from NetworkIF of UserIF ?
+    double target = 30.0;  // mm
+
+    // Convert target in lists of target of each actuators
+    double convertedTarget = this->m_Kinematics->Convert(target);
+
+    // Send targets to HardwareIF
+    this->m_HardwareIF->Move(0, convertedTarget);
+
+    // Inverse kinematics
+
+    // Send feedback position to NetworkIF
+
+  }
+
+
+  void Controller::Exit()
+  {
+    // TODO: delete classes ?
+
+    if(this->m_Kinematics)
+      {
+      this->m_Kinematics->Exit();
+      }
+
+    if(this->m_NetworkIF)
+      {
+      this->m_NetworkIF->Exit();
+      }
+
+    if(this->m_HardwareIF)
+      {
+      this->m_HardwareIF->Exit();
+      }
+
+    if(this->m_UserIF)
+      {
+      this->m_UserIF->Exit();
+      }
+
+    if(this->m_XMLParser)
+      {
+      this->m_XMLParser->Exit();
+      }
+
+    if(this->m_LogRecorder)
+      {
+      this->m_LogRecorder->Exit();
+      }
+  }
+
+
 } // end namespace nitro

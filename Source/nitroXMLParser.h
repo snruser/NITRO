@@ -66,6 +66,11 @@ namespace nitro {
     // Initialization function. Could be overloaded.
     virtual void Initialize() {};
 
+    // Description:
+    // Close connections, delete classes
+    virtual void Exit() {};
+
+
   protected:
 
     // Description:

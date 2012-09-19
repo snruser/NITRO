@@ -41,7 +41,23 @@ namespace nitro {
 
     // Description:
     // Initialization function. Could be overloaded.
-    virtual void Initialize() {};
+    virtual void Initialize();
+
+    // Description:
+    // Move actuator to target
+    virtual void Move(int actuator, double target) {};
+
+    // Description:
+    // Move actuator to target
+    virtual void InitiateCommunication() {};
+
+    // Description:
+    // Move actuator to target
+    virtual void DefaultConfiguration() {};
+
+    // Description:
+    // Close connections, delete classes
+    virtual void Exit() {};
 
 
   protected:

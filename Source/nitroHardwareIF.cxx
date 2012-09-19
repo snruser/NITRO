@@ -23,4 +23,11 @@ namespace nitro {
   {
   }
 
+
+  void HardwareIF::Initialize()
+  {
+    this->InitiateCommunication();
+    this->DefaultConfiguration();
+  }
+
 } // end namespace nitro
