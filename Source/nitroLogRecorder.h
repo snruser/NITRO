@@ -35,11 +35,17 @@ namespace nitro {
   public:
 
     void SetLogFile(const char* fpath);
+    const char* GetLogFile();
     void Log(const char* logData);
+    void Close();
 
     // Create continous recording ?
     //void StartRecording();
     //void StopRecording();
+
+    // Description:
+    // Initialization function. Could be overloaded.
+    virtual void Initialize() {};
 
   protected:
 
@@ -51,6 +57,7 @@ namespace nitro {
   protected:
 
     std::ofstream LogFile;
+    std::string LogPath;
   };
 
 } // end namespace nitro

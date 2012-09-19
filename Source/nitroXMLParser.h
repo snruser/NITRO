@@ -62,6 +62,10 @@ namespace nitro {
     int GetNumberOfJoints() { return this->NumberOfJoints; };
     int GetNumberOfLinks() { return this->NumberOfLinks; };
 
+    // Description:
+    // Initialization function. Could be overloaded.
+    virtual void Initialize() {};
+
   protected:
 
     // Description:
@@ -73,7 +77,6 @@ namespace nitro {
     void ParseDegreesOfFreedom();
     void ParseLinks();
     void ParseJoints();
-
 
   protected:
 

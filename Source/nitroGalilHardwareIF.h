@@ -60,6 +60,11 @@ class  GalilHardwareIF : public nitro::HardwareIF
   int GetNumberOfDevices();
   std::string GetNthIPAsString(int i);
 
+
+  // Description:
+  // Initialization function. Could be overloaded.
+  virtual void Initialize() { this->Connect(); };
+
  protected:
 
 // Description:

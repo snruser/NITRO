@@ -39,6 +39,10 @@ namespace nitro {
 
   public:
 
+    // Description:
+    // Initialization function. Could be overloaded.
+    virtual void Initialize() {};
+
 
   protected:
 

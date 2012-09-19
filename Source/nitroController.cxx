@@ -84,4 +84,45 @@ namespace nitro {
       }
   }
 
+  void Controller::Initialize()
+  {
+    if(this->m_Kinematics)
+      {
+      this->m_Kinematics->Initialize();
+      }
+
+    if(this->m_NetworkIF)
+      {
+      this->m_NetworkIF->Initialize();
+      }
+
+    if(this->m_HardwareIF)
+      {
+      this->m_HardwareIF->Initialize();
+      }
+
+    if(this->m_UserIF)
+      {
+      this->m_UserIF->Initialize();
+      }
+
+    if(this->m_XMLParser)
+      {
+      // XML Path should be set before calling Initialize
+      if(!strcmp(this->m_XMLParser->GetXMLPath(),""))
+        {
+        this->m_XMLParser->Initialize();
+        }
+      }
+
+    if(this->m_LogRecorder)
+      {
+      // File path should be set before calling Initialize
+      if(!strcmp(this->m_LogRecorder->GetLogFile(),""))
+        {
+        this->m_LogRecorder->Initialize();
+        }
+      }
+  }
+
 } // end namespace nitro

@@ -55,6 +55,11 @@ namespace nitro {
     // calling GetTargets().
     virtual int GetTargets(std::list< Vector >& vectors) { return 0; };
 
+    // Description:
+    // Initialization function. Could be overloaded.
+    virtual void Initialize() {};
+    
+
   protected:
 
     // Description:

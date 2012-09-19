@@ -34,6 +34,7 @@ class NITROCommon_EXPORT NeedlePusherKinematics : public Kinematics
 
  public:
 
+  double Convert(double distance_mm);
 
  protected:
 

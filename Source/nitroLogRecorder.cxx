@@ -28,6 +28,9 @@ namespace nitro {
   {
     std::ios_base::openmode mode = std::ios::out;
     std::fstream testFile;
+    
+    // Set path
+    this->LogPath.assign(fpath);
 
     // Check if file exists
     testFile.open(fpath);
@@ -42,6 +45,14 @@ namespace nitro {
     this->LogFile.open(fpath,mode);
   }
 
+  const char* LogRecorder::GetLogFile()
+  {
+    if(!this->LogPath.empty())
+      {
+      return this->LogPath.c_str();
+      }
+    return NULL;
+  }
 
   // TODO: Return value ?
   void LogRecorder::Log(const char* logData)
@@ -49,6 +60,14 @@ namespace nitro {
     if(this->LogFile.is_open())
       {
       this->LogFile << logData << std::endl;
+      }
+  }
+
+  void LogRecorder::Close()
+  {
+    if(this->LogFile.is_open())
+      {
+      this->LogFile.close();
       }
   }
 

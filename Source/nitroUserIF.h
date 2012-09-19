@@ -36,6 +36,10 @@ namespace nitro {
     virtual void Print(const char *format, ...);
     virtual void PrintError(const char *format, ...);
 
+    // Description:
+    // Initialization function. Could be overloaded.
+    virtual void Initialize() {};
+
   protected:
 
     // Description:

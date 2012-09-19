@@ -2,7 +2,7 @@
 #include "nitroOpenIGTLinkNetworkIF.h"
 #include "nitroNeedlePusherKinematics.h"
 #include "nitroUserIF.h"
-#include "nitroNeedlePusherController.h"
+#include "nitroController.h"
 
 #include "nitroXMLParser.h"
 
@@ -25,15 +25,17 @@ int main()
   // Network IO (OpenIGTLink)
   OpenIGTLinkNetworkIF::Pointer nwio;
   nwio = OpenIGTLinkNetworkIF::New();
-  nwio->ConfigureAsServer(18944);
+  nwio->ConfigureAsServer(COM_PORT);
 
   // Controller (Kinematics)
   NeedlePusherKinematics::Pointer km;
   km = NeedlePusherKinematics::New();
 
-  // User Interface (Required ?)
-  //UserIF::Pointer ui;
-  //ui = UserIF::New();
+  // User Interface
+  /*
+  UserIF::Pointer ui;
+  ui = UserIF::New();
+  */
 
   // XML Parser
   XMLParser::Pointer xmlp;
@@ -41,21 +43,23 @@ int main()
   xmlp->SetXMLPath("/Users/SNR/Desktop/NITRO/Examples/NeedlePusher/NeedlePusher.xml");
 
   // Log Recorder
+  /*
   LogRecorder::Pointer log;
   log = LogRecorder::New();
   log->SetLogFile("/Users/SNR/Desktop/NITRO/Examples/NeedlePusher/test1.txt");
+  */
 
   // ------------------------------------------------------------
   // Step 2: Create controller and set the instances
 
-  NeedlePusherController::Pointer ctl;
-  ctl = NeedlePusherController::New();
+  Controller::Pointer ctl;
+  ctl = Controller::New();
   ctl->SetHardwareIF(hwnp);
   ctl->SetNetworkIF(nwio);
   ctl->SetKinematics(km);
-  //ctl->SetUserIF(ui);
   ctl->SetXMLParser(xmlp);
-  ctl->SetLogRecorder(log);
+  //ctl->SetUserIF(ui);
+  //ctl->SetLogRecorder(log);
 
   // ------------------------------------------------------------
   // Step 3: Initialize the controller

@@ -61,8 +61,14 @@ namespace nitro {
       {
       return 0;
       }
-
-    return this->m_Session->Connect();
+    std::cerr << "Connecting..." << std::endl;
+    
+    if(!this->m_Session->Connect())
+      {
+      std::cerr << "Connection timeout" << std::endl;
+      return 0;
+      }
+    return 1;
   }
 
   int OpenIGTLinkNetworkIF::Disconnect()
@@ -91,6 +97,47 @@ namespace nitro {
       }
 
     // message received
+    return 1;
+  }
+
+  void OpenIGTLinkNetworkIF::Initialize()
+  {
+    switch(this->m_Session->GetMode())
+      {
+      // Server
+      case igtl::SessionManager::MODE_SERVER:
+        {
+        if(this->m_Session->GetPort())
+          {
+          this->Connect();
+          }
+        else
+          {
+          std::cerr << "ERROR: As server, port should be set" << std::endl;
+          }
+        break;
+        }
+
+        // Client
+      case igtl::SessionManager::MODE_CLIENT:
+        {
+        if(this->m_Session->GetPort() && !strcmp(this->m_Session->GetHostname(),""))
+          {
+          this->Connect();
+          }
+        else
+          {
+          std::cerr << "ERROR: As client, port and hostname should be set" << std::endl;
+          }
+        break;
+        }
+
+        // Default
+      default:
+        {
+        break;
+        }
+      }
   }
 
 } // end namespace nitro

@@ -77,7 +77,7 @@ namespace nitro {
 
     // Description:
     // Initialize all classes and parse xml file (if exists) to fill them
-    virtual void Initialize() {};
+    virtual void Initialize();
 
     // Description:
     // Main loop
