@@ -40,6 +40,7 @@ SET(NITRO_BASE_SOURCES
   nitroXMLParser.cxx
   nitroLogRecorder.cxx
   nitroOSUtil.cxx
+  nitroBase.cxx
   )
 
 SET(NITRO_WORKFLOW_SOURCES
@@ -74,6 +75,7 @@ SET(NITRO_BASE_INCLUDES
   nitroLogRecorder.h
   nitroOSUtil.h
   nitroMath.h
+  nitroBase.h
 )
 
 SET(NITRO_WORKFLOW_INCLUDES

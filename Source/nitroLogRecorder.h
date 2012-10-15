@@ -15,13 +15,13 @@
 #define  __nitroLogRecorder_h
 
 #include <fstream>
-#include "nitroConfigure.h"
-#include "nitroObject.h"
-#include "nitroObjectFactory.h"
+
+// NITRO Base class
+#include "nitroBase.h"
 
 namespace nitro {
 
-  class NITROCommon_EXPORT LogRecorder : public Object
+  class NITROCommon_EXPORT LogRecorder : public nitroBase
   {
   public:
     typedef LogRecorder              Self;

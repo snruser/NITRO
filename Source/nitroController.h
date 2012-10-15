@@ -14,9 +14,12 @@
 #ifndef  __nitroController_h
 #define  __nitroController_h
 
-#include "nitroConfigure.h"
-#include "nitroObject.h"
-#include "nitroObjectFactory.h"
+// Shared Memory
+#include <sys/types.h>
+#include <sys/ipc.h>
+
+// Nitro Base class
+#include "nitroBase.h"
 
 // NITRO Classes
 #include "nitroKinematics.h"
@@ -28,7 +31,7 @@
 
 namespace nitro {
 
-class NITROCommon_EXPORT Controller : public Object
+class NITROCommon_EXPORT Controller : public nitroBase
 {
 public:
 typedef Controller               Self;

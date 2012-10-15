@@ -16,6 +16,8 @@
 #include "nitroMath.h"
 #include "nitroOSUtil.h"
 
+#define MEMORY_SIZE 500*256*sizeof(char)
+
 namespace nitro {
 
   Controller::Controller()
@@ -86,23 +88,42 @@ namespace nitro {
 
   void Controller::Initialize()
   {
+    // Controller Shared Memory
+    this->AllocateSharedMemory(SHM_CONTROLLER_AREA, MEMORY_SIZE, IPC_CREAT | 0644);
+
     if(this->m_Kinematics)
       {
+      // Kinematics Shared Memory
+      this->m_Kinematics->AllocateSharedMemory(SHM_KINEMATICS_AREA, MEMORY_SIZE, IPC_CREAT | 0644);
+
+      // Initialization
       this->m_Kinematics->Initialize();
       }
 
     if(this->m_NetworkIF)
       {
+      // Network Shared Memory
+      this->m_NetworkIF->AllocateSharedMemory(SHM_NETWORK_AREA, MEMORY_SIZE, IPC_CREAT | 0644);
+
+      // Initialization
       this->m_NetworkIF->Initialize();
       }
 
     if(this->m_HardwareIF)
       {
+      // Hardware Shared Memory
+      this->m_HardwareIF->AllocateSharedMemory(SHM_HARDWARE_AREA, MEMORY_SIZE, IPC_CREAT | 0644);
+      
+      // Initialization
       this->m_HardwareIF->Initialize();
       }
 
     if(this->m_UserIF)
       {
+      // User Interface Shared Memory
+      this->m_UserIF->AllocateSharedMemory(SHM_UI_AREA, MEMORY_SIZE, IPC_CREAT | 0644);
+
+      // Initialization
       this->m_UserIF->Initialize();
       }
 

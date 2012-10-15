@@ -14,13 +14,12 @@
 #ifndef  __nitroUserIF_h
 #define  __nitroUserIF_h
 
-#include "nitroConfigure.h"
-#include "nitroObject.h"
-#include "nitroObjectFactory.h"
+// NITRO Base class
+#include "nitroBase.h"
 
 namespace nitro {
 
-  class NITROCommon_EXPORT UserIF : public Object
+  class NITROCommon_EXPORT UserIF : public nitroBase
   {
   public:
     typedef UserIF                      Self;

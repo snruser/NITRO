@@ -14,14 +14,13 @@
 #ifndef  __nitroNetworkIF_h
 #define  __nitroNetworkIF_h
 
-#include "nitroConfigure.h"
-#include "nitroObject.h"
-#include "nitroObjectFactory.h"
+// NITRO Base class
+#include "nitroBase.h"
 #include "nitroMath.h"
 
 namespace nitro {
 
-  class NITROCommon_EXPORT NetworkIF : public Object
+  class NITROCommon_EXPORT NetworkIF : public nitroBase
   {
   public:
     typedef NetworkIF                   Self;

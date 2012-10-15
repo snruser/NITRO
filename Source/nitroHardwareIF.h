@@ -17,17 +17,14 @@
 // STD include
 #include <vector>
 
-#include "nitroConfigure.h"
-#include "nitroObject.h"
-#include "nitroObjectFactory.h"
-
-// NITRO includes
+// NITRO Base class
+#include "nitroBase.h"
 #include "nitroJoint.h"
 
 namespace nitro {
 
 
-  class NITROCommon_EXPORT HardwareIF : public Object
+  class NITROCommon_EXPORT HardwareIF : public nitroBase
   {
   public:
     typedef HardwareIF                  Self;
