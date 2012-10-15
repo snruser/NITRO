@@ -104,8 +104,8 @@ namespace nitro {
   {
     std::cerr << "OpenIGTLinkNetworkIF initialization" << std::endl;
     
-    int i = 0;
     // 10/15/2012 ayamada: !!You have to decide the variable i!! 
+    int i = 0;
     switch(this->m_Session->GetMode(i))
       {
       // Server
