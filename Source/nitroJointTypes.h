@@ -55,18 +55,18 @@ namespace nitro {
 
   struct Actuator{
     ActuatorType Type;
-    MotionType MotionType;
+    MotionType MType;
     ActuatorInput Input;
     int PulsePerUnit;
     double GearRatio;
-  Actuator():Type(DC),MotionType(ROTATIONAL),Input(POSITION),PulsePerUnit(0.0),GearRatio(1.0){}
+  Actuator():Type(DC),MType(ROTATIONAL),Input(POSITION),PulsePerUnit(0.0),GearRatio(1.0){}
   };
 
   struct Sensor{
     SensorType Type;
-    MotionType MotionType;
+    MotionType MType;
     double CountsPerUnit;
-  Sensor():Type(NONE),MotionType(ROTATIONAL),CountsPerUnit(0.0){}
+  Sensor():Type(NONE),MType(ROTATIONAL),CountsPerUnit(0.0){}
   };
 
   struct Landmark{

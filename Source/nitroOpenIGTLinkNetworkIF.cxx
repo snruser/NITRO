@@ -103,7 +103,10 @@ namespace nitro {
   void OpenIGTLinkNetworkIF::Initialize()
   {
     std::cerr << "OpenIGTLinkNetworkIF initialization" << std::endl;
-    switch(this->m_Session->GetMode())
+    
+    int i = 0;
+    // 10/15/2012 ayamada: !!You have to decide the variable i!! 
+    switch(this->m_Session->GetMode(i))
       {
       // Server
       case igtl::SessionManager::MODE_SERVER:
