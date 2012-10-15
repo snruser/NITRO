@@ -59,9 +59,9 @@ namespace nitro {
     if(this->SharedMemoryArea && (shm_id >= 0))
       {
       // Detach and remove memory
-      // TODO: Add counter of mutex to be sure no one else is accessing memory
       if(shmdt(this->SharedMemoryArea) >= 0)
         {
+        // IPC_RMID set the segment ready for destruction. As soon as number of processes attaches become 0, the segment is destroy
         if(shmctl(this->shm_id, IPC_RMID, NULL) >= 0)
           {
           std::cerr << "Shared Memory deallocation succeed" << std::endl;

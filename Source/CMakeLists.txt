@@ -107,6 +107,10 @@ ADD_LIBRARY(OpenIGTLinkLib STATIC IMPORTED)
 SET_PROPERTY(TARGET OpenIGTLinkLib PROPERTY
                 IMPORTED_LOCATION "${OpenIGTLink_INSTALL_DIR}/lib/igtl/libOpenIGTLink.a")
 
+SET(UserInterfaceSources
+	nitroUserIF.cxx
+   )	
+
 TARGET_LINK_LIBRARIES(NITRO
   ${LINK_LIBS}
   OpenIGTLinkLib

@@ -29,6 +29,8 @@
 #define SHM_KINEMATICS_AREA	(key_t)84563
 #define SHM_UI_AREA		(key_t)84564
 
+#define MEMORY_SIZE 500*256*sizeof(char)
+
 namespace nitro {
 
   class NITROCommon_EXPORT nitroBase : public Object
@@ -45,9 +47,6 @@ namespace nitro {
   public:
 
     int AllocateSharedMemory(key_t shmKey ,int size, int permflag);
-    //void SetShmID(int shid) { this->shm_id = shid; }
-    //int GetShmID() { return this->shm_id; }
-    //void SetSharedMemoryArea(void* shmem) { this->SharedMemoryArea = shmem; }
     void* GetSharedMemoryArea() { return this->SharedMemoryArea; }
     int DeallocateSharedMemory();
 

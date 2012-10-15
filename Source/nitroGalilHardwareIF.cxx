@@ -175,6 +175,12 @@ namespace nitro {
     std::cerr << "Connect to board: ";
     std::cin >> selectedBoard;
 
+    if(selectedBoard == -1)
+      {
+      this->Exit();
+      return;
+      }
+
     if(selectedBoard >= 0   && selectedBoard < this->GalilList.size())
       {
       this->InitiateCommunication(selectedBoard);
@@ -300,13 +306,16 @@ namespace nitro {
 
   void GalilHardwareIF::DefaultConfiguration()
   {
-    std::cerr << "Configuring..." << std::endl;
-    this->Command("BAA");
-    this->Command("BMA=4096");
-    this->Command("BXA=-3");
-    this->Command("KIA=0.17");
-    this->Command("SPA=2000");
-    this->Command("PRA=8192");
+    if(this->CommunicationSocket > 0)
+      {
+      std::cerr << "Configuring..." << std::endl;
+      this->Command("BAA");
+      this->Command("BMA=4096");
+      this->Command("BXA=-3");
+      this->Command("KIA=0.17");
+      this->Command("SPA=2000");
+      this->Command("PRA=8192");
+      }
   }
 
   void GalilHardwareIF::Exit()

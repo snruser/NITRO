@@ -43,6 +43,15 @@ namespace nitro {
     // Close connections, delete classes
     virtual void Exit() {};
 
+    // Description:
+    // Check which shared memory has been allocated
+    void CheckSharedMemories();
+
+    // Access shared memories area
+    void* GetControllerMemory() { return this->shmController; }
+    void* GetNetworkMemory() { return this->shmNetwork; }
+    void* GetKinematicsMemory() { return this->shmKinematics; }
+    void* GetHardwareMemory() { return this->shmHardware; }
 
   protected:
 
@@ -51,7 +60,19 @@ namespace nitro {
     UserIF();
     ~UserIF();
 
+    void CheckSharedMemory(key_t shmKey, int* shmID, void** shmPtr);
+
   protected:
+
+    void* shmController;
+    void* shmNetwork;
+    void* shmKinematics;
+    void* shmHardware;
+
+    int shmControllerID;
+    int shmNetworkID;
+    int shmKinematicsID;
+    int shmHardwareID;
 
   };
 
