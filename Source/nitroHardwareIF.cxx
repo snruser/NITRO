@@ -23,7 +23,6 @@ namespace nitro {
   {
   }
 
-
   void HardwareIF::Initialize()
   {
     this->InitiateCommunication();

@@ -7,7 +7,7 @@ namespace nitro {
 
   typedef std::string Text;
 
-  enum MotionType
+  enum MotionTypes
   {
     ROTATIONAL,
     LINEAR
@@ -19,7 +19,7 @@ namespace nitro {
     PASSIVE
   };
 
-  enum ActuatorType
+  enum ActuatorTypes
   {
     DC,
     STEPPING
@@ -32,7 +32,7 @@ namespace nitro {
     TORQUE
   };
 
-  enum SensorType
+  enum SensorTypes
   {
     NONE,
     ENCODER
@@ -54,19 +54,19 @@ namespace nitro {
   };
 
   struct Actuator{
-    ActuatorType Type;
-    MotionType MType;
+    ActuatorTypes Type;
+    MotionTypes MotionType;
     ActuatorInput Input;
     int PulsePerUnit;
     double GearRatio;
-  Actuator():Type(DC),MType(ROTATIONAL),Input(POSITION),PulsePerUnit(0.0),GearRatio(1.0){}
+  Actuator():Type(DC),MotionType(ROTATIONAL),Input(POSITION),PulsePerUnit(0.0),GearRatio(1.0){}
   };
 
   struct Sensor{
-    SensorType Type;
-    MotionType MType;
+    SensorTypes Type;
+    MotionTypes MotionType;
     double CountsPerUnit;
-  Sensor():Type(NONE),MType(ROTATIONAL),CountsPerUnit(0.0){}
+  Sensor():Type(NONE),MotionType(ROTATIONAL),CountsPerUnit(0.0){}
   };
 
   struct Landmark{

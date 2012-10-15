@@ -42,8 +42,8 @@ namespace nitro {
     const char* GetDescription() { return this->m_Description.c_str(); };
     void SetGroup(int group) { this->m_Group = group; };
     int GetGroup() { return this->m_Group; };
-    void SetMotionType(MotionType type) { this->m_MotionType = type;};
-    MotionType GetMotionType() { return this->m_MotionType; };
+    void SetMotionType(MotionTypes type) { this->m_MotionType = type;};
+    MotionTypes GetMotionType() { return this->m_MotionType; };
     void SetDrive(Drive drive) { this->m_Drive = drive; };
     Drive GetDrive() { return this->m_Drive; };
     void SetMotionRange(MinMax motionRange) { this->m_MotionRange = motionRange; };
@@ -70,11 +70,11 @@ namespace nitro {
 
   protected:
 
-    /* (REQUIRED) */   Text             m_Name;         // Name of the joint
-    Text                m_Description;  // Description of the joint
-    /* (REQUIRED) */   int              m_Group;        // Group belonging for priority motion
-    /* (REQUIRED) */   MotionType       m_MotionType;   // Rotational or linear motion
-    /* (REQUIRED) */   Drive    m_Drive;        // Active or passive joint
+    Text        m_Name;         // Name of the joint
+    Text        m_Description;  // Description of the joint
+    int         m_Group;        // Group belonging for priority motion
+    MotionTypes m_MotionType;   // Rotational or linear motion
+    Drive	m_Drive;        // Active or passive joint
     MinMax      m_MotionRange;  // Range of motion
     MinMaxFixed m_Speed;        // Range of speed, or fixed
     MinMaxFixed m_Acceleration; // Range of acceleration, or fixed

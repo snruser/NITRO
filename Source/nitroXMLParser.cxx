@@ -326,11 +326,11 @@ namespace nitro {
             {
             if(!strcasecmp(tmpNode3->value(), "rotational"))
               {
-              temp.MType = ROTATIONAL;
+              temp.MotionType = ROTATIONAL;
               }
             else if(!strcasecmp(tmpNode3->value(), "linear"))
               {
-              temp.MType = LINEAR;
+              temp.MotionType = LINEAR;
               }
             }
           if(rapidxml::xml_node<>* tmpNode4 = tmpNode->first_node("Input"))
@@ -378,11 +378,11 @@ namespace nitro {
             {
             if(!strcasecmp(tmpNode3->value(), "rotational"))
               {
-              temp.MType = ROTATIONAL;
+              temp.MotionType = ROTATIONAL;
               }
             else if(!strcasecmp(tmpNode3->value(), "linear"))
               {
-              temp.MType = LINEAR;
+              temp.MotionType = LINEAR;
               }
             }
           if(rapidxml::xml_node<>* tmpNode4 = tmpNode->first_node("CountsPerUnit"))

@@ -26,6 +26,7 @@
 
 namespace nitro {
 
+
   class NITROCommon_EXPORT HardwareIF : public Object
   {
   public:
@@ -39,41 +40,33 @@ namespace nitro {
 
   public:
 
-    // Description:
-    // Initialization function. Could be overloaded.
+// Description:
+// Initialization function. Could be overloaded.
     virtual void Initialize();
 
-    // Description:
-    // Move actuator to target
+// Description:
+// Move actuator to target
     virtual void Move(int actuator, double target) {};
 
-    // Description:
-    // Move actuator to target
+// Description:
+// Move actuator to target
     virtual void InitiateCommunication() {};
 
-    // Description:
-    // Move actuator to target
+// Description:
+// Move actuator to target
     virtual void DefaultConfiguration() {};
 
-    // Description:
-    // Close connections, delete classes
+// Description:
+// Close connections, delete classes
     virtual void Exit() {};
 
 
   protected:
 
-    // Description:
-    // Constructor/Destructor
+// Description:
+// Constructor/Destructor
     HardwareIF();
     ~HardwareIF();
-
-    // Description:
-    // Variables
-    int DegreesOfFreedom;
-
-    // Description:
-    // Vector of actuators
-    std::vector<Joint*> JointsList;
 
   protected:
 
