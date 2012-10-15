@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<RobotName>NeedleInsertionSensor</RobotName>
+<DegreesOfFreedom>4</DegreesOfFreedom>
+<Link>
+  <Name>Dunno</Name>
+  <Length>20</Length>
+</Link>
+<Joint>
+  <Name>Shoulder</Name>
+  <Description>Rotation of needle</Description>
+  <Group>0</Group>
+  <MotionType>Rotational</MotionType>
+  <Drive>Passive</Drive>
+  <MotionRange>
+    <Min>-3.14</Min>
+    <Max>3.14</Max>
+  </MotionRange>
+  <Sensor>
+    <Type>Encoder</Type>
+    <MotionType>Rotational</MotionType>
+    <CountsPerUnit>8192</CountsPerUnit>
+  </Sensor>
+</Joint>
