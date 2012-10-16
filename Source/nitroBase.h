@@ -23,13 +23,18 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 
+#include <string.h>
+#include <stdio.h>
+
 #define SHM_CONTROLLER_AREA	(key_t)84560
 #define SHM_HARDWARE_AREA	(key_t)84561
 #define SHM_NETWORK_AREA	(key_t)84562
 #define SHM_KINEMATICS_AREA	(key_t)84563
 #define SHM_UI_AREA		(key_t)84564
 
-#define MEMORY_SIZE 500*256*sizeof(char)
+#define FIELD_LENGTH 256
+#define MAX_FIELDS 500
+#define MEMORY_SIZE FIELD_LENGTH*MAX_FIELDS*sizeof(char)
 
 namespace nitro {
 
@@ -49,6 +54,9 @@ namespace nitro {
     int AllocateSharedMemory(key_t shmKey ,int size, int permflag);
     void* GetSharedMemoryArea() { return this->SharedMemoryArea; }
     int DeallocateSharedMemory();
+    int AddField(const char* key, const char* value);
+    int RemoveField(const char* key);
+    char* GetField(const char* key);
 
   protected:
 
@@ -61,6 +69,7 @@ namespace nitro {
 
     int shm_id;
     void* SharedMemoryArea;
+    int NumOfFields;
 
   };
 

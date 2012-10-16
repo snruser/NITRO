@@ -15,20 +15,26 @@
 
 namespace nitro {
 
+  //----------------------------------------------------------------------------------------------------
+
   LogRecorder::LogRecorder()
   {
   }
 
+  //----------------------------------------------------------------------------------------------------
+
   LogRecorder::~LogRecorder()
   {
   }
+
+  //----------------------------------------------------------------------------------------------------
 
   // TODO: Return value ?
   void LogRecorder::SetLogFile(const char* fpath)
   {
     std::ios_base::openmode mode = std::ios::out;
     std::fstream testFile;
-    
+
     // Set path
     this->LogPath.assign(fpath);
 
@@ -45,6 +51,8 @@ namespace nitro {
     this->LogFile.open(fpath,mode);
   }
 
+  //----------------------------------------------------------------------------------------------------
+
   const char* LogRecorder::GetLogFile()
   {
     if(!this->LogPath.empty())
@@ -53,6 +61,8 @@ namespace nitro {
       }
     return NULL;
   }
+
+  //----------------------------------------------------------------------------------------------------
 
   // TODO: Return value ?
   void LogRecorder::Log(const char* logData)
@@ -63,6 +73,8 @@ namespace nitro {
       }
   }
 
+  //----------------------------------------------------------------------------------------------------
+
   void LogRecorder::Close()
   {
     if(this->LogFile.is_open())
@@ -70,5 +82,7 @@ namespace nitro {
       this->LogFile.close();
       }
   }
+
+  //----------------------------------------------------------------------------------------------------
 
 } // end namespace nitro

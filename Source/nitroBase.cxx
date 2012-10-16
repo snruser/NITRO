@@ -15,11 +15,16 @@
 
 namespace nitro {
 
+  //----------------------------------------------------------------------------------------------------
+
   nitroBase::nitroBase()
   {
     this->shm_id = -1;
     this->SharedMemoryArea = NULL;
+    this->NumOfFields = 0;
   }
+
+  //----------------------------------------------------------------------------------------------------
 
   nitroBase::~nitroBase()
   {
@@ -28,6 +33,8 @@ namespace nitro {
       this->DeallocateSharedMemory();
       }
   }
+
+  //----------------------------------------------------------------------------------------------------
 
   int nitroBase::AllocateSharedMemory(key_t shmKey, int size, int permflag)
   {
@@ -51,8 +58,11 @@ namespace nitro {
         return 0;
         }
       }
+    memset(this->SharedMemoryArea,0x00, MEMORY_SIZE);
     return 1;
   }
+
+  //----------------------------------------------------------------------------------------------------
 
   int nitroBase::DeallocateSharedMemory()
   {
@@ -78,5 +88,134 @@ namespace nitro {
       }
     return 1;
   }
+
+  //----------------------------------------------------------------------------------------------------
+  // TODO: Implement update flag
+
+  // Memory organization:
+  //
+  // FIELD_LENGTH = 256
+  // MAX_FIELD = 500
+  //
+  // SharedMemoryArea                                                                       SharedMemoryArea + MEMORY_SIZE
+  // |                                                                                                    |
+  // V                                                                                                    V
+  //
+  // 0              256               512              768              1024                        MEMORY_SIZE
+  // --------------------------------------------------------------------------   -------------------------
+  // |      Key1     |      Value1     |      Key2      |     Value2     |  ...           |   Value 500   |
+  // --------------------------------------------------------------------------   -------------------------
+  //
+  // ^                                 ^                                 ^                                ^
+  // |_________________________________|_________________________________|_____   ________________________|
+  //               Field 1                           Field 2                            Field 500
+
+
+  //----------------------------------------------------------------------------------------------------
+
+  int nitroBase::AddField(const char* key, const char* value)
+  {
+    if(this->SharedMemoryArea)
+      {
+      if(strcasecmp(key,""))
+        {
+        char* foundKey = this->GetField(key);
+        if(foundKey)
+          {
+          // Key already exists. Overwrite value if different (case insensitive)
+          if(strcasecmp(foundKey, value) != 0)
+            {
+            std::cerr << "Replace value by " << value <<  std::endl;
+            strncpy(foundKey, value, FIELD_LENGTH*sizeof(char));
+            }
+          }
+        else
+          {
+          // New key. Add key and value in shared memory
+          int memoffset = this->NumOfFields*FIELD_LENGTH*sizeof(char)*2;
+          if(memoffset <= MEMORY_SIZE)
+            {
+            char* dptr = (char*)(this->SharedMemoryArea) + memoffset;
+            strncpy(dptr, key, FIELD_LENGTH*sizeof(char));
+            strncpy(dptr + FIELD_LENGTH*sizeof(char), value, FIELD_LENGTH*sizeof(char));
+            this->NumOfFields++;
+            }
+          }
+        }
+      }
+    return 1;
+  }
+
+  //----------------------------------------------------------------------------------------------------
+  // NULL can't be printed directly. Need to be converted in void* or check return of function before displaying
+
+  char* nitroBase::GetField(const char* key)
+  {
+    if(this->SharedMemoryArea)
+      {
+      if(strcasecmp(key,""))
+        {
+        // Set start pointer, end pointer, and iterator pointer
+        char* sptr = (char*)(this->SharedMemoryArea);
+        char* eptr = sptr + this->NumOfFields*2*FIELD_LENGTH*sizeof(char);
+        char* ptr = sptr;
+
+        // Look for required key in array (limited to number of fields). Return value if found, NULL otherwise
+        while(ptr < eptr)
+          {
+          char* curKey = ptr;
+          char* curVal = ptr + FIELD_LENGTH*sizeof(char);
+
+          // Case insensitive
+          if(strcasecmp(key,curKey) == 0)
+            {
+            return curVal;
+            }
+          ptr+=FIELD_LENGTH*sizeof(char)*2;
+          }
+        }
+      }
+    return NULL;
+  }
+
+  //----------------------------------------------------------------------------------------------------
+
+ int nitroBase::RemoveField(const char* key)
+  {
+    if(this->SharedMemoryArea)
+      {
+      if(strcasecmp(key,""))
+        {
+        // Set start pointer, end pointer, and iterator pointer
+        char* sptr = (char*)(this->SharedMemoryArea);
+        char* eptr = sptr + this->NumOfFields*2*FIELD_LENGTH*sizeof(char);
+        char* ptr = sptr;
+
+        // Look for required key in array (limited to number of fields). Return value if found, NULL otherwise
+        while(ptr < eptr)
+          {
+          char* curKey = ptr;
+          char* curVal = ptr + FIELD_LENGTH*sizeof(char);
+
+          // Move array to erase key and value
+          if(strcasecmp(key,curKey) == 0)
+            {
+            // Move memory
+            // Memory before moving: key1, val1, key2, val2, key3, val3. 
+            memmove(curKey, curVal + FIELD_LENGTH*sizeof(char), eptr - (curVal + FIELD_LENGTH*sizeof(char)));
+            
+            // Memory after moving: key1, val1, key3, val3, key3, val3 .Need to erase last one.
+            memset(eptr - 2*FIELD_LENGTH*sizeof(char), 0x00, 2*FIELD_LENGTH);
+            this->NumOfFields--;
+            return 1;
+            }
+          ptr+=FIELD_LENGTH*sizeof(char)*2;
+          }
+        }
+      }
+    return 0;
+  }
+
+  //----------------------------------------------------------------------------------------------------
 
 } // end namespace nitro
