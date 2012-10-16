@@ -32,9 +32,9 @@ int main()
 
   // Log Recorder
   /*
-  LogRecorder::Pointer log;
-  log = LogRecorder::New();
-  log->SetLogFile("/Users/SNR/Desktop/NITRO/Examples/NeedlePusher/test1.txt");
+    LogRecorder::Pointer log;
+    log = LogRecorder::New();
+    log->SetLogFile("/Users/SNR/Desktop/NITRO/Examples/NeedlePusher/test1.txt");
   */
 
   // ------------------------------------------------------------
@@ -50,22 +50,7 @@ int main()
   // ------------------------------------------------------------
   // Step 3: Initialize the controller
 
-  ctl->Initialize();  
-
-  ctl->AddField("test","value");
-  ctl->AddField("test2","value2");
-  ctl->AddField("test3","value3");
-  ctl->AddField("test4","value4");
-
-  std::cerr << "test: " << ctl->GetField("test") << std::endl;
-  std::cerr << "test2: " << ctl->GetField("test2") << std::endl;
-  std::cerr << "test3: " << ctl->GetField("test3") << std::endl;
-  
-  ctl->RemoveField("test2");
-
-  std::cerr << "test: " << ctl->GetField("test") << std::endl;
-  std::cerr << "test2: " << ctl->GetField("test2") << std::endl;
-  std::cerr << "test3: " << ctl->GetField("test3") << std::endl;
+  ctl->Initialize();
 
   // ------------------------------------------------------------
   // Step 4: Main loop
