@@ -114,7 +114,7 @@ namespace nitro {
       this->m_HardwareIF->Initialize();
       }
 
-    if(this->m_XMLParser)
+    if(this->m_XMLParser && this->m_XMLParser->GetXMLPath())
       {
       // XML Path should be set before calling Initialize
       if(!strcmp(this->m_XMLParser->GetXMLPath(),""))
