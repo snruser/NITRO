@@ -16,9 +16,9 @@
 #include "nitroMath.h"
 #include "nitroOSUtil.h"
 
-#define MEMORY_SIZE 500*256*sizeof(char)
-
 namespace nitro {
+
+  //----------------------------------------------------------------------------------------------------
 
   Controller::Controller()
   {
@@ -27,40 +27,33 @@ namespace nitro {
     this->m_Kinematics = NULL;
     this->m_NetworkIF  = NULL;
     this->m_HardwareIF = NULL;
-    this->m_UserIF     = NULL;
     this->m_XMLParser  = NULL;
+
+    this->m_InitializationStatus = 1;
   }
+
+  //----------------------------------------------------------------------------------------------------
 
   Controller::~Controller()
   {
   }
 
+  //----------------------------------------------------------------------------------------------------
+
   int Controller::Execute()
   {
-
-    // Before start using this->m_UserIF->Print() and this->m_UserIF->PrintError(),
-    // make sure that UserIF is set.
-    if (this->m_UserIF)
-      {
-      std::cerr << "ERROR: NO user interface has found." << std::endl;
-      return 0;
-      }
-
     if (this->m_Kinematics)
       {
-      this->m_UserIF->PrintError("No Kinematic class has been set.\n");
       return 0;
       }
 
     if (this->m_NetworkIF)
       {
-      this->m_UserIF->PrintError("No NetworkIF class has been set.\n");
       return 0;
       }
 
     if (this->m_HardwareIF)
       {
-      this->m_UserIF->PrintError("No HardwareIF class has been set.\n");
       return 0;
       }
 
@@ -75,7 +68,6 @@ namespace nitro {
 
     // ------------------------------
     // Initialize
-    this->m_UserIF->Print("Initializing.\n");
 
     while (1)
       {
@@ -85,6 +77,8 @@ namespace nitro {
       Sleep(10);
       }
   }
+
+  //----------------------------------------------------------------------------------------------------
 
   void Controller::Initialize()
   {
@@ -97,6 +91,8 @@ namespace nitro {
       this->m_Kinematics->AllocateSharedMemory(SHM_KINEMATICS_AREA, MEMORY_SIZE, IPC_CREAT | 0644);
 
       // Initialization
+      // TODO: Add flag for initialization status. Check the flag before starting loop.
+      //this->m_InitializationStatus = this->m_InitializationStatus & this->m_Kinematics->Initialize();
       this->m_Kinematics->Initialize();
       }
 
@@ -113,18 +109,9 @@ namespace nitro {
       {
       // Hardware Shared Memory
       this->m_HardwareIF->AllocateSharedMemory(SHM_HARDWARE_AREA, MEMORY_SIZE, IPC_CREAT | 0644);
-      
+
       // Initialization
       this->m_HardwareIF->Initialize();
-      }
-
-    if(this->m_UserIF)
-      {
-      // User Interface Shared Memory
-      this->m_UserIF->AllocateSharedMemory(SHM_UI_AREA, MEMORY_SIZE, IPC_CREAT | 0644);
-
-      // Initialization
-      this->m_UserIF->Initialize();
       }
 
     if(this->m_XMLParser)
@@ -146,17 +133,26 @@ namespace nitro {
       }
   }
 
+  //----------------------------------------------------------------------------------------------------
+
   void Controller::Loop()
   {
     // TODO: Get targets
     // Get targets from NetworkIF of UserIF ?
     double target = 30.0;  // mm
+    double convertedTarget = 0.0;
 
     // Convert target in lists of target of each actuators
-    double convertedTarget = this->m_Kinematics->Convert(target);
+    if(this->m_Kinematics)
+      {
+      convertedTarget = this->m_Kinematics->Convert(target);
+      }
 
     // Send targets to HardwareIF
-    this->m_HardwareIF->Move(0, convertedTarget);
+    if(this->m_HardwareIF)
+      {
+      this->m_HardwareIF->Move(0, convertedTarget);
+      }
 
     // Inverse kinematics
 
@@ -164,6 +160,7 @@ namespace nitro {
 
   }
 
+  //----------------------------------------------------------------------------------------------------
 
   void Controller::Exit()
   {
@@ -184,11 +181,6 @@ namespace nitro {
       this->m_HardwareIF->Exit();
       }
 
-    if(this->m_UserIF)
-      {
-      this->m_UserIF->Exit();
-      }
-
     if(this->m_XMLParser)
       {
       this->m_XMLParser->Exit();
@@ -200,5 +192,6 @@ namespace nitro {
       }
   }
 
+  //----------------------------------------------------------------------------------------------------
 
 } // end namespace nitro

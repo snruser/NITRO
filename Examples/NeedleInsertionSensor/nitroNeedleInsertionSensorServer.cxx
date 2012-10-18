@@ -32,9 +32,9 @@ int main()
 
   // Log Recorder
   /*
-  LogRecorder::Pointer log;
-  log = LogRecorder::New();
-  log->SetLogFile("/Users/SNR/Desktop/NITRO/Examples/NeedlePusher/test1.txt");
+    LogRecorder::Pointer log;
+    log = LogRecorder::New();
+    log->SetLogFile("/Users/SNR/Desktop/NITRO/Examples/NeedlePusher/test1.txt");
   */
 
   // ------------------------------------------------------------
@@ -42,8 +42,8 @@ int main()
 
   Controller::Pointer ctl;
   ctl = Controller::New();
-  ctl->SetHardwareIF(hwnp);
-  ctl->SetNetworkIF(nwio);
+  //ctl->SetHardwareIF(hwnp);
+  //ctl->SetNetworkIF(nwio);
   ctl->SetXMLParser(xmlp);
   //ctl->SetLogRecorder(log);
 
@@ -56,12 +56,12 @@ int main()
   // Step 4: Main loop
   // TODO: Change the name
 
-  ctl->Loop();
+  //ctl->Loop();
 
   // ------------------------------------------------------------
   // Step 5: Exit
 
-  ctl->Exit();
+  //ctl->Exit();
 
   return 0;
 }

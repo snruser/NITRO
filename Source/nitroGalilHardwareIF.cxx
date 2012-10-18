@@ -15,13 +15,19 @@
 
 namespace nitro {
 
+  //----------------------------------------------------------------------------------------------------
+
   GalilHardwareIF::GalilHardwareIF()
   {
   }
 
+  //----------------------------------------------------------------------------------------------------
+
   GalilHardwareIF::~GalilHardwareIF()
   {
   }
+
+  //----------------------------------------------------------------------------------------------------
 
   void GalilHardwareIF::Connect()
   {
@@ -40,6 +46,8 @@ namespace nitro {
       this->RequestGalilBoardToConnect();
       }
   }
+
+  //----------------------------------------------------------------------------------------------------
 
   void GalilHardwareIF::DiscoverGalilBoards()
   {
@@ -154,6 +162,7 @@ namespace nitro {
     close(sock);
   }
 
+  //----------------------------------------------------------------------------------------------------
 
   void GalilHardwareIF::DisplayBoardsAvailable()
   {
@@ -167,6 +176,8 @@ namespace nitro {
       }
   }
 
+  //----------------------------------------------------------------------------------------------------
+
   void GalilHardwareIF::RequestGalilBoardToConnect()
   {
     int selectedBoard = 0;
@@ -174,6 +185,12 @@ namespace nitro {
     std::cerr << std::endl;
     std::cerr << "Connect to board: ";
     std::cin >> selectedBoard;
+
+    if(selectedBoard == -1)
+      {
+      this->Exit();
+      return;
+      }
 
     if(selectedBoard >= 0   && selectedBoard < this->GalilList.size())
       {
@@ -185,6 +202,8 @@ namespace nitro {
       this->RequestGalilBoardToConnect();
       }
   }
+
+  //----------------------------------------------------------------------------------------------------
 
   void GalilHardwareIF::InitiateCommunication(int board)
   {
@@ -215,6 +234,8 @@ namespace nitro {
 
     std::cerr << "Connected" << std::endl;
   }
+
+  //----------------------------------------------------------------------------------------------------
 
   void GalilHardwareIF::Command(const char *command)
   {
@@ -247,6 +268,8 @@ namespace nitro {
       }
   }
 
+  //----------------------------------------------------------------------------------------------------
+
   void GalilHardwareIF::Disconnect()
   {
     if(this->CommunicationSocket > 0)
@@ -256,10 +279,14 @@ namespace nitro {
       }
   }
 
+  //----------------------------------------------------------------------------------------------------
+
   int GalilHardwareIF::GetNumberOfDevices()
   {
     return GalilList.size();
   }
+
+  //----------------------------------------------------------------------------------------------------
 
   std::string GalilHardwareIF::GetNthIPAsString(int i)
   {
@@ -270,12 +297,15 @@ namespace nitro {
     return "(empty)";
   }
 
+  //----------------------------------------------------------------------------------------------------
 
   void GalilHardwareIF::InitiateCommunication()
   {
     std::cerr << "Galil communication initiation" << std::endl;
     this->Connect();
   }
+
+  //----------------------------------------------------------------------------------------------------
 
   void GalilHardwareIF::Move(int actuator, double target)
   {
@@ -298,21 +328,30 @@ namespace nitro {
     this->Command("BGA");
   }
 
+  //----------------------------------------------------------------------------------------------------
+
   void GalilHardwareIF::DefaultConfiguration()
   {
-    std::cerr << "Configuring..." << std::endl;
-    this->Command("BAA");
-    this->Command("BMA=4096");
-    this->Command("BXA=-3");
-    this->Command("KIA=0.17");
-    this->Command("SPA=2000");
-    this->Command("PRA=8192");
+    if(this->CommunicationSocket > 0)
+      {
+      std::cerr << "Configuring..." << std::endl;
+      this->Command("BAA");
+      this->Command("BMA=4096");
+      this->Command("BXA=-3");
+      this->Command("KIA=0.17");
+      this->Command("SPA=2000");
+      this->Command("PRA=8192");
+      }
   }
+
+  //----------------------------------------------------------------------------------------------------
 
   void GalilHardwareIF::Exit()
   {
     std::cerr << "Disconnect..." << std::endl;
     this->Disconnect();
   }
+
+  //----------------------------------------------------------------------------------------------------
 
 }

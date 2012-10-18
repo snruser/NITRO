@@ -16,7 +16,15 @@ SET(SOURCES
     nitroNeedleInsertionSensorServer.cxx
     )
 
+SET(UI_SOURCES
+    nitroNeedleInsertionUI.cxx
+   )
+
 ADD_EXECUTABLE(NeedleInsertionSensorServer ${SOURCES})
 TARGET_LINK_LIBRARIES(NeedleInsertionSensorServer NITRO)
+
+# User Interface
+ADD_EXECUTABLE(NeedleInsertionSensorUI ${UI_SOURCES})
+TARGET_LINK_LIBRARIES(NeedleInsertionSensorUI NITRO)
 
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)

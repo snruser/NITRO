@@ -15,6 +15,8 @@
 
 namespace nitro {
 
+  //----------------------------------------------------------------------------------------------------
+
   OpenIGTLinkNetworkIF::OpenIGTLinkNetworkIF()
   {
     this->m_Session = igtl::SessionManager::New();
@@ -31,9 +33,13 @@ namespace nitro {
 
   }
 
+  //----------------------------------------------------------------------------------------------------
+
   OpenIGTLinkNetworkIF::~OpenIGTLinkNetworkIF()
   {
   }
+
+  //----------------------------------------------------------------------------------------------------
 
   void OpenIGTLinkNetworkIF::ConfigureAsServer(int port)
   {
@@ -44,6 +50,8 @@ namespace nitro {
       }
   }
 
+  //----------------------------------------------------------------------------------------------------
+
   void OpenIGTLinkNetworkIF::ConfigureAsClient(const char* hostname, int port)
   {
     if (this->m_Session.IsNotNull())
@@ -53,6 +61,8 @@ namespace nitro {
       this->m_Session->SetPort(port);
       }
   }
+
+  //----------------------------------------------------------------------------------------------------
 
   int OpenIGTLinkNetworkIF::Connect()
   {
@@ -71,16 +81,22 @@ namespace nitro {
     return 1;
   }
 
+  //----------------------------------------------------------------------------------------------------
+
   int OpenIGTLinkNetworkIF::Disconnect()
   {
     return this->m_Session->Disconnect();
   }
+
+  //----------------------------------------------------------------------------------------------------
 
   int OpenIGTLinkNetworkIF::IsConnected()
   {
     return 1;
     // this->m_Session->IsConnected();
   }
+
+  //----------------------------------------------------------------------------------------------------
 
   int OpenIGTLinkNetworkIF::GetTargets(std::list< Vector >& vectors)
   {
@@ -100,10 +116,12 @@ namespace nitro {
     return 1;
   }
 
+  //----------------------------------------------------------------------------------------------------
+
   void OpenIGTLinkNetworkIF::Initialize()
   {
     std::cerr << "OpenIGTLinkNetworkIF initialization" << std::endl;
-    
+
     switch(this->m_Session->GetMode())
       {
       // Server
@@ -142,6 +160,8 @@ namespace nitro {
       }
   }
 
+  //----------------------------------------------------------------------------------------------------
+
   void OpenIGTLinkNetworkIF::Exit()
   {
     if(this->m_Session)
@@ -149,5 +169,7 @@ namespace nitro {
       this->Disconnect();
       }
   }
+
+  //----------------------------------------------------------------------------------------------------
 
 } // end namespace nitro
