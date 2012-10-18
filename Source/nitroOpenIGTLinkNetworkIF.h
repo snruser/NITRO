@@ -14,6 +14,8 @@
 #ifndef  __nitroOpenIGTLinkNetworkIF_h
 #define  __nitroOpenIGTLinkNetworkIF_h
 
+#include <cstring>
+
 #include "nitroConfigure.h"
 #include "nitroObject.h"
 #include "nitroObjectFactory.h"

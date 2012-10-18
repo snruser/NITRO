@@ -14,6 +14,8 @@
 #ifndef  __nitroController_h
 #define  __nitroController_h
 
+#include <cstring>
+
 // Shared Memory
 #include <sys/types.h>
 #include <sys/ipc.h>

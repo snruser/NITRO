@@ -14,8 +14,13 @@
 #ifndef  __nitroXMLParser_h
 #define  __nitroXMLParser_h
 
+#include <fstream>
+#include <iostream>
+#include <cstring>
+
 // NITRO Base class
 #include "nitroBase.h"
+#include "nitroJointTypes.h"
 #include "nitroJoint.h"
 #include "nitroLink.h"
 
@@ -51,7 +56,7 @@ namespace nitro {
         ss >> t;
         return t;
         }
-      return NULL;
+      return (T)NULL;
       }
 
     const char* GetHardwareName() { return this->HardwareName.c_str(); };
